@@ -1,0 +1,798 @@
+[
+  {
+    "id": "D01",
+    "split": "development",
+    "question": "Net collected in ZAR on 1-2 November 2026",
+    "profile": "analyst-a",
+    "merchant": "a",
+    "snapshot": "fresh",
+    "expected": {
+      "status": "ok",
+      "metric_id": "net_collected",
+      "currency": "ZAR",
+      "merchant": "a",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "total",
+      "provider": null,
+      "rows": [
+        [
+          null,
+          13000
+        ]
+      ]
+    }
+  },
+  {
+    "id": "D02",
+    "split": "development",
+    "question": "Captured amount in ZAR on 1-2 November 2026",
+    "profile": "analyst-a",
+    "merchant": "a",
+    "snapshot": "fresh",
+    "expected": {
+      "status": "ok",
+      "metric_id": "captured_amount",
+      "currency": "ZAR",
+      "merchant": "a",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "total",
+      "provider": null,
+      "rows": [
+        [
+          null,
+          17000
+        ]
+      ]
+    }
+  },
+  {
+    "id": "D03",
+    "split": "development",
+    "question": "Refunded amount in ZAR on 1-2 November 2026",
+    "profile": "analyst-a",
+    "merchant": "a",
+    "snapshot": "fresh",
+    "expected": {
+      "status": "ok",
+      "metric_id": "refunded_amount",
+      "currency": "ZAR",
+      "merchant": "a",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "total",
+      "provider": null,
+      "rows": [
+        [
+          null,
+          4000
+        ]
+      ]
+    }
+  },
+  {
+    "id": "D04",
+    "split": "development",
+    "question": "Payment success rate in ZAR on 1-2 November 2026",
+    "profile": "analyst-a",
+    "merchant": "a",
+    "snapshot": "fresh",
+    "expected": {
+      "status": "ok",
+      "metric_id": "payment_success_rate",
+      "currency": "ZAR",
+      "merchant": "a",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "total",
+      "provider": null,
+      "rows": [
+        [
+          null,
+          [
+            "0.750000",
+            3,
+            4
+          ]
+        ]
+      ]
+    }
+  },
+  {
+    "id": "D05",
+    "split": "development",
+    "question": "Paying orders in ZAR on 1-2 November 2026",
+    "profile": "analyst-a",
+    "merchant": "a",
+    "snapshot": "fresh",
+    "expected": {
+      "status": "ok",
+      "metric_id": "paying_orders",
+      "currency": "ZAR",
+      "merchant": "a",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "total",
+      "provider": null,
+      "rows": [
+        [
+          null,
+          2
+        ]
+      ]
+    }
+  },
+  {
+    "id": "D06",
+    "split": "development",
+    "question": "Captured amount by day in ZAR on 1-2 November 2026",
+    "profile": "analyst-a",
+    "merchant": "a",
+    "snapshot": "fresh",
+    "expected": {
+      "status": "ok",
+      "metric_id": "captured_amount",
+      "currency": "ZAR",
+      "merchant": "a",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "day",
+      "provider": null,
+      "rows": [
+        [
+          "2026-11-01",
+          10000
+        ],
+        [
+          "2026-11-02",
+          7000
+        ]
+      ]
+    }
+  },
+  {
+    "id": "D07",
+    "split": "development",
+    "question": "Refunded amount daily in ZAR on 1-2 November 2026",
+    "profile": "analyst-a",
+    "merchant": "a",
+    "snapshot": "fresh",
+    "expected": {
+      "status": "ok",
+      "metric_id": "refunded_amount",
+      "currency": "ZAR",
+      "merchant": "a",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "day",
+      "provider": null,
+      "rows": [
+        [
+          "2026-11-01",
+          0
+        ],
+        [
+          "2026-11-02",
+          4000
+        ]
+      ]
+    }
+  },
+  {
+    "id": "D08",
+    "split": "development",
+    "question": "Net collected each day in ZAR on 1-2 November 2026",
+    "profile": "analyst-a",
+    "merchant": "a",
+    "snapshot": "fresh",
+    "expected": {
+      "status": "ok",
+      "metric_id": "net_collected",
+      "currency": "ZAR",
+      "merchant": "a",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "day",
+      "provider": null,
+      "rows": [
+        [
+          "2026-11-01",
+          10000
+        ],
+        [
+          "2026-11-02",
+          3000
+        ]
+      ]
+    }
+  },
+  {
+    "id": "D09",
+    "split": "development",
+    "question": "Payment success rate by day in ZAR on 1-2 November 2026",
+    "profile": "analyst-a",
+    "merchant": "a",
+    "snapshot": "fresh",
+    "expected": {
+      "status": "ok",
+      "metric_id": "payment_success_rate",
+      "currency": "ZAR",
+      "merchant": "a",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "day",
+      "provider": null,
+      "rows": [
+        [
+          "2026-11-01",
+          [
+            "1.000000",
+            1,
+            1
+          ]
+        ],
+        [
+          "2026-11-02",
+          [
+            "0.666667",
+            2,
+            3
+          ]
+        ]
+      ]
+    }
+  },
+  {
+    "id": "D10",
+    "split": "development",
+    "question": "Paying orders by day in ZAR on 1-2 November 2026",
+    "profile": "analyst-a",
+    "merchant": "a",
+    "snapshot": "fresh",
+    "expected": {
+      "status": "ok",
+      "metric_id": "paying_orders",
+      "currency": "ZAR",
+      "merchant": "a",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "day",
+      "provider": null,
+      "rows": [
+        [
+          "2026-11-01",
+          1
+        ],
+        [
+          "2026-11-02",
+          2
+        ]
+      ]
+    }
+  },
+  {
+    "id": "D11",
+    "split": "development",
+    "question": "Net collected by provider in ZAR on 1-2 November 2026",
+    "profile": "analyst-a",
+    "merchant": "a",
+    "snapshot": "fresh",
+    "expected": {
+      "status": "ok",
+      "metric_id": "net_collected",
+      "currency": "ZAR",
+      "merchant": "a",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "provider",
+      "provider": null,
+      "rows": [
+        [
+          "CARD",
+          8000
+        ],
+        [
+          "EFT",
+          5000
+        ]
+      ]
+    }
+  },
+  {
+    "id": "D12",
+    "split": "development",
+    "question": "Captured amount in ZAR for CARD on 1-2 November 2026",
+    "profile": "analyst-a",
+    "merchant": "a",
+    "snapshot": "fresh",
+    "expected": {
+      "status": "ok",
+      "metric_id": "captured_amount",
+      "currency": "ZAR",
+      "merchant": "a",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "total",
+      "provider": "CARD",
+      "rows": [
+        [
+          null,
+          12000
+        ]
+      ]
+    }
+  },
+  {
+    "id": "D13",
+    "split": "development",
+    "question": "Refunded amount in ZAR for CARD on 1-2 November 2026",
+    "profile": "analyst-a",
+    "merchant": "a",
+    "snapshot": "fresh",
+    "expected": {
+      "status": "ok",
+      "metric_id": "refunded_amount",
+      "currency": "ZAR",
+      "merchant": "a",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "total",
+      "provider": "CARD",
+      "rows": [
+        [
+          null,
+          4000
+        ]
+      ]
+    }
+  },
+  {
+    "id": "D14",
+    "split": "development",
+    "question": "Net collected in ZAR for CARD on 1-2 November 2026",
+    "profile": "analyst-a",
+    "merchant": "a",
+    "snapshot": "fresh",
+    "expected": {
+      "status": "ok",
+      "metric_id": "net_collected",
+      "currency": "ZAR",
+      "merchant": "a",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "total",
+      "provider": "CARD",
+      "rows": [
+        [
+          null,
+          8000
+        ]
+      ]
+    }
+  },
+  {
+    "id": "D15",
+    "split": "development",
+    "question": "Payment success rate in ZAR for CARD on 1-2 November 2026",
+    "profile": "analyst-a",
+    "merchant": "a",
+    "snapshot": "fresh",
+    "expected": {
+      "status": "ok",
+      "metric_id": "payment_success_rate",
+      "currency": "ZAR",
+      "merchant": "a",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "total",
+      "provider": "CARD",
+      "rows": [
+        [
+          null,
+          [
+            "0.666667",
+            2,
+            3
+          ]
+        ]
+      ]
+    }
+  },
+  {
+    "id": "D16",
+    "split": "development",
+    "question": "Paying orders in ZAR for CARD on 1-2 November 2026",
+    "profile": "analyst-a",
+    "merchant": "a",
+    "snapshot": "fresh",
+    "expected": {
+      "status": "ok",
+      "metric_id": "paying_orders",
+      "currency": "ZAR",
+      "merchant": "a",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "total",
+      "provider": "CARD",
+      "rows": [
+        [
+          null,
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "id": "D17",
+    "split": "development",
+    "question": "Net collected in USD on 1-2 November 2026",
+    "profile": "analyst-a",
+    "merchant": "a",
+    "snapshot": "fresh",
+    "expected": {
+      "status": "ok",
+      "metric_id": "net_collected",
+      "currency": "USD",
+      "merchant": "a",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "total",
+      "provider": null,
+      "rows": [
+        [
+          null,
+          700
+        ]
+      ]
+    }
+  },
+  {
+    "id": "D18",
+    "split": "development",
+    "question": "Net collected in ZAR on 1-2 November 2026",
+    "profile": "analyst-b",
+    "merchant": "b",
+    "snapshot": "fresh",
+    "expected": {
+      "status": "ok",
+      "metric_id": "net_collected",
+      "currency": "ZAR",
+      "merchant": "b",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "total",
+      "provider": null,
+      "rows": [
+        [
+          null,
+          90000
+        ]
+      ]
+    }
+  },
+  {
+    "id": "D19",
+    "split": "development",
+    "question": "How much revenue did we make in ZAR on 1-2 November 2026?",
+    "profile": "analyst-a",
+    "merchant": "a",
+    "snapshot": "fresh",
+    "expected": {
+      "status": "clarify",
+      "reason": "AMBIGUOUS_METRIC"
+    }
+  },
+  {
+    "id": "D20",
+    "split": "development",
+    "question": "Net collected on 1-2 November 2026",
+    "profile": "analyst-a",
+    "merchant": "a",
+    "snapshot": "fresh",
+    "expected": {
+      "status": "clarify",
+      "reason": "CURRENCY_REQUIRED"
+    }
+  },
+  {
+    "id": "D21",
+    "split": "development",
+    "question": "Net collected in ZAR",
+    "profile": "analyst-a",
+    "merchant": "a",
+    "snapshot": "fresh",
+    "expected": {
+      "status": "clarify",
+      "reason": "DATE_REQUIRED"
+    }
+  },
+  {
+    "id": "D22",
+    "split": "development",
+    "question": "Net collected in ZAR on 1-2 November 2026",
+    "profile": "analyst-a",
+    "merchant": "b",
+    "snapshot": "fresh",
+    "expected": {
+      "status": "denied",
+      "reason": "SCOPE_DENIED"
+    }
+  },
+  {
+    "id": "D23",
+    "split": "development",
+    "question": "Net collected in ZAR on 1-2 November 2026",
+    "profile": "analyst-a",
+    "merchant": "a",
+    "snapshot": "stale-refunds",
+    "expected": {
+      "status": "stale",
+      "reason": "STALE_INPUT"
+    }
+  },
+  {
+    "id": "D24",
+    "split": "development",
+    "question": "Payment success rate in ZAR yesterday",
+    "profile": "analyst-a",
+    "merchant": "a",
+    "snapshot": "fresh",
+    "expected": {
+      "status": "ok",
+      "metric_id": "payment_success_rate",
+      "currency": "ZAR",
+      "merchant": "a",
+      "start": "2026-11-04",
+      "end": "2026-11-05",
+      "grouping": "total",
+      "provider": null,
+      "rows": [
+        [
+          null,
+          [
+            null,
+            0,
+            0
+          ]
+        ]
+      ]
+    }
+  },
+  {
+    "id": "H01",
+    "split": "held-out",
+    "question": "How much did we collect after refunds in rand on 1 to 2 November?",
+    "profile": "analyst-a",
+    "merchant": "a",
+    "snapshot": "fresh",
+    "expected": {
+      "status": "ok",
+      "metric_id": "net_collected",
+      "currency": "ZAR",
+      "merchant": "a",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "total",
+      "provider": null,
+      "rows": [
+        [
+          null,
+          13000
+        ]
+      ]
+    }
+  },
+  {
+    "id": "H02",
+    "split": "held-out",
+    "question": "Show gross captures per provider in ZAR on November 1-2, 2026.",
+    "profile": "analyst-a",
+    "merchant": "a",
+    "snapshot": "fresh",
+    "expected": {
+      "status": "ok",
+      "metric_id": "captured_amount",
+      "currency": "ZAR",
+      "merchant": "a",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "provider",
+      "provider": null,
+      "rows": [
+        [
+          "CARD",
+          12000
+        ],
+        [
+          "EFT",
+          5000
+        ]
+      ]
+    }
+  },
+  {
+    "id": "H03",
+    "split": "held-out",
+    "question": "Settled refunds in USD for November 1-2 2026",
+    "profile": "analyst-a",
+    "merchant": "a",
+    "snapshot": "fresh",
+    "expected": {
+      "status": "ok",
+      "metric_id": "refunded_amount",
+      "currency": "USD",
+      "merchant": "a",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "total",
+      "provider": null,
+      "rows": [
+        [
+          null,
+          0
+        ]
+      ]
+    }
+  },
+  {
+    "id": "H04",
+    "split": "held-out",
+    "question": "How many paid orders in US dollars on 2026-11-01 through 2026-11-02?",
+    "profile": "analyst-a",
+    "merchant": "a",
+    "snapshot": "fresh",
+    "expected": {
+      "status": "ok",
+      "metric_id": "paying_orders",
+      "currency": "USD",
+      "merchant": "a",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "total",
+      "provider": null,
+      "rows": [
+        [
+          null,
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "id": "H05",
+    "split": "held-out",
+    "question": "Success ratio for CARD in ZAR on 1-2 Nov",
+    "profile": "ops-a",
+    "merchant": "a",
+    "snapshot": "fresh",
+    "expected": {
+      "status": "ok",
+      "metric_id": "payment_success_rate",
+      "currency": "ZAR",
+      "merchant": "a",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "total",
+      "provider": "CARD",
+      "rows": [
+        [
+          null,
+          [
+            "0.666667",
+            2,
+            3
+          ]
+        ]
+      ]
+    }
+  },
+  {
+    "id": "H06",
+    "split": "held-out",
+    "question": "Payment success rate in ZAR on 1-2 Nov",
+    "profile": "ops-a",
+    "merchant": "a",
+    "snapshot": "fresh",
+    "expected": {
+      "status": "clarify",
+      "reason": "CONFIRM_PROVIDER"
+    }
+  },
+  {
+    "id": "H07",
+    "split": "held-out",
+    "question": "How many successful payments in ZAR on 1-2 November?",
+    "profile": "analyst-a",
+    "merchant": "a",
+    "snapshot": "fresh",
+    "expected": {
+      "status": "clarify",
+      "reason": "AMBIGUOUS_PAYMENTS"
+    }
+  },
+  {
+    "id": "H08",
+    "split": "held-out",
+    "question": "Net collected in ZAR on 1-2 November",
+    "profile": "analyst-a",
+    "merchant": "unknown-id",
+    "snapshot": "fresh",
+    "expected": {
+      "status": "denied",
+      "reason": "SCOPE_DENIED"
+    }
+  },
+  {
+    "id": "H09",
+    "split": "held-out",
+    "question": "Gross captured in ZAR on 1-2 November",
+    "profile": "analyst-a",
+    "merchant": "a",
+    "snapshot": "stale-refunds",
+    "expected": {
+      "status": "ok",
+      "metric_id": "captured_amount",
+      "currency": "ZAR",
+      "merchant": "a",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "total",
+      "provider": null,
+      "rows": [
+        [
+          null,
+          17000
+        ]
+      ]
+    }
+  },
+  {
+    "id": "H10",
+    "split": "held-out",
+    "question": "Net collected in ZAR from 2026-09-01 to 2026-11-03",
+    "profile": "analyst-a",
+    "merchant": "a",
+    "snapshot": "fresh",
+    "expected": {
+      "status": "clarify",
+      "reason": "WINDOW_TOO_LONG"
+    }
+  },
+  {
+    "id": "H11",
+    "split": "held-out",
+    "question": "How much did the processor charge in ZAR on 1-2 November?",
+    "profile": "analyst-a",
+    "merchant": "a",
+    "snapshot": "fresh",
+    "expected": {
+      "status": "unavailable",
+      "reason": "NO_CERTIFIED_METRIC"
+    }
+  },
+  {
+    "id": "H12",
+    "split": "held-out",
+    "question": "Net collection in rand yesterday",
+    "profile": "analyst-a",
+    "merchant": "a",
+    "snapshot": "fresh",
+    "expected": {
+      "status": "ok",
+      "metric_id": "net_collected",
+      "currency": "ZAR",
+      "merchant": "a",
+      "start": "2026-11-04",
+      "end": "2026-11-05",
+      "grouping": "total",
+      "provider": null,
+      "rows": [
+        [
+          null,
+          0
+        ]
+      ]
+    }
+  }
+]
