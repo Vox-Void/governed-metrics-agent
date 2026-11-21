@@ -99,6 +99,7 @@ class Answer(Strict):
     catalog_version: str
     unit: Unit
     currency: Currency
+    currency_default_used: bool = False
     merchant: str
     provider: Provider | None
     grouping: Grouping

@@ -16,7 +16,16 @@ from governed_metrics.auth import Principal
 from governed_metrics.catalog import Catalog, MetricDefinition, load_catalog
 from governed_metrics.compiler import compile_metric
 from governed_metrics.executor import DuckDBExecutor, Executor, QueryFailure
-from governed_metrics.planner import Context, Planner, business_today
+from governed_metrics.planner import (
+    Context,
+    Planner,
+    ambiguous_reason,
+    business_today,
+    date_window,
+    recognised_metrics,
+    requested_currencies,
+    requested_providers,
+)
 from governed_metrics.schemas import (
     CLARIFICATIONS,
     DECISION,
@@ -43,6 +52,29 @@ def clarification(trace: str, reason: ClarificationCode) -> Clarify:
 
 def denial(trace: str) -> Failure:
     return Failure(status="denied", trace_id=trace, reason="SCOPE_DENIED")
+
+
+def check_question(text: str, context: Context, plan: MetricPlan) -> ClarificationCode | None:
+    choices = recognised_metrics(text, context, baseline=False)
+    if len(choices) > 1:
+        return "MULTIPLE_METRICS"
+    if not choices and (reason := ambiguous_reason(text, context.ambiguous)):
+        return reason
+    currencies = requested_currencies(text)
+    if (currencies and currencies != {plan.currency}) or (
+        not currencies and context.currency_default != plan.currency
+    ):
+        return "CURRENCY_REQUIRED"
+    if date_window(text, context.today) != (plan.start, plan.end):
+        return "DATE_REQUIRED"
+    providers = requested_providers(text)
+    if not providers and plan.provider is not None:
+        return "PROVIDER_REQUIRED"
+    if len(providers) == 1 and plan.provider != providers[0]:
+        return "PROVIDER_REQUIRED"
+    if len(providers) > 1 and (plan.grouping != "provider" or plan.provider is not None):
+        return "PROVIDER_REQUIRED"
+    return None
 
 
 def metadata(path: Path, revision: str) -> dict[str, Watermark]:
@@ -132,11 +164,17 @@ class Trace:
 
 class Service:
     def __init__(
-        self, root: Path, *, clock: datetime = DEMO_CLOCK, executor: Executor | None = None
+        self,
+        root: Path,
+        *,
+        clock: datetime = DEMO_CLOCK,
+        executor: Executor | None = None,
+        trace_root: Path | None = None,
     ):
         if clock.utcoffset() is None:
             raise ValueError("The business clock must include an offset.")
         self.root = root
+        self.trace_root = trace_root if trace_root is not None else root / "traces"
         self.clock = clock
         self.executor = executor if executor is not None else DuckDBExecutor()
 
@@ -173,7 +211,7 @@ class Service:
             "usage": trace.usage,
             "duration_ms": round((monotonic() - trace.started) * 1000),
         }
-        directory = self.root / "traces"
+        directory = self.trace_root
         directory.mkdir(parents=True, exist_ok=True)
         (directory / f"{trace.trace_id}.json").write_text(
             json.dumps(record, indent=2) + "\n", encoding="utf-8"
@@ -210,6 +248,7 @@ class Service:
             tuple(group for group in order if group in principal.groups),
             principal.default_currency,
             business_today(self.clock),
+            tuple(catalog.ambiguous),
         )
         trace.actions.append("propose_plan")
         try:
@@ -227,7 +266,15 @@ class Service:
                 status="unavailable", trace_id=trace.trace_id, reason=decision.reason
             )
         else:
-            response = self.run_plan(merchant, principal, decision, catalog, variant, trace)
+            response = self.run_plan(
+                merchant,
+                principal,
+                decision,
+                catalog,
+                variant,
+                trace,
+                natural_request=(question.lower(), context),
+            )
         return self.close(response, trace)
 
     def structured(
@@ -255,6 +302,8 @@ class Service:
         catalog: Catalog,
         variant: str,
         trace: Trace,
+        *,
+        natural_request: tuple[str, Context] | None = None,
     ) -> Response:
         trace_id = trace.trace_id
         trace.actions.append("authorize_plan")
@@ -266,7 +315,10 @@ class Service:
             or (plan.provider is not None and plan.provider not in principal.providers)
         ):
             return denial(trace_id)
-        if plan.provider is None and len(principal.providers) < len(PROVIDERS):
+        confirmed_provider = plan.provider is not None and (
+            natural_request is None or plan.provider in requested_providers(natural_request[0])
+        )
+        if len(principal.providers) < len(PROVIDERS) and not confirmed_provider:
             return clarification(trace_id, "CONFIRM_PROVIDER")
         if plan.end <= plan.start:
             return clarification(trace_id, "DATE_REQUIRED")
@@ -275,6 +327,12 @@ class Service:
         definition = catalog.metrics[plan.metric_id]
         if plan.grouping not in definition.groups:
             return clarification(trace_id, "UNSUPPORTED_GROUP")
+        default_used = False
+        if natural_request:
+            text, context = natural_request
+            if reason := check_question(text, context, plan):
+                return clarification(trace_id, reason)
+            default_used = not requested_currencies(text)
         trace.actions.append("check_freshness")
         try:
             revision, path = pin_snapshot(self.root, variant)
@@ -307,6 +365,7 @@ class Service:
             catalog_version=catalog.version,
             unit=definition.unit,
             currency=plan.currency,
+            currency_default_used=default_used,
             merchant=plan.merchant,
             provider=plan.provider,
             grouping=plan.grouping,
@@ -348,7 +407,8 @@ def display(response: Response) -> str:
         lines.append(
             f"{row.group}  {value}" if row.group is not None else f"{response.label}  {value}"
         )
-    scope = f"Merchant {response.merchant.upper()} | {response.currency} | {response.provider or 'all providers'}"
+    currency = response.currency + (" (profile default)" if response.currency_default_used else "")
+    scope = f"Merchant {response.merchant.upper()} | {currency} | {response.provider or 'all providers'}"
     return "\n".join(
         [
             *lines,

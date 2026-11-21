@@ -1,5 +1,6 @@
 import json
 import subprocess
+from dataclasses import replace
 from datetime import UTC, date, datetime
 from pathlib import Path
 
@@ -153,6 +154,37 @@ def test_ops_profile_has_only_card_rate_permission(snapshot_root):
         service.structured(plan(metric_id="payment_success_rate"), "a", profile).reason
         == "CONFIRM_PROVIDER"
     )
+
+
+def test_planner_cannot_guess_scope_the_reader_did_not_request(snapshot_root):
+    service = Service(snapshot_root, executor=NoQuery())
+    ops = RoguePlanner(plan(provider="CARD", metric_id="payment_success_rate"))
+    assert (
+        service.ask(f"Payment success rate {SCOPE}", "a", PROFILES["ops-a"], ops).reason
+        == "CONFIRM_PROVIDER"
+    )
+    analyst = RoguePlanner(plan())
+    assert (
+        service.ask("Net collected on 1-2 November", "a", PROFILES["analyst-a"], analyst).reason
+        == "CURRENCY_REQUIRED"
+    )
+    assert (
+        service.ask("Net collected in ZAR yesterday", "a", PROFILES["analyst-a"], analyst).reason
+        == "DATE_REQUIRED"
+    )
+    assert (
+        service.ask(f"What was revenue {SCOPE}", "a", PROFILES["analyst-a"], analyst).reason
+        == "AMBIGUOUS_METRIC"
+    )
+
+
+def test_trusted_profile_currency_default_is_visible(snapshot_root):
+    profile = replace(PROFILES["analyst-a"], default_currency="ZAR")
+    result = Service(snapshot_root).ask(
+        "Net collected on 1-2 November", "a", profile, ScriptedPlanner()
+    )
+    assert isinstance(result, Answer) and result.currency_default_used
+    assert "ZAR (profile default)" in display(result)
 
 
 @pytest.mark.parametrize(

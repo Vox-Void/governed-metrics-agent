@@ -100,7 +100,8 @@ def main() -> int:
         if args.command == "bootstrap":
             print(json.dumps(publish_snapshots(args.out), indent=2))
             return 0
-        service = Service(args.root)
+        trace_dir = os.environ.get("GOVERNED_METRICS_TRACE_DIR")
+        service = Service(args.root, trace_root=Path(trace_dir) if trace_dir else None)
         if args.command == "demo":
             return 0 if demo(service, args.root / "demo.json") else 1
         if args.command == "eval":

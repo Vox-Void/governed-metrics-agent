@@ -122,6 +122,7 @@ def publish_snapshots(output: Path, project_root: Path = ROOT) -> dict[str, Any]
             pointer.write("\n")
             pointer.flush()
             os.fsync(pointer.fileno())
+        os.chmod(pointer.name, 0o644)
         os.replace(pointer.name, output / "current.json")
     return {"versions": revisions, "dbt": checks, "duckdb": duckdb.__version__}
 
