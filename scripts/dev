@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+set -euo pipefail
+cd "$(dirname "${BASH_SOURCE[0]}")/.."
+
+command="${1:-}"
+if [[ $# -gt 0 ]]; then shift; fi
+if ! command -v uv >/dev/null; then
+  echo "Install uv 0.13.9, then run ./scripts/dev bootstrap." >&2
+  exit 1
+fi
+export PYTHONPATH="$PWD/src"
+case "$command" in
+  bootstrap)
+    uv sync --locked
+    exec uv run --locked python -m governed_metrics.cli bootstrap "$@"
+    ;;
+  test)
+    uv run --locked ruff format --check src tests
+    uv run --locked ruff check src tests
+    uv run --locked mypy
+    exec uv run --locked pytest "$@"
+    ;;
+  demo|eval|ask|list|mcp|template)
+    exec uv run --locked python -m governed_metrics.cli "$command" "$@"
+    ;;
+  *)
+    echo "Usage: scripts/dev {bootstrap|test|demo|eval|ask|list|mcp|template}" >&2
+    exit 2
+    ;;
+esac

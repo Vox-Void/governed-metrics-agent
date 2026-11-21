@@ -1,0 +1,9 @@
+version: 2
+sources:
+  - name: fixture
+    schema: main
+    description: Synthetic delivery records before version selection.
+    tables:
+      - name: capture_deliveries
+      - name: refund_deliveries
+      - name: attempt_deliveries

@@ -1,0 +1,45 @@
+version: 2
+models:
+  - name: fct_captures
+    config:
+      contract: {enforced: true}
+    columns:
+      - {name: merchant_id, data_type: varchar}
+      - {name: capture_id, data_type: varchar}
+      - {name: order_id, data_type: varchar}
+      - {name: attempt_id, data_type: varchar}
+      - {name: provider, data_type: varchar}
+      - {name: currency, data_type: varchar}
+      - {name: status, data_type: varchar}
+      - {name: settled_at, data_type: timestamptz}
+      - {name: amount_minor, data_type: bigint}
+      - {name: source_version, data_type: bigint}
+      - {name: business_date, data_type: date}
+  - name: fct_refunds
+    config:
+      contract: {enforced: true}
+    columns:
+      - {name: merchant_id, data_type: varchar}
+      - {name: refund_id, data_type: varchar}
+      - {name: capture_id, data_type: varchar}
+      - {name: provider, data_type: varchar}
+      - {name: currency, data_type: varchar}
+      - {name: status, data_type: varchar}
+      - {name: settled_at, data_type: timestamptz}
+      - {name: amount_minor, data_type: bigint}
+      - {name: source_version, data_type: bigint}
+      - {name: business_date, data_type: date}
+  - name: fct_attempts
+    config:
+      contract: {enforced: true}
+    columns:
+      - {name: merchant_id, data_type: varchar}
+      - {name: attempt_id, data_type: varchar}
+      - {name: order_id, data_type: varchar}
+      - {name: provider, data_type: varchar}
+      - {name: currency, data_type: varchar}
+      - {name: status, data_type: varchar}
+      - {name: initiated_at, data_type: timestamptz}
+      - {name: completed_at, data_type: timestamptz}
+      - {name: source_version, data_type: bigint}
+      - {name: business_date, data_type: date}

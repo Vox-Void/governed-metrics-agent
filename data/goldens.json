@@ -1,0 +1,10 @@
+{
+  "a_zar_total": {"captured_amount": 17000, "refunded_amount": 4000, "net_collected": 13000, "payment_success_rate": ["0.750000", 3, 4], "paying_orders": 2},
+  "a_zar_day_one": {"captured_amount": 10000, "refunded_amount": 0, "net_collected": 10000, "payment_success_rate": ["1.000000", 1, 1], "paying_orders": 1},
+  "a_zar_day_two": {"captured_amount": 7000, "refunded_amount": 4000, "net_collected": 3000, "payment_success_rate": ["0.666667", 2, 3], "paying_orders": 2},
+  "a_zar_card": {"captured_amount": 12000, "refunded_amount": 4000, "net_collected": 8000, "payment_success_rate": ["0.666667", 2, 3], "paying_orders": 1},
+  "a_usd_total": {"captured_amount": 700, "refunded_amount": 0, "net_collected": 700, "payment_success_rate": ["1.000000", 1, 1], "paying_orders": 1},
+  "a_zar_net_by_provider": {"CARD": 8000, "EFT": 5000},
+  "b_zar_total": {"net_collected": 90000},
+  "a_zar_empty": {"captured_amount": 0, "refunded_amount": 0, "net_collected": 0, "payment_success_rate": [null, 0, 0], "paying_orders": 0}
+}

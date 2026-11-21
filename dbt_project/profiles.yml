@@ -1,0 +1,10 @@
+governed_payments:
+  target: fixture
+  outputs:
+    fixture:
+      type: duckdb
+      path: "{{ env_var('GOVERNED_METRICS_BUILD_DB') }}"
+      schema: main
+      threads: 1
+      settings:
+        TimeZone: UTC

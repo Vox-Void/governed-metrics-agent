@@ -1,0 +1,23 @@
+name: Governed metrics checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  metrics:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Install uv
+        run: pipx install uv==0.13.9
+      - name: Build and certify the synthetic snapshot
+        run: ./scripts/dev bootstrap
+      - name: Check the data and service
+        run: ./scripts/dev test

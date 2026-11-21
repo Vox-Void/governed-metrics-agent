@@ -1,0 +1,5 @@
+merchant_id,refund_id,capture_id,currency,status,settled_at,amount_minor,version,ingested_at
+a,r1,c1,ZAR,settled,2026-11-02T10:00:00Z,2000,1,2026-11-05T07:47:01Z
+a,r4,c1,ZAR,settled,2026-11-02T10:30:00Z,1000,1,2026-11-05T07:47:02Z
+a,r2,c0,ZAR,settled,2026-11-02T11:00:00Z,1000,1,2026-11-05T07:47:03Z
+a,r3,c2,ZAR,pending,,1000,1,2026-11-05T07:47:04Z
