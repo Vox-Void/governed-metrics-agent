@@ -26,6 +26,7 @@ class SnapshotError(RuntimeError):
 
 
 def revision_digest(project_root: Path, variant: str, marks: object) -> str:
+    """Hash the build inputs and the watermark values for one snapshot variant."""
     paths = sorted(
         [
             *project_root.glob("data/seeds/*.csv"),
@@ -43,6 +44,7 @@ def revision_digest(project_root: Path, variant: str, marks: object) -> str:
 
 
 def run_dbt(project_root: Path, candidate: Path, scratch: Path) -> dict[str, int]:
+    """Run the seed and build commands against a temporary DuckDB file."""
     exe = Path(sys.executable).with_name("dbt.exe" if os.name == "nt" else "dbt")
     project = project_root / "dbt_project"
     environment = {
@@ -96,11 +98,13 @@ def publish_snapshots(output: Path, project_root: Path = ROOT) -> dict[str, Any]
     with TemporaryDirectory(prefix="building-", dir=output) as temp:
         scratch = Path(temp)
         candidate = scratch / "tested.duckdb"
+        # Build the facts once and check the counts reported by dbt.
         checks = run_dbt(project_root, candidate, scratch)
         if checks["models"] != 6 or checks["tests"] != 7:
             raise SnapshotError("The dbt candidate did not run all six models and seven tests.")
         for variant, revision in revisions.items():
             staged = scratch / f"{revision}.duckdb"
+            # Copy the facts and write this variant's revision and input watermarks.
             shutil.copyfile(candidate, staged)
             with duckdb.connect(str(staged)) as database:
                 database.execute("CREATE TABLE snapshot_meta (revision VARCHAR, tested BOOLEAN)")
@@ -114,9 +118,10 @@ def publish_snapshots(output: Path, project_root: Path = ROOT) -> dict[str, Any]
                         [source, datetime.fromisoformat(loaded), date.fromisoformat(complete)],
                     )
                 database.execute("CHECKPOINT")
-            # The same tested revision may already have been published by another build.
+            # Link the completed file under its revision name and keep any existing copy.
             with suppress(FileExistsError):
                 os.link(staged, versions / staged.name)
+        # Publish the variant-to-revision map after both files are in place.
         with NamedTemporaryFile("w", encoding="utf-8", dir=scratch, delete=False) as pointer:
             json.dump(revisions, pointer, indent=2)
             pointer.write("\n")
@@ -128,6 +133,7 @@ def publish_snapshots(output: Path, project_root: Path = ROOT) -> dict[str, Any]
 
 
 def pin_snapshot(output: Path, variant: str) -> tuple[str, Path]:
+    """Read the current map and resolve one revision to its DuckDB file."""
     if variant not in VARIANTS:
         raise SnapshotError("Unknown snapshot variant.")
     try:

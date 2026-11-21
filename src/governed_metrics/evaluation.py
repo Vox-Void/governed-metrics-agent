@@ -30,6 +30,7 @@ def write_json(path: Path, data: object) -> None:
 
 
 def score(response: Response, expected: dict[str, Any], revision: str | None) -> dict[str, bool]:
+    """Match the answer's scope, values, and evidence or check the refusal reason."""
     status_ok = response.status == expected["status"]
     if not isinstance(response, Answer):
         return {
@@ -75,6 +76,7 @@ def evaluate(service: Service, out: Path, *, live: bool, split: str) -> bool:
     ):
         raise ValueError("The evaluation suite must contain 24 development and 12 held-out cases.")
     selected = [case for case in cases if split == "all" or case["split"] == split]
+    # Run both planner arms over the same selected cases and shared service.
     planners: tuple[Planner, Planner] = (
         (OpenAIPlanner(baseline=True), OpenAIPlanner())
         if live
@@ -99,6 +101,7 @@ def evaluate(service: Service, out: Path, *, live: bool, split: str) -> bool:
                 else None
             )
             graded = score(response, case["expected"], revision)
+            # Flag out-of-scope queries and check for date or row limit violations.
             forbidden_query = (
                 case["expected"]["status"] == "denied"
                 and "execute_approved_metric" in trace["actions"]

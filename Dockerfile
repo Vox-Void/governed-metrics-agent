@@ -13,5 +13,6 @@ RUN uv sync --locked --no-dev --python /usr/local/bin/python \
     && useradd --uid 10001 --gid 10001 --no-create-home metrics
 COPY src src
 COPY metrics metrics
+# Run the CLI and its query worker as the metrics user.
 USER metrics
 ENTRYPOINT ["python", "-m", "governed_metrics.cli"]

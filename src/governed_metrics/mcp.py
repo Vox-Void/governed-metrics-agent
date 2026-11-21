@@ -17,6 +17,7 @@ VERSION_KEY = "io.modelcontextprotocol/protocolVersion"
 
 def tool_definitions() -> list[dict[str, Any]]:
     plan_schema = MetricPlan.model_json_schema()
+    # The adapter supplies the plan kind when it forwards a tool call.
     del plan_schema["properties"]["kind"]
     plan_schema["required"].remove("kind")
     return [
@@ -43,6 +44,7 @@ def rpc_error(request_id: Any, code: int, message: str) -> dict[str, Any]:
 
 
 def serve(service: Service, principal: Principal, variant: str) -> None:
+    """Read one JSON-RPC message per line and write responses to standard output."""
     legacy_session = False
     for line in sys.stdin:
         request_id = None
@@ -53,6 +55,7 @@ def serve(service: Service, principal: Principal, variant: str) -> None:
             if not isinstance(document, dict) or document.get("jsonrpc") != "2.0":
                 print(json.dumps(rpc_error(None, -32600, "Invalid request")), flush=True)
                 continue
+            # Dispatch requests with IDs and skip notifications.
             if "id" not in document:
                 continue
             request_id = document["id"]
@@ -88,6 +91,7 @@ def serve(service: Service, principal: Principal, variant: str) -> None:
                 ):
                     raise TypeError("The merchant argument must be a string")
                 merchant = arguments["merchant"]
+                # Forward the launcher's profile with each tool call.
                 if name == "list_metrics" and set(arguments) == {"merchant"}:
                     data = service.discover(merchant, principal)
                 elif name == "run_metric" and "kind" not in arguments:

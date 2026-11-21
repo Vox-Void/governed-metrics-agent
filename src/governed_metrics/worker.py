@@ -29,6 +29,7 @@ def execute(payload: dict[str, Any]) -> dict[str, Any]:
         with connect_read_only(
             Path(payload["snapshot"]), threads=payload["threads"], memory_mib=payload["memory_mib"]
         ) as connection:
+            # Fetch up to 60 allowed rows plus one to check the limit.
             rows = connection.execute(payload["statement"], payload["parameters"]).fetchmany(61)
     except (duckdb.Error, ValueError, OSError):
         return {"status": "QUERY_FAILED"}

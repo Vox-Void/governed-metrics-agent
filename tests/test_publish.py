@@ -30,6 +30,7 @@ def test_conflicting_same_version_fails_dbt_and_keeps_last_good_snapshot(snapsho
     before = snapshots.pin_snapshot(local, "fresh")[0]
     project = isolated_project(tmp_path)
     seed = project / "data/seeds/capture_deliveries.csv"
+    # Submit a different amount under the same capture ID and source version.
     with seed.open("a", encoding="utf-8", newline="") as stream:
         stream.write(
             "a,c1,o1,a1,CARD,ZAR,settled,2026-10-31T22:10:00Z,11000,1,2026-11-05T07:49:00Z\n"
@@ -51,6 +52,7 @@ def test_concurrent_read_sees_one_complete_revision(snapshot_root, tmp_path, mon
     real_dbt = snapshots.run_dbt
 
     def staged(*arguments):
+        # Pause after dbt passes and before the published pointer changes.
         checks = real_dbt(*arguments)
         built.set()
         assert publish.wait(15), "Expected the parallel read to finish before publication"

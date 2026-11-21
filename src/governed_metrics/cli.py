@@ -17,6 +17,7 @@ from governed_metrics.snapshots import VARIANTS, SnapshotError, publish_snapshot
 
 
 def demo(service: Service, path: Path) -> bool:
+    """Run the five demo requests and write their rendered and structured answers."""
     cases = (
         ("How much did we collect after refunds in ZAR on 1-2 November 2026?", "a", "fresh", "ok"),
         ("How much revenue in ZAR on 1-2 November 2026?", "a", "fresh", "clarify"),
@@ -48,6 +49,7 @@ def demo(service: Service, path: Path) -> bool:
 
 
 def main() -> int:
+    """Parse command options, then dispatch the build, query, or inspection command."""
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest="command", required=True)
     bootstrap = commands.add_parser("bootstrap")
@@ -80,6 +82,7 @@ def main() -> int:
     if args.command == "template":
         if args.group not in load_catalog().metrics[args.metric].groups:
             parser.error("This metric does not support that grouping.")
+        # Compile the selected template with sample values and print just its SQL.
         plan = MetricPlan.model_validate_json(
             json.dumps(
                 {

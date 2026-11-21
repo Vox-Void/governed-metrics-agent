@@ -4,6 +4,8 @@ Ask for a certified payments metric and see the value, definition, scope and fre
 
 Watch the [2:18 captioned demo](docs/demo.mp4) for the net collection answer, revenue clarification, access denial and stale-refund case.
 
+The [project guide](docs/project-guide.md) follows the ZAR 130.00 answer from the original payment files to the terminal and explains the choices behind the build.
+
 ## Run it
 
 Use Bash on Linux or WSL2 with `uv` 0.13.9. Run these commands from the repository root.

@@ -14,6 +14,7 @@ class Principal:
     default_currency: Currency | None = None
 
 
+# Map each local profile to its merchant, metrics, groupings, and providers.
 PROFILES = {
     "analyst-a": Principal(
         "a", frozenset(METRICS), frozenset({"total", "day", "provider"}), frozenset(PROVIDERS)

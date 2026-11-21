@@ -55,6 +55,7 @@ def denial(trace: str) -> Failure:
 
 
 def check_question(text: str, context: Context, plan: MetricPlan) -> ClarificationCode | None:
+    """Check metric ambiguity and compare the question's currency, dates, and providers with the plan."""
     choices = recognised_metrics(text, context, baseline=False)
     if len(choices) > 1:
         return "MULTIPLE_METRICS"
@@ -78,6 +79,7 @@ def check_question(text: str, context: Context, plan: MetricPlan) -> Clarificati
 
 
 def metadata(path: Path, revision: str) -> dict[str, Watermark]:
+    """Check the file's certified revision and return complete input watermarks in UTC."""
     with connect_read_only(path) as connection:
         if connection.execute("select revision, tested from snapshot_meta").fetchall() != [
             (revision, True)
@@ -110,6 +112,7 @@ def ratio(numerator: int, denominator: int) -> str | None:
 def shape_rows(
     plan: MetricPlan, definition: MetricDefinition, rows: list[list[Any]]
 ) -> list[MetricRow]:
+    # Build the ordered list of groups from the request.
     if plan.grouping == "day":
         groups: list[str | None] = [
             (plan.start + timedelta(days=offset)).isoformat()
@@ -125,6 +128,7 @@ def shape_rows(
     is_rate = definition.unit == "ratio"
     if len(rows) > 60:
         raise QueryFailure("RESULT_LIMIT")
+    # Check the worker's row shape and index each row by its group.
     for row in rows:
         if (
             len(row) != (3 if is_rate else 2)
@@ -135,6 +139,7 @@ def shape_rows(
             raise QueryFailure("WORKER_RESULT_INVALID")
         by_group[row[0]] = row[1:]
     results = []
+    # Fill missing amount and count groups with zero. An empty rate is null with counts of zero.
     for group in groups:
         if is_rate:
             numerator, denominator = by_group.get(group, [0, 0])
@@ -179,6 +184,7 @@ class Service:
         self.executor = executor if executor is not None else DuckDBExecutor()
 
     def discover(self, merchant: str, principal: Principal) -> dict[str, Any]:
+        """Return the metrics, groupings, and providers available to this profile."""
         if merchant != principal.merchant:
             return denial(uuid4().hex).model_dump(mode="json")
         catalog = load_catalog()
@@ -202,6 +208,7 @@ class Service:
         }
 
     def close(self, response: Response, trace: Trace) -> Response:
+        """Write the decision path, timings, and token counts for one request."""
         record = {
             "trace_id": trace.trace_id,
             "mode": trace.mode,
@@ -238,6 +245,7 @@ class Service:
             )
         catalog = load_catalog()
         order: tuple[Grouping, ...] = ("total", "day", "provider")
+        # Pass only the profile's metric definitions and groupings to the planner.
         context = Context(
             merchant,
             {
@@ -307,6 +315,7 @@ class Service:
     ) -> Response:
         trace_id = trace.trace_id
         trace.actions.append("authorize_plan")
+        # Check the proposed merchant, metric, grouping, and provider against the profile.
         if (
             merchant != principal.merchant
             or plan.merchant != merchant
@@ -335,11 +344,13 @@ class Service:
             default_used = not requested_currencies(text)
         trace.actions.append("check_freshness")
         try:
+            # Use the same revision for the watermark read and the fact query below.
             revision, path = pin_snapshot(self.root, variant)
             marks = metadata(path, revision)
         except (SnapshotError, duckdb.Error, ValidationError, OSError):
             return Failure(status="unavailable", trace_id=trace_id, reason="SNAPSHOT_UNAVAILABLE")
         required = tuple(definition.inputs)
+        # Check the age and date coverage of every input named in the metric definition.
         for source in required:
             mark = marks.get(source)
             if mark is None:
@@ -382,6 +393,7 @@ class Service:
 
 
 def display(response: Response) -> str:
+    """Format a clarification, a refusal, or a typed answer for the terminal."""
     if isinstance(response, Clarify):
         return response.question
     if isinstance(response, Failure):

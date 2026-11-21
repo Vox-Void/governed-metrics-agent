@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
+# Run every command from the repository root.
 cd "$(dirname "${BASH_SOURCE[0]}")/.."
 
 command="${1:-}"
@@ -8,6 +9,7 @@ if ! command -v uv >/dev/null; then
   echo "Install uv 0.13.9, then run ./scripts/dev bootstrap." >&2
   exit 1
 fi
+# Import the package from this checkout.
 export PYTHONPATH="$PWD/src"
 case "$command" in
   bootstrap)

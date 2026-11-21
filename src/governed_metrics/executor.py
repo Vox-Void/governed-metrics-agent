@@ -36,6 +36,7 @@ class DuckDBExecutor:
                 "memory_mib": self.memory_mib,
             }
         )
+        # Pass only the listed platform environment variables and the package path to the worker.
         environment = {
             name: value
             for name, value in os.environ.items()
@@ -71,6 +72,7 @@ class DuckDBExecutor:
             raise QueryFailure("QUERY_TIMEOUT") from error
         except (subprocess.SubprocessError, OSError, ValueError) as error:
             raise QueryFailure("WORKER_UNAVAILABLE") from error
+        # Translate the worker's error status into the service's query failure codes.
         if payload.get("status") != "OK":
             reason = payload.get("status", "WORKER_UNAVAILABLE")
             raise QueryFailure(

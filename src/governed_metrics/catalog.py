@@ -49,6 +49,7 @@ class Catalog(Strict):
 @lru_cache(maxsize=1)
 def load_catalog() -> Catalog:
     catalog = Catalog.model_validate(yaml.safe_load((ROOT / "metrics/catalog.yml").read_bytes()))
+    # Check the file's dimension values against the lists used by the compiler.
     if (
         set(catalog.metrics) != set(METRICS)
         or tuple(catalog.currencies) != CURRENCIES
@@ -56,6 +57,7 @@ def load_catalog() -> Catalog:
         or catalog.timezone != BUSINESS_TIMEZONE
     ):
         raise ValueError("Catalog dimensions differ from the approved compiler dimensions.")
+    # Reserve ambiguous terms and check each metric's inputs, groupings, and aliases.
     aliases = set(catalog.ambiguous)
     for metric, definition in catalog.metrics.items():
         policy_groups = (

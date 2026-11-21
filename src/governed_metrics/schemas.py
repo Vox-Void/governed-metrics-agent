@@ -52,6 +52,7 @@ class Strict(BaseModel):
     model_config = ConfigDict(extra="forbid", strict=True, frozen=True)
 
 
+# A plan carries one metric with its merchant, filters, and grouping.
 class MetricPlan(Strict):
     kind: Literal["plan"]
     metric_id: Metric
@@ -73,6 +74,7 @@ class Unable(Strict):
     reason: Literal["NO_CERTIFIED_METRIC", "PLANNER_UNAVAILABLE"]
 
 
+# Use the kind field to select the model that validates each planner response.
 Decision = Annotated[MetricPlan | Clarification | Unable, Field(discriminator="kind")]
 DECISION = TypeAdapter[Decision](Decision)
 
@@ -89,6 +91,7 @@ class Watermark(Strict):
     complete_through: date
 
 
+# An answer includes the result, metric definition, query template, and snapshot details.
 class Answer(Strict):
     status: Literal["ok"] = "ok"
     reason: Literal["VERIFIED_METRIC"] = "VERIFIED_METRIC"

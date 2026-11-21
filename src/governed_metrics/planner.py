@@ -87,6 +87,7 @@ def ambiguous_reason(text: str, labels: tuple[str, ...]) -> ClarificationCode | 
 
 
 def date_window(text: str, today: date) -> tuple[date, date] | None:
+    """Parse a day or date range and return the first day and exclusive end day."""
     try:
         iso = re.findall(r"\b\d{4}-\d{2}-\d{2}\b", text)
         if iso:
@@ -116,6 +117,7 @@ def date_window(text: str, today: date) -> tuple[date, date] | None:
 
 
 def recognised_metrics(text: str, context: Context, *, baseline: bool) -> set[Metric]:
+    # Look up names and aliases among the metrics in the current profile.
     matches = []
     for metric, definition in context.metrics.items():
         labels = [metric, metric.replace("_", " ")]
@@ -125,6 +127,7 @@ def recognised_metrics(text: str, context: Context, *, baseline: bool) -> set[Me
             for match in re.finditer(rf"(?<!\w){re.escape(label)}(?!\w)", text):
                 matches.append((match.start(), match.end(), metric))
     accepted: list[tuple[int, int, Metric]] = []
+    # Take longer phrases first and discard matches that overlap an accepted phrase.
     for start, end, metric in sorted(matches, key=lambda match: match[0] - match[1]):
         if not any(start < right and left < end for left, right, _ in accepted):
             accepted.append((start, end, metric))
@@ -137,6 +140,7 @@ class ScriptedPlanner:
         self.mode = "scripted-baseline" if baseline else "scripted-catalog"
 
     def propose(self, question: str, context: Context) -> Proposal:
+        """Read a metric, currency, date window, grouping, and provider from the question."""
         text = question.lower().strip()
         choices = recognised_metrics(text, context, baseline=self.baseline)
         if len(choices) > 1:
@@ -194,6 +198,8 @@ class ScriptedPlanner:
 
 
 def decision_schema(context: Context) -> dict[str, Any]:
+    """List the fields for a plan, a clarification, or an unavailable decision."""
+
     def shape(fields: dict[str, Any]) -> dict[str, Any]:
         return {
             "type": "object",
@@ -265,6 +271,7 @@ class OpenAIPlanner:
                 "clarification unless the profile supplies a default. Yesterday is the prior Johannesburg date. "
                 "A no-year date is in the current year if it is on or before today. Use at most 60 dates."
             )
+        # Send the question with the allowed scope and the decision schema.
         request = Request(
             "https://api.openai.com/v1/responses",
             headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"},
@@ -315,7 +322,7 @@ class OpenAIPlanner:
 
 
 def business_today(clock: datetime) -> date:
-    # Johannesburg is UTC+02:00 throughout the fixture period.
+    """Return the Johannesburg calendar date for the supplied clock time."""
     from zoneinfo import ZoneInfo
 
     return clock.astimezone(ZoneInfo("Africa/Johannesburg")).date()

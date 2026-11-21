@@ -9,6 +9,7 @@ services:
     security_opt: ["no-new-privileges:true"]
     tmpfs:
       - /tmp:rw,nosuid,nodev,size=32m,mode=1777
+    # Mount the published artifacts at the path used by the isolated reader.
     volumes:
       - ./artifacts:/snapshots:ro
     cpus: 2.0

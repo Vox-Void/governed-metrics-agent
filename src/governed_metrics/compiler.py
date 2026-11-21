@@ -21,6 +21,7 @@ class Statement:
 
     @property
     def digest(self) -> str:
+        """Hash the SQL template after collapsing whitespace."""
         return hashlib.sha256(" ".join(self.sql.split()).encode()).hexdigest()
 
 
@@ -28,6 +29,7 @@ def compile_metric(plan: MetricPlan) -> Statement:
     group = GROUP_EXPRESSION[plan.grouping]
     grouping = " group by 1" if plan.grouping != "total" else ""
     terms = FILTER + (" and provider = ?" if plan.provider is not None else "")
+    # Keep the filter values in the order of the SQL placeholders.
     params: tuple[str, ...] = (
         plan.merchant,
         plan.currency,
@@ -53,11 +55,13 @@ def compile_metric(plan: MetricPlan) -> Statement:
                     count(*) as denominator
                 from fct_attempts where {terms} and status in ('succeeded', 'failed'){grouping}"""
         case "net_collected":
+            # Add the capture and negative refund totals after grouping each stream separately.
             captured = settled("fct_captures", "coalesce(sum(amount_minor), 0)")
             refunded = settled("fct_refunds", "-coalesce(sum(amount_minor), 0)")
             sql = f"""with captured as ({captured}), refunded as ({refunded}),
                 movements as (select * from captured union all select * from refunded)
                 select bucket, sum(value) as value from movements group by bucket"""
+            # Bind the same scope again for the separate refund scan.
             params += params
     suffix = ".filtered" if plan.provider else ""
     return Statement(f"{plan.metric_id}.{plan.grouping}{suffix}", sql, params)
