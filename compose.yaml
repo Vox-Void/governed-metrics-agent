@@ -1,0 +1,16 @@
+services:
+  metrics-reader:
+    build: .
+    image: governed-metrics-reader:local
+    init: true
+    network_mode: none
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    tmpfs:
+      - /tmp:rw,nosuid,nodev,size=32m,mode=1777
+    volumes:
+      - ./artifacts:/snapshots:ro
+    cpus: 2.0
+    mem_limit: 512m
+    pids_limit: 128

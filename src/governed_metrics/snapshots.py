@@ -7,6 +7,7 @@ import re
 import shutil
 import subprocess
 import sys
+from contextlib import suppress
 from datetime import date, datetime
 from pathlib import Path
 from tempfile import NamedTemporaryFile, TemporaryDirectory
@@ -113,15 +114,15 @@ def publish_snapshots(output: Path, project_root: Path = ROOT) -> dict[str, Any]
                         [source, datetime.fromisoformat(loaded), date.fromisoformat(complete)],
                     )
                 database.execute("CHECKPOINT")
-            try:
+            # The same tested revision may already have been published by another build.
+            with suppress(FileExistsError):
                 os.link(staged, versions / staged.name)
-            except FileExistsError:
-                pass  # A concurrent build already published the same version.
         with NamedTemporaryFile("w", encoding="utf-8", dir=scratch, delete=False) as pointer:
             json.dump(revisions, pointer, indent=2)
             pointer.write("\n")
             pointer.flush()
             os.fsync(pointer.fileno())
+        os.chmod(pointer.name, 0o644)
         os.replace(pointer.name, output / "current.json")
     return {"versions": revisions, "dbt": checks, "duckdb": duckdb.__version__}
 

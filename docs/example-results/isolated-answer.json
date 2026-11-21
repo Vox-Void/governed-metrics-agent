@@ -1,0 +1,43 @@
+{
+  "status": "ok",
+  "reason": "VERIFIED_METRIC",
+  "trace_id": "a535704afee84f64840da2b9d54932b6",
+  "metric_id": "net_collected",
+  "label": "Net collected",
+  "definition": "Settled captures less settled refunds, each counted on its own settlement date.",
+  "catalog_version": "payments/1.0",
+  "unit": "minor_units",
+  "currency": "ZAR",
+  "currency_default_used": false,
+  "merchant": "a",
+  "provider": null,
+  "grouping": "total",
+  "timezone": "Africa/Johannesburg",
+  "start": "2026-11-01",
+  "end": "2026-11-03",
+  "rows": [
+    {
+      "group": null,
+      "value": 13000,
+      "numerator": null,
+      "denominator": null
+    }
+  ],
+  "template_id": "net_collected.total",
+  "query_hash": "c5d55028ca1859b02e8b31c39859dfcb0e761e77a22a9ac467bb0c9ec631f5b7",
+  "snapshot_id": "33f443ac5ff60ab4e248158ca35c3e9f",
+  "required_inputs": [
+    "captures",
+    "refunds"
+  ],
+  "watermarks": {
+    "captures": {
+      "loaded_at": "2026-11-05T07:50:00Z",
+      "complete_through": "2026-11-05"
+    },
+    "refunds": {
+      "loaded_at": "2026-11-05T07:50:00Z",
+      "complete_through": "2026-11-05"
+    }
+  }
+}

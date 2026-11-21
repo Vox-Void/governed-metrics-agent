@@ -21,3 +21,21 @@ jobs:
         run: ./scripts/dev bootstrap
       - name: Check the data and service
         run: ./scripts/dev test
+      - name: Run the demo and scripted evaluation
+        run: |
+          ./scripts/dev demo
+          ./scripts/dev eval
+      - name: Check the isolated reader
+        run: |
+          docker compose build metrics-reader
+          docker compose run --rm -T metrics-reader ask --root /snapshots --merchant a --json 'Net collected in ZAR on 1-2 November 2026' > artifacts/isolated-answer.json
+          python3 -c 'import json; from pathlib import Path; a = json.loads(Path("artifacts/isolated-answer.json").read_bytes()); assert a["status"] == "ok" and a["rows"][0]["value"] == 13000'
+      - name: Upload verification reports
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: metrics-evidence
+          path: |
+            artifacts/demo.json
+            artifacts/eval/
+            artifacts/isolated-answer.json

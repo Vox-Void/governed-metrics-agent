@@ -1,0 +1,41 @@
+version: 'payments/1.0'
+timezone: Africa/Johannesburg
+currencies: [ZAR, USD]
+providers: [CARD, EFT]
+ambiguous: [revenue, completed payments, successful payments]
+metrics:
+  captured_amount:
+    label: Captured amount
+    definition: Total settled captures on their capture settlement date.
+    unit: minor_units
+    inputs: [captures]
+    groups: [total, day, provider]
+    aliases: [captured amount, gross captures, gross captured, total captured, captured]
+  refunded_amount:
+    label: Refunded amount
+    definition: Total settled refunds on their refund settlement date, including refunds for captures before the window.
+    unit: minor_units
+    inputs: [captures, refunds]
+    groups: [total, day, provider]
+    aliases: [refunded amount, settled refunds, refunds, refunded]
+  net_collected:
+    label: Net collected
+    definition: Settled captures less settled refunds, each counted on its own settlement date.
+    unit: minor_units
+    inputs: [captures, refunds]
+    groups: [total, day, provider]
+    aliases: [net collected, net collections, collected after refunds, after refunds, net collection]
+  payment_success_rate:
+    label: Payment success rate
+    definition: Successful terminal attempts divided by all terminal attempts on their completion date.
+    unit: ratio
+    inputs: [attempts]
+    groups: [total, day, provider]
+    aliases: [payment success rate, success rate, share of attempts succeeded, success ratio]
+  paying_orders:
+    label: Paying orders
+    definition: Distinct orders with at least one settled capture in the requested scope.
+    unit: count
+    inputs: [captures]
+    groups: [total, day]
+    aliases: [paying orders, paid orders, orders with settled captures, distinct paid orders]
