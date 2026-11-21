@@ -1,0 +1,4851 @@
+[
+  {
+    "case": "D01",
+    "split": "development",
+    "mode": "scripted-baseline",
+    "expected": {
+      "status": "ok",
+      "metric_id": "net_collected",
+      "currency": "ZAR",
+      "merchant": "a",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "total",
+      "provider": null,
+      "rows": [
+        [
+          null,
+          13000
+        ]
+      ]
+    },
+    "result": {
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "trace_id": "0b44bc182e5c4e32bbff0ca95c339dca",
+      "metric_id": "net_collected",
+      "label": "Net collected",
+      "definition": "Settled captures less settled refunds, each counted on its own settlement date.",
+      "catalog_version": "payments/1.0",
+      "unit": "minor_units",
+      "currency": "ZAR",
+      "currency_default_used": false,
+      "merchant": "a",
+      "provider": null,
+      "grouping": "total",
+      "timezone": "Africa/Johannesburg",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "rows": [
+        {
+          "group": null,
+          "value": 13000,
+          "numerator": null,
+          "denominator": null
+        }
+      ],
+      "template_id": "net_collected.total",
+      "query_hash": "c5d55028ca1859b02e8b31c39859dfcb0e761e77a22a9ac467bb0c9ec631f5b7",
+      "snapshot_id": "33f443ac5ff60ab4e248158ca35c3e9f",
+      "required_inputs": [
+        "captures",
+        "refunds"
+      ],
+      "watermarks": {
+        "captures": {
+          "loaded_at": "2026-11-05T07:50:00Z",
+          "complete_through": "2026-11-05"
+        },
+        "refunds": {
+          "loaded_at": "2026-11-05T07:50:00Z",
+          "complete_through": "2026-11-05"
+        }
+      }
+    },
+    "grade": {
+      "matched": true,
+      "evidence": true
+    },
+    "trace": {
+      "trace_id": "0b44bc182e5c4e32bbff0ca95c339dca",
+      "mode": "scripted-baseline",
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "actions": [
+        "authorize_scope",
+        "propose_plan",
+        "authorize_plan",
+        "check_freshness",
+        "execute_approved_metric"
+      ],
+      "usage": null,
+      "duration_ms": 131
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  },
+  {
+    "case": "D02",
+    "split": "development",
+    "mode": "scripted-baseline",
+    "expected": {
+      "status": "ok",
+      "metric_id": "captured_amount",
+      "currency": "ZAR",
+      "merchant": "a",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "total",
+      "provider": null,
+      "rows": [
+        [
+          null,
+          17000
+        ]
+      ]
+    },
+    "result": {
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "trace_id": "7456021d952b482b9f0d09adfe357193",
+      "metric_id": "captured_amount",
+      "label": "Captured amount",
+      "definition": "Total settled captures on their capture settlement date.",
+      "catalog_version": "payments/1.0",
+      "unit": "minor_units",
+      "currency": "ZAR",
+      "currency_default_used": false,
+      "merchant": "a",
+      "provider": null,
+      "grouping": "total",
+      "timezone": "Africa/Johannesburg",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "rows": [
+        {
+          "group": null,
+          "value": 17000,
+          "numerator": null,
+          "denominator": null
+        }
+      ],
+      "template_id": "captured_amount.total",
+      "query_hash": "3e19295ad78940464ae7553fefada36112a9290b5c47ed45da09c56632398676",
+      "snapshot_id": "33f443ac5ff60ab4e248158ca35c3e9f",
+      "required_inputs": [
+        "captures"
+      ],
+      "watermarks": {
+        "captures": {
+          "loaded_at": "2026-11-05T07:50:00Z",
+          "complete_through": "2026-11-05"
+        }
+      }
+    },
+    "grade": {
+      "matched": true,
+      "evidence": true
+    },
+    "trace": {
+      "trace_id": "7456021d952b482b9f0d09adfe357193",
+      "mode": "scripted-baseline",
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "actions": [
+        "authorize_scope",
+        "propose_plan",
+        "authorize_plan",
+        "check_freshness",
+        "execute_approved_metric"
+      ],
+      "usage": null,
+      "duration_ms": 124
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  },
+  {
+    "case": "D03",
+    "split": "development",
+    "mode": "scripted-baseline",
+    "expected": {
+      "status": "ok",
+      "metric_id": "refunded_amount",
+      "currency": "ZAR",
+      "merchant": "a",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "total",
+      "provider": null,
+      "rows": [
+        [
+          null,
+          4000
+        ]
+      ]
+    },
+    "result": {
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "trace_id": "8c5b6ec9ada942fd8921039e7aab23f3",
+      "metric_id": "refunded_amount",
+      "label": "Refunded amount",
+      "definition": "Total settled refunds on their refund settlement date, including refunds for captures before the window.",
+      "catalog_version": "payments/1.0",
+      "unit": "minor_units",
+      "currency": "ZAR",
+      "currency_default_used": false,
+      "merchant": "a",
+      "provider": null,
+      "grouping": "total",
+      "timezone": "Africa/Johannesburg",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "rows": [
+        {
+          "group": null,
+          "value": 4000,
+          "numerator": null,
+          "denominator": null
+        }
+      ],
+      "template_id": "refunded_amount.total",
+      "query_hash": "43bf75446abe851d92daf1b2e80eba3cdfd3bbe48432351cbd68f8b516a5822f",
+      "snapshot_id": "33f443ac5ff60ab4e248158ca35c3e9f",
+      "required_inputs": [
+        "captures",
+        "refunds"
+      ],
+      "watermarks": {
+        "captures": {
+          "loaded_at": "2026-11-05T07:50:00Z",
+          "complete_through": "2026-11-05"
+        },
+        "refunds": {
+          "loaded_at": "2026-11-05T07:50:00Z",
+          "complete_through": "2026-11-05"
+        }
+      }
+    },
+    "grade": {
+      "matched": true,
+      "evidence": true
+    },
+    "trace": {
+      "trace_id": "8c5b6ec9ada942fd8921039e7aab23f3",
+      "mode": "scripted-baseline",
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "actions": [
+        "authorize_scope",
+        "propose_plan",
+        "authorize_plan",
+        "check_freshness",
+        "execute_approved_metric"
+      ],
+      "usage": null,
+      "duration_ms": 113
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  },
+  {
+    "case": "D04",
+    "split": "development",
+    "mode": "scripted-baseline",
+    "expected": {
+      "status": "ok",
+      "metric_id": "payment_success_rate",
+      "currency": "ZAR",
+      "merchant": "a",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "total",
+      "provider": null,
+      "rows": [
+        [
+          null,
+          [
+            "0.750000",
+            3,
+            4
+          ]
+        ]
+      ]
+    },
+    "result": {
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "trace_id": "d807cf9ffb9041c587787bed7321b5ae",
+      "metric_id": "payment_success_rate",
+      "label": "Payment success rate",
+      "definition": "Successful terminal attempts divided by all terminal attempts on their completion date.",
+      "catalog_version": "payments/1.0",
+      "unit": "ratio",
+      "currency": "ZAR",
+      "currency_default_used": false,
+      "merchant": "a",
+      "provider": null,
+      "grouping": "total",
+      "timezone": "Africa/Johannesburg",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "rows": [
+        {
+          "group": null,
+          "value": "0.750000",
+          "numerator": 3,
+          "denominator": 4
+        }
+      ],
+      "template_id": "payment_success_rate.total",
+      "query_hash": "a1d8d9f2a27018f96ab02f179039a5f0dbb74dc03bb1ca869909ffc0bb4f2d5d",
+      "snapshot_id": "33f443ac5ff60ab4e248158ca35c3e9f",
+      "required_inputs": [
+        "attempts"
+      ],
+      "watermarks": {
+        "attempts": {
+          "loaded_at": "2026-11-05T07:50:00Z",
+          "complete_through": "2026-11-05"
+        }
+      }
+    },
+    "grade": {
+      "matched": true,
+      "evidence": true
+    },
+    "trace": {
+      "trace_id": "d807cf9ffb9041c587787bed7321b5ae",
+      "mode": "scripted-baseline",
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "actions": [
+        "authorize_scope",
+        "propose_plan",
+        "authorize_plan",
+        "check_freshness",
+        "execute_approved_metric"
+      ],
+      "usage": null,
+      "duration_ms": 105
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  },
+  {
+    "case": "D05",
+    "split": "development",
+    "mode": "scripted-baseline",
+    "expected": {
+      "status": "ok",
+      "metric_id": "paying_orders",
+      "currency": "ZAR",
+      "merchant": "a",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "total",
+      "provider": null,
+      "rows": [
+        [
+          null,
+          2
+        ]
+      ]
+    },
+    "result": {
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "trace_id": "cdf0f3a9f23140f39c9ed99b0ad1dbcb",
+      "metric_id": "paying_orders",
+      "label": "Paying orders",
+      "definition": "Distinct orders with at least one settled capture in the requested scope.",
+      "catalog_version": "payments/1.0",
+      "unit": "count",
+      "currency": "ZAR",
+      "currency_default_used": false,
+      "merchant": "a",
+      "provider": null,
+      "grouping": "total",
+      "timezone": "Africa/Johannesburg",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "rows": [
+        {
+          "group": null,
+          "value": 2,
+          "numerator": null,
+          "denominator": null
+        }
+      ],
+      "template_id": "paying_orders.total",
+      "query_hash": "1c6a8cae5629657bb6c2e0e3761d2b0ef5391525148abae79e1b7d807f234e76",
+      "snapshot_id": "33f443ac5ff60ab4e248158ca35c3e9f",
+      "required_inputs": [
+        "captures"
+      ],
+      "watermarks": {
+        "captures": {
+          "loaded_at": "2026-11-05T07:50:00Z",
+          "complete_through": "2026-11-05"
+        }
+      }
+    },
+    "grade": {
+      "matched": true,
+      "evidence": true
+    },
+    "trace": {
+      "trace_id": "cdf0f3a9f23140f39c9ed99b0ad1dbcb",
+      "mode": "scripted-baseline",
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "actions": [
+        "authorize_scope",
+        "propose_plan",
+        "authorize_plan",
+        "check_freshness",
+        "execute_approved_metric"
+      ],
+      "usage": null,
+      "duration_ms": 106
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  },
+  {
+    "case": "D06",
+    "split": "development",
+    "mode": "scripted-baseline",
+    "expected": {
+      "status": "ok",
+      "metric_id": "captured_amount",
+      "currency": "ZAR",
+      "merchant": "a",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "day",
+      "provider": null,
+      "rows": [
+        [
+          "2026-11-01",
+          10000
+        ],
+        [
+          "2026-11-02",
+          7000
+        ]
+      ]
+    },
+    "result": {
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "trace_id": "fc91bd87e25b4245bb0cb2425b49f8f3",
+      "metric_id": "captured_amount",
+      "label": "Captured amount",
+      "definition": "Total settled captures on their capture settlement date.",
+      "catalog_version": "payments/1.0",
+      "unit": "minor_units",
+      "currency": "ZAR",
+      "currency_default_used": false,
+      "merchant": "a",
+      "provider": null,
+      "grouping": "day",
+      "timezone": "Africa/Johannesburg",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "rows": [
+        {
+          "group": "2026-11-01",
+          "value": 10000,
+          "numerator": null,
+          "denominator": null
+        },
+        {
+          "group": "2026-11-02",
+          "value": 7000,
+          "numerator": null,
+          "denominator": null
+        }
+      ],
+      "template_id": "captured_amount.day",
+      "query_hash": "0f448c8dab3ecdf2600715ec2e811e026b51c34e055d0d81acff30eda4f020c2",
+      "snapshot_id": "33f443ac5ff60ab4e248158ca35c3e9f",
+      "required_inputs": [
+        "captures"
+      ],
+      "watermarks": {
+        "captures": {
+          "loaded_at": "2026-11-05T07:50:00Z",
+          "complete_through": "2026-11-05"
+        }
+      }
+    },
+    "grade": {
+      "matched": true,
+      "evidence": true
+    },
+    "trace": {
+      "trace_id": "fc91bd87e25b4245bb0cb2425b49f8f3",
+      "mode": "scripted-baseline",
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "actions": [
+        "authorize_scope",
+        "propose_plan",
+        "authorize_plan",
+        "check_freshness",
+        "execute_approved_metric"
+      ],
+      "usage": null,
+      "duration_ms": 107
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  },
+  {
+    "case": "D07",
+    "split": "development",
+    "mode": "scripted-baseline",
+    "expected": {
+      "status": "ok",
+      "metric_id": "refunded_amount",
+      "currency": "ZAR",
+      "merchant": "a",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "day",
+      "provider": null,
+      "rows": [
+        [
+          "2026-11-01",
+          0
+        ],
+        [
+          "2026-11-02",
+          4000
+        ]
+      ]
+    },
+    "result": {
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "trace_id": "952876c482314711b195ffa667e0f208",
+      "metric_id": "refunded_amount",
+      "label": "Refunded amount",
+      "definition": "Total settled refunds on their refund settlement date, including refunds for captures before the window.",
+      "catalog_version": "payments/1.0",
+      "unit": "minor_units",
+      "currency": "ZAR",
+      "currency_default_used": false,
+      "merchant": "a",
+      "provider": null,
+      "grouping": "day",
+      "timezone": "Africa/Johannesburg",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "rows": [
+        {
+          "group": "2026-11-01",
+          "value": 0,
+          "numerator": null,
+          "denominator": null
+        },
+        {
+          "group": "2026-11-02",
+          "value": 4000,
+          "numerator": null,
+          "denominator": null
+        }
+      ],
+      "template_id": "refunded_amount.day",
+      "query_hash": "4af53e6761fa9cf619ca4db336806b56bd2eb6ecea7059dae0e584e45159847d",
+      "snapshot_id": "33f443ac5ff60ab4e248158ca35c3e9f",
+      "required_inputs": [
+        "captures",
+        "refunds"
+      ],
+      "watermarks": {
+        "captures": {
+          "loaded_at": "2026-11-05T07:50:00Z",
+          "complete_through": "2026-11-05"
+        },
+        "refunds": {
+          "loaded_at": "2026-11-05T07:50:00Z",
+          "complete_through": "2026-11-05"
+        }
+      }
+    },
+    "grade": {
+      "matched": true,
+      "evidence": true
+    },
+    "trace": {
+      "trace_id": "952876c482314711b195ffa667e0f208",
+      "mode": "scripted-baseline",
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "actions": [
+        "authorize_scope",
+        "propose_plan",
+        "authorize_plan",
+        "check_freshness",
+        "execute_approved_metric"
+      ],
+      "usage": null,
+      "duration_ms": 107
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  },
+  {
+    "case": "D08",
+    "split": "development",
+    "mode": "scripted-baseline",
+    "expected": {
+      "status": "ok",
+      "metric_id": "net_collected",
+      "currency": "ZAR",
+      "merchant": "a",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "day",
+      "provider": null,
+      "rows": [
+        [
+          "2026-11-01",
+          10000
+        ],
+        [
+          "2026-11-02",
+          3000
+        ]
+      ]
+    },
+    "result": {
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "trace_id": "fd77b88c7fc447349a0b8df3748984e1",
+      "metric_id": "net_collected",
+      "label": "Net collected",
+      "definition": "Settled captures less settled refunds, each counted on its own settlement date.",
+      "catalog_version": "payments/1.0",
+      "unit": "minor_units",
+      "currency": "ZAR",
+      "currency_default_used": false,
+      "merchant": "a",
+      "provider": null,
+      "grouping": "day",
+      "timezone": "Africa/Johannesburg",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "rows": [
+        {
+          "group": "2026-11-01",
+          "value": 10000,
+          "numerator": null,
+          "denominator": null
+        },
+        {
+          "group": "2026-11-02",
+          "value": 3000,
+          "numerator": null,
+          "denominator": null
+        }
+      ],
+      "template_id": "net_collected.day",
+      "query_hash": "70294e4f4ebbcbe7008ec969759bb40778c8dcc55ee41a2935d426aa91024bad",
+      "snapshot_id": "33f443ac5ff60ab4e248158ca35c3e9f",
+      "required_inputs": [
+        "captures",
+        "refunds"
+      ],
+      "watermarks": {
+        "captures": {
+          "loaded_at": "2026-11-05T07:50:00Z",
+          "complete_through": "2026-11-05"
+        },
+        "refunds": {
+          "loaded_at": "2026-11-05T07:50:00Z",
+          "complete_through": "2026-11-05"
+        }
+      }
+    },
+    "grade": {
+      "matched": true,
+      "evidence": true
+    },
+    "trace": {
+      "trace_id": "fd77b88c7fc447349a0b8df3748984e1",
+      "mode": "scripted-baseline",
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "actions": [
+        "authorize_scope",
+        "propose_plan",
+        "authorize_plan",
+        "check_freshness",
+        "execute_approved_metric"
+      ],
+      "usage": null,
+      "duration_ms": 111
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  },
+  {
+    "case": "D09",
+    "split": "development",
+    "mode": "scripted-baseline",
+    "expected": {
+      "status": "ok",
+      "metric_id": "payment_success_rate",
+      "currency": "ZAR",
+      "merchant": "a",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "day",
+      "provider": null,
+      "rows": [
+        [
+          "2026-11-01",
+          [
+            "1.000000",
+            1,
+            1
+          ]
+        ],
+        [
+          "2026-11-02",
+          [
+            "0.666667",
+            2,
+            3
+          ]
+        ]
+      ]
+    },
+    "result": {
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "trace_id": "ecf0f261464841b692e177974a5ffdcf",
+      "metric_id": "payment_success_rate",
+      "label": "Payment success rate",
+      "definition": "Successful terminal attempts divided by all terminal attempts on their completion date.",
+      "catalog_version": "payments/1.0",
+      "unit": "ratio",
+      "currency": "ZAR",
+      "currency_default_used": false,
+      "merchant": "a",
+      "provider": null,
+      "grouping": "day",
+      "timezone": "Africa/Johannesburg",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "rows": [
+        {
+          "group": "2026-11-01",
+          "value": "1.000000",
+          "numerator": 1,
+          "denominator": 1
+        },
+        {
+          "group": "2026-11-02",
+          "value": "0.666667",
+          "numerator": 2,
+          "denominator": 3
+        }
+      ],
+      "template_id": "payment_success_rate.day",
+      "query_hash": "5b1face0e83ddbc08f16ffece1f0a9375b6be5801d43644d04d907313deda0f4",
+      "snapshot_id": "33f443ac5ff60ab4e248158ca35c3e9f",
+      "required_inputs": [
+        "attempts"
+      ],
+      "watermarks": {
+        "attempts": {
+          "loaded_at": "2026-11-05T07:50:00Z",
+          "complete_through": "2026-11-05"
+        }
+      }
+    },
+    "grade": {
+      "matched": true,
+      "evidence": true
+    },
+    "trace": {
+      "trace_id": "ecf0f261464841b692e177974a5ffdcf",
+      "mode": "scripted-baseline",
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "actions": [
+        "authorize_scope",
+        "propose_plan",
+        "authorize_plan",
+        "check_freshness",
+        "execute_approved_metric"
+      ],
+      "usage": null,
+      "duration_ms": 109
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  },
+  {
+    "case": "D10",
+    "split": "development",
+    "mode": "scripted-baseline",
+    "expected": {
+      "status": "ok",
+      "metric_id": "paying_orders",
+      "currency": "ZAR",
+      "merchant": "a",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "day",
+      "provider": null,
+      "rows": [
+        [
+          "2026-11-01",
+          1
+        ],
+        [
+          "2026-11-02",
+          2
+        ]
+      ]
+    },
+    "result": {
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "trace_id": "ced41aca7a2849078c52b9a7fd50c820",
+      "metric_id": "paying_orders",
+      "label": "Paying orders",
+      "definition": "Distinct orders with at least one settled capture in the requested scope.",
+      "catalog_version": "payments/1.0",
+      "unit": "count",
+      "currency": "ZAR",
+      "currency_default_used": false,
+      "merchant": "a",
+      "provider": null,
+      "grouping": "day",
+      "timezone": "Africa/Johannesburg",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "rows": [
+        {
+          "group": "2026-11-01",
+          "value": 1,
+          "numerator": null,
+          "denominator": null
+        },
+        {
+          "group": "2026-11-02",
+          "value": 2,
+          "numerator": null,
+          "denominator": null
+        }
+      ],
+      "template_id": "paying_orders.day",
+      "query_hash": "535bac3baf02995404bee4e5ee26a1adfccad0aa6a1ad0d165a7b7dc4890a82b",
+      "snapshot_id": "33f443ac5ff60ab4e248158ca35c3e9f",
+      "required_inputs": [
+        "captures"
+      ],
+      "watermarks": {
+        "captures": {
+          "loaded_at": "2026-11-05T07:50:00Z",
+          "complete_through": "2026-11-05"
+        }
+      }
+    },
+    "grade": {
+      "matched": true,
+      "evidence": true
+    },
+    "trace": {
+      "trace_id": "ced41aca7a2849078c52b9a7fd50c820",
+      "mode": "scripted-baseline",
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "actions": [
+        "authorize_scope",
+        "propose_plan",
+        "authorize_plan",
+        "check_freshness",
+        "execute_approved_metric"
+      ],
+      "usage": null,
+      "duration_ms": 111
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  },
+  {
+    "case": "D11",
+    "split": "development",
+    "mode": "scripted-baseline",
+    "expected": {
+      "status": "ok",
+      "metric_id": "net_collected",
+      "currency": "ZAR",
+      "merchant": "a",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "provider",
+      "provider": null,
+      "rows": [
+        [
+          "CARD",
+          8000
+        ],
+        [
+          "EFT",
+          5000
+        ]
+      ]
+    },
+    "result": {
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "trace_id": "dde7a3944e27496e9bd697ff9974b262",
+      "metric_id": "net_collected",
+      "label": "Net collected",
+      "definition": "Settled captures less settled refunds, each counted on its own settlement date.",
+      "catalog_version": "payments/1.0",
+      "unit": "minor_units",
+      "currency": "ZAR",
+      "currency_default_used": false,
+      "merchant": "a",
+      "provider": null,
+      "grouping": "provider",
+      "timezone": "Africa/Johannesburg",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "rows": [
+        {
+          "group": "CARD",
+          "value": 8000,
+          "numerator": null,
+          "denominator": null
+        },
+        {
+          "group": "EFT",
+          "value": 5000,
+          "numerator": null,
+          "denominator": null
+        }
+      ],
+      "template_id": "net_collected.provider",
+      "query_hash": "330be055e20e70d2886c48a06aa7d47edff5d3bbdcf802b2898d3a9051a66a83",
+      "snapshot_id": "33f443ac5ff60ab4e248158ca35c3e9f",
+      "required_inputs": [
+        "captures",
+        "refunds"
+      ],
+      "watermarks": {
+        "captures": {
+          "loaded_at": "2026-11-05T07:50:00Z",
+          "complete_through": "2026-11-05"
+        },
+        "refunds": {
+          "loaded_at": "2026-11-05T07:50:00Z",
+          "complete_through": "2026-11-05"
+        }
+      }
+    },
+    "grade": {
+      "matched": true,
+      "evidence": true
+    },
+    "trace": {
+      "trace_id": "dde7a3944e27496e9bd697ff9974b262",
+      "mode": "scripted-baseline",
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "actions": [
+        "authorize_scope",
+        "propose_plan",
+        "authorize_plan",
+        "check_freshness",
+        "execute_approved_metric"
+      ],
+      "usage": null,
+      "duration_ms": 112
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  },
+  {
+    "case": "D12",
+    "split": "development",
+    "mode": "scripted-baseline",
+    "expected": {
+      "status": "ok",
+      "metric_id": "captured_amount",
+      "currency": "ZAR",
+      "merchant": "a",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "total",
+      "provider": "CARD",
+      "rows": [
+        [
+          null,
+          12000
+        ]
+      ]
+    },
+    "result": {
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "trace_id": "8c92a135ee3c4ac8bc90c88dea4d6bd2",
+      "metric_id": "captured_amount",
+      "label": "Captured amount",
+      "definition": "Total settled captures on their capture settlement date.",
+      "catalog_version": "payments/1.0",
+      "unit": "minor_units",
+      "currency": "ZAR",
+      "currency_default_used": false,
+      "merchant": "a",
+      "provider": "CARD",
+      "grouping": "total",
+      "timezone": "Africa/Johannesburg",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "rows": [
+        {
+          "group": null,
+          "value": 12000,
+          "numerator": null,
+          "denominator": null
+        }
+      ],
+      "template_id": "captured_amount.total.filtered",
+      "query_hash": "304cd97308ab5664b3d5ca996580441d20c490991dec1ce22e15c10c37b8a408",
+      "snapshot_id": "33f443ac5ff60ab4e248158ca35c3e9f",
+      "required_inputs": [
+        "captures"
+      ],
+      "watermarks": {
+        "captures": {
+          "loaded_at": "2026-11-05T07:50:00Z",
+          "complete_through": "2026-11-05"
+        }
+      }
+    },
+    "grade": {
+      "matched": true,
+      "evidence": true
+    },
+    "trace": {
+      "trace_id": "8c92a135ee3c4ac8bc90c88dea4d6bd2",
+      "mode": "scripted-baseline",
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "actions": [
+        "authorize_scope",
+        "propose_plan",
+        "authorize_plan",
+        "check_freshness",
+        "execute_approved_metric"
+      ],
+      "usage": null,
+      "duration_ms": 107
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  },
+  {
+    "case": "D13",
+    "split": "development",
+    "mode": "scripted-baseline",
+    "expected": {
+      "status": "ok",
+      "metric_id": "refunded_amount",
+      "currency": "ZAR",
+      "merchant": "a",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "total",
+      "provider": "CARD",
+      "rows": [
+        [
+          null,
+          4000
+        ]
+      ]
+    },
+    "result": {
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "trace_id": "70e521705e434c4ea8c8f411c2f94997",
+      "metric_id": "refunded_amount",
+      "label": "Refunded amount",
+      "definition": "Total settled refunds on their refund settlement date, including refunds for captures before the window.",
+      "catalog_version": "payments/1.0",
+      "unit": "minor_units",
+      "currency": "ZAR",
+      "currency_default_used": false,
+      "merchant": "a",
+      "provider": "CARD",
+      "grouping": "total",
+      "timezone": "Africa/Johannesburg",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "rows": [
+        {
+          "group": null,
+          "value": 4000,
+          "numerator": null,
+          "denominator": null
+        }
+      ],
+      "template_id": "refunded_amount.total.filtered",
+      "query_hash": "b18b95fd30262e9d18bdeba1c75899cc422dfe007f29392781d3467333306e33",
+      "snapshot_id": "33f443ac5ff60ab4e248158ca35c3e9f",
+      "required_inputs": [
+        "captures",
+        "refunds"
+      ],
+      "watermarks": {
+        "captures": {
+          "loaded_at": "2026-11-05T07:50:00Z",
+          "complete_through": "2026-11-05"
+        },
+        "refunds": {
+          "loaded_at": "2026-11-05T07:50:00Z",
+          "complete_through": "2026-11-05"
+        }
+      }
+    },
+    "grade": {
+      "matched": true,
+      "evidence": true
+    },
+    "trace": {
+      "trace_id": "70e521705e434c4ea8c8f411c2f94997",
+      "mode": "scripted-baseline",
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "actions": [
+        "authorize_scope",
+        "propose_plan",
+        "authorize_plan",
+        "check_freshness",
+        "execute_approved_metric"
+      ],
+      "usage": null,
+      "duration_ms": 106
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  },
+  {
+    "case": "D14",
+    "split": "development",
+    "mode": "scripted-baseline",
+    "expected": {
+      "status": "ok",
+      "metric_id": "net_collected",
+      "currency": "ZAR",
+      "merchant": "a",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "total",
+      "provider": "CARD",
+      "rows": [
+        [
+          null,
+          8000
+        ]
+      ]
+    },
+    "result": {
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "trace_id": "5bee4c1fd13943eb85af5b816b8cf4e0",
+      "metric_id": "net_collected",
+      "label": "Net collected",
+      "definition": "Settled captures less settled refunds, each counted on its own settlement date.",
+      "catalog_version": "payments/1.0",
+      "unit": "minor_units",
+      "currency": "ZAR",
+      "currency_default_used": false,
+      "merchant": "a",
+      "provider": "CARD",
+      "grouping": "total",
+      "timezone": "Africa/Johannesburg",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "rows": [
+        {
+          "group": null,
+          "value": 8000,
+          "numerator": null,
+          "denominator": null
+        }
+      ],
+      "template_id": "net_collected.total.filtered",
+      "query_hash": "e6e5209aca3fa58b4b2d625821f07530669c804e92df05290dd7995e898d8334",
+      "snapshot_id": "33f443ac5ff60ab4e248158ca35c3e9f",
+      "required_inputs": [
+        "captures",
+        "refunds"
+      ],
+      "watermarks": {
+        "captures": {
+          "loaded_at": "2026-11-05T07:50:00Z",
+          "complete_through": "2026-11-05"
+        },
+        "refunds": {
+          "loaded_at": "2026-11-05T07:50:00Z",
+          "complete_through": "2026-11-05"
+        }
+      }
+    },
+    "grade": {
+      "matched": true,
+      "evidence": true
+    },
+    "trace": {
+      "trace_id": "5bee4c1fd13943eb85af5b816b8cf4e0",
+      "mode": "scripted-baseline",
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "actions": [
+        "authorize_scope",
+        "propose_plan",
+        "authorize_plan",
+        "check_freshness",
+        "execute_approved_metric"
+      ],
+      "usage": null,
+      "duration_ms": 110
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  },
+  {
+    "case": "D15",
+    "split": "development",
+    "mode": "scripted-baseline",
+    "expected": {
+      "status": "ok",
+      "metric_id": "payment_success_rate",
+      "currency": "ZAR",
+      "merchant": "a",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "total",
+      "provider": "CARD",
+      "rows": [
+        [
+          null,
+          [
+            "0.666667",
+            2,
+            3
+          ]
+        ]
+      ]
+    },
+    "result": {
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "trace_id": "02ceb4f98f6747bf85d02008e417eb3a",
+      "metric_id": "payment_success_rate",
+      "label": "Payment success rate",
+      "definition": "Successful terminal attempts divided by all terminal attempts on their completion date.",
+      "catalog_version": "payments/1.0",
+      "unit": "ratio",
+      "currency": "ZAR",
+      "currency_default_used": false,
+      "merchant": "a",
+      "provider": "CARD",
+      "grouping": "total",
+      "timezone": "Africa/Johannesburg",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "rows": [
+        {
+          "group": null,
+          "value": "0.666667",
+          "numerator": 2,
+          "denominator": 3
+        }
+      ],
+      "template_id": "payment_success_rate.total.filtered",
+      "query_hash": "f1bada80684388f783e82d96b9f58f51470609d3fddbb9847e6b882ed6835713",
+      "snapshot_id": "33f443ac5ff60ab4e248158ca35c3e9f",
+      "required_inputs": [
+        "attempts"
+      ],
+      "watermarks": {
+        "attempts": {
+          "loaded_at": "2026-11-05T07:50:00Z",
+          "complete_through": "2026-11-05"
+        }
+      }
+    },
+    "grade": {
+      "matched": true,
+      "evidence": true
+    },
+    "trace": {
+      "trace_id": "02ceb4f98f6747bf85d02008e417eb3a",
+      "mode": "scripted-baseline",
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "actions": [
+        "authorize_scope",
+        "propose_plan",
+        "authorize_plan",
+        "check_freshness",
+        "execute_approved_metric"
+      ],
+      "usage": null,
+      "duration_ms": 106
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  },
+  {
+    "case": "D16",
+    "split": "development",
+    "mode": "scripted-baseline",
+    "expected": {
+      "status": "ok",
+      "metric_id": "paying_orders",
+      "currency": "ZAR",
+      "merchant": "a",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "total",
+      "provider": "CARD",
+      "rows": [
+        [
+          null,
+          1
+        ]
+      ]
+    },
+    "result": {
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "trace_id": "257ddfc8843d41878167fb3bae539d7b",
+      "metric_id": "paying_orders",
+      "label": "Paying orders",
+      "definition": "Distinct orders with at least one settled capture in the requested scope.",
+      "catalog_version": "payments/1.0",
+      "unit": "count",
+      "currency": "ZAR",
+      "currency_default_used": false,
+      "merchant": "a",
+      "provider": "CARD",
+      "grouping": "total",
+      "timezone": "Africa/Johannesburg",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "rows": [
+        {
+          "group": null,
+          "value": 1,
+          "numerator": null,
+          "denominator": null
+        }
+      ],
+      "template_id": "paying_orders.total.filtered",
+      "query_hash": "5b204ec715bd383bd9a9e5678ff8bb507ff45120178d2493e0f787c3b225f04d",
+      "snapshot_id": "33f443ac5ff60ab4e248158ca35c3e9f",
+      "required_inputs": [
+        "captures"
+      ],
+      "watermarks": {
+        "captures": {
+          "loaded_at": "2026-11-05T07:50:00Z",
+          "complete_through": "2026-11-05"
+        }
+      }
+    },
+    "grade": {
+      "matched": true,
+      "evidence": true
+    },
+    "trace": {
+      "trace_id": "257ddfc8843d41878167fb3bae539d7b",
+      "mode": "scripted-baseline",
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "actions": [
+        "authorize_scope",
+        "propose_plan",
+        "authorize_plan",
+        "check_freshness",
+        "execute_approved_metric"
+      ],
+      "usage": null,
+      "duration_ms": 105
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  },
+  {
+    "case": "D17",
+    "split": "development",
+    "mode": "scripted-baseline",
+    "expected": {
+      "status": "ok",
+      "metric_id": "net_collected",
+      "currency": "USD",
+      "merchant": "a",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "total",
+      "provider": null,
+      "rows": [
+        [
+          null,
+          700
+        ]
+      ]
+    },
+    "result": {
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "trace_id": "19a4482a7a994051b6573f97107de8a2",
+      "metric_id": "net_collected",
+      "label": "Net collected",
+      "definition": "Settled captures less settled refunds, each counted on its own settlement date.",
+      "catalog_version": "payments/1.0",
+      "unit": "minor_units",
+      "currency": "USD",
+      "currency_default_used": false,
+      "merchant": "a",
+      "provider": null,
+      "grouping": "total",
+      "timezone": "Africa/Johannesburg",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "rows": [
+        {
+          "group": null,
+          "value": 700,
+          "numerator": null,
+          "denominator": null
+        }
+      ],
+      "template_id": "net_collected.total",
+      "query_hash": "c5d55028ca1859b02e8b31c39859dfcb0e761e77a22a9ac467bb0c9ec631f5b7",
+      "snapshot_id": "33f443ac5ff60ab4e248158ca35c3e9f",
+      "required_inputs": [
+        "captures",
+        "refunds"
+      ],
+      "watermarks": {
+        "captures": {
+          "loaded_at": "2026-11-05T07:50:00Z",
+          "complete_through": "2026-11-05"
+        },
+        "refunds": {
+          "loaded_at": "2026-11-05T07:50:00Z",
+          "complete_through": "2026-11-05"
+        }
+      }
+    },
+    "grade": {
+      "matched": true,
+      "evidence": true
+    },
+    "trace": {
+      "trace_id": "19a4482a7a994051b6573f97107de8a2",
+      "mode": "scripted-baseline",
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "actions": [
+        "authorize_scope",
+        "propose_plan",
+        "authorize_plan",
+        "check_freshness",
+        "execute_approved_metric"
+      ],
+      "usage": null,
+      "duration_ms": 107
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  },
+  {
+    "case": "D18",
+    "split": "development",
+    "mode": "scripted-baseline",
+    "expected": {
+      "status": "ok",
+      "metric_id": "net_collected",
+      "currency": "ZAR",
+      "merchant": "b",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "total",
+      "provider": null,
+      "rows": [
+        [
+          null,
+          90000
+        ]
+      ]
+    },
+    "result": {
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "trace_id": "f7b465e935324b8dbf65a73a131c2687",
+      "metric_id": "net_collected",
+      "label": "Net collected",
+      "definition": "Settled captures less settled refunds, each counted on its own settlement date.",
+      "catalog_version": "payments/1.0",
+      "unit": "minor_units",
+      "currency": "ZAR",
+      "currency_default_used": false,
+      "merchant": "b",
+      "provider": null,
+      "grouping": "total",
+      "timezone": "Africa/Johannesburg",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "rows": [
+        {
+          "group": null,
+          "value": 90000,
+          "numerator": null,
+          "denominator": null
+        }
+      ],
+      "template_id": "net_collected.total",
+      "query_hash": "c5d55028ca1859b02e8b31c39859dfcb0e761e77a22a9ac467bb0c9ec631f5b7",
+      "snapshot_id": "33f443ac5ff60ab4e248158ca35c3e9f",
+      "required_inputs": [
+        "captures",
+        "refunds"
+      ],
+      "watermarks": {
+        "captures": {
+          "loaded_at": "2026-11-05T07:50:00Z",
+          "complete_through": "2026-11-05"
+        },
+        "refunds": {
+          "loaded_at": "2026-11-05T07:50:00Z",
+          "complete_through": "2026-11-05"
+        }
+      }
+    },
+    "grade": {
+      "matched": true,
+      "evidence": true
+    },
+    "trace": {
+      "trace_id": "f7b465e935324b8dbf65a73a131c2687",
+      "mode": "scripted-baseline",
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "actions": [
+        "authorize_scope",
+        "propose_plan",
+        "authorize_plan",
+        "check_freshness",
+        "execute_approved_metric"
+      ],
+      "usage": null,
+      "duration_ms": 108
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  },
+  {
+    "case": "D19",
+    "split": "development",
+    "mode": "scripted-baseline",
+    "expected": {
+      "status": "clarify",
+      "reason": "AMBIGUOUS_METRIC"
+    },
+    "result": {
+      "status": "clarify",
+      "trace_id": "edde6208990b42a4b617563870fc1a6b",
+      "reason": "AMBIGUOUS_METRIC",
+      "question": "Do you mean gross captured amount or net collected after settled refunds?"
+    },
+    "grade": {
+      "matched": true,
+      "evidence": true
+    },
+    "trace": {
+      "trace_id": "edde6208990b42a4b617563870fc1a6b",
+      "mode": "scripted-baseline",
+      "status": "clarify",
+      "reason": "AMBIGUOUS_METRIC",
+      "actions": [
+        "authorize_scope",
+        "propose_plan"
+      ],
+      "usage": null,
+      "duration_ms": 0
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  },
+  {
+    "case": "D20",
+    "split": "development",
+    "mode": "scripted-baseline",
+    "expected": {
+      "status": "clarify",
+      "reason": "CURRENCY_REQUIRED"
+    },
+    "result": {
+      "status": "clarify",
+      "trace_id": "11f9f8d5d1344e93a4335d63d3a72bae",
+      "reason": "CURRENCY_REQUIRED",
+      "question": "Which currency should I use, ZAR or USD?"
+    },
+    "grade": {
+      "matched": true,
+      "evidence": true
+    },
+    "trace": {
+      "trace_id": "11f9f8d5d1344e93a4335d63d3a72bae",
+      "mode": "scripted-baseline",
+      "status": "clarify",
+      "reason": "CURRENCY_REQUIRED",
+      "actions": [
+        "authorize_scope",
+        "propose_plan"
+      ],
+      "usage": null,
+      "duration_ms": 0
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  },
+  {
+    "case": "D21",
+    "split": "development",
+    "mode": "scripted-baseline",
+    "expected": {
+      "status": "clarify",
+      "reason": "DATE_REQUIRED"
+    },
+    "result": {
+      "status": "clarify",
+      "trace_id": "815674c1ffdc45c6ac758eef7a45873a",
+      "reason": "DATE_REQUIRED",
+      "question": "What business date or date range should I use? Include the year if it is unclear."
+    },
+    "grade": {
+      "matched": true,
+      "evidence": true
+    },
+    "trace": {
+      "trace_id": "815674c1ffdc45c6ac758eef7a45873a",
+      "mode": "scripted-baseline",
+      "status": "clarify",
+      "reason": "DATE_REQUIRED",
+      "actions": [
+        "authorize_scope",
+        "propose_plan"
+      ],
+      "usage": null,
+      "duration_ms": 0
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  },
+  {
+    "case": "D22",
+    "split": "development",
+    "mode": "scripted-baseline",
+    "expected": {
+      "status": "denied",
+      "reason": "SCOPE_DENIED"
+    },
+    "result": {
+      "status": "denied",
+      "trace_id": "53b74b2b05b148249e7ad5aad92d64e6",
+      "reason": "SCOPE_DENIED"
+    },
+    "grade": {
+      "matched": true,
+      "evidence": true
+    },
+    "trace": {
+      "trace_id": "53b74b2b05b148249e7ad5aad92d64e6",
+      "mode": "scripted-baseline",
+      "status": "denied",
+      "reason": "SCOPE_DENIED",
+      "actions": [
+        "authorize_scope"
+      ],
+      "usage": null,
+      "duration_ms": 0
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  },
+  {
+    "case": "D23",
+    "split": "development",
+    "mode": "scripted-baseline",
+    "expected": {
+      "status": "stale",
+      "reason": "STALE_INPUT"
+    },
+    "result": {
+      "status": "stale",
+      "trace_id": "bcd51d5891c3497ca2e9f45475118451",
+      "reason": "STALE_INPUT"
+    },
+    "grade": {
+      "matched": true,
+      "evidence": true
+    },
+    "trace": {
+      "trace_id": "bcd51d5891c3497ca2e9f45475118451",
+      "mode": "scripted-baseline",
+      "status": "stale",
+      "reason": "STALE_INPUT",
+      "actions": [
+        "authorize_scope",
+        "propose_plan",
+        "authorize_plan",
+        "check_freshness"
+      ],
+      "usage": null,
+      "duration_ms": 13
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  },
+  {
+    "case": "D24",
+    "split": "development",
+    "mode": "scripted-baseline",
+    "expected": {
+      "status": "ok",
+      "metric_id": "payment_success_rate",
+      "currency": "ZAR",
+      "merchant": "a",
+      "start": "2026-11-04",
+      "end": "2026-11-05",
+      "grouping": "total",
+      "provider": null,
+      "rows": [
+        [
+          null,
+          [
+            null,
+            0,
+            0
+          ]
+        ]
+      ]
+    },
+    "result": {
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "trace_id": "eaf4b49a51cb4e3eb2d576407fa27965",
+      "metric_id": "payment_success_rate",
+      "label": "Payment success rate",
+      "definition": "Successful terminal attempts divided by all terminal attempts on their completion date.",
+      "catalog_version": "payments/1.0",
+      "unit": "ratio",
+      "currency": "ZAR",
+      "currency_default_used": false,
+      "merchant": "a",
+      "provider": null,
+      "grouping": "total",
+      "timezone": "Africa/Johannesburg",
+      "start": "2026-11-04",
+      "end": "2026-11-05",
+      "rows": [
+        {
+          "group": null,
+          "value": null,
+          "numerator": 0,
+          "denominator": 0
+        }
+      ],
+      "template_id": "payment_success_rate.total",
+      "query_hash": "a1d8d9f2a27018f96ab02f179039a5f0dbb74dc03bb1ca869909ffc0bb4f2d5d",
+      "snapshot_id": "33f443ac5ff60ab4e248158ca35c3e9f",
+      "required_inputs": [
+        "attempts"
+      ],
+      "watermarks": {
+        "attempts": {
+          "loaded_at": "2026-11-05T07:50:00Z",
+          "complete_through": "2026-11-05"
+        }
+      }
+    },
+    "grade": {
+      "matched": true,
+      "evidence": true
+    },
+    "trace": {
+      "trace_id": "eaf4b49a51cb4e3eb2d576407fa27965",
+      "mode": "scripted-baseline",
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "actions": [
+        "authorize_scope",
+        "propose_plan",
+        "authorize_plan",
+        "check_freshness",
+        "execute_approved_metric"
+      ],
+      "usage": null,
+      "duration_ms": 104
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  },
+  {
+    "case": "H01",
+    "split": "held-out",
+    "mode": "scripted-baseline",
+    "expected": {
+      "status": "ok",
+      "metric_id": "net_collected",
+      "currency": "ZAR",
+      "merchant": "a",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "total",
+      "provider": null,
+      "rows": [
+        [
+          null,
+          13000
+        ]
+      ]
+    },
+    "result": {
+      "status": "unavailable",
+      "trace_id": "96d8e37bb8f04af5b545e8de5c4496e7",
+      "reason": "NO_CERTIFIED_METRIC"
+    },
+    "grade": {
+      "matched": false,
+      "evidence": false
+    },
+    "trace": {
+      "trace_id": "96d8e37bb8f04af5b545e8de5c4496e7",
+      "mode": "scripted-baseline",
+      "status": "unavailable",
+      "reason": "NO_CERTIFIED_METRIC",
+      "actions": [
+        "authorize_scope",
+        "propose_plan"
+      ],
+      "usage": null,
+      "duration_ms": 0
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  },
+  {
+    "case": "H02",
+    "split": "held-out",
+    "mode": "scripted-baseline",
+    "expected": {
+      "status": "ok",
+      "metric_id": "captured_amount",
+      "currency": "ZAR",
+      "merchant": "a",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "provider",
+      "provider": null,
+      "rows": [
+        [
+          "CARD",
+          12000
+        ],
+        [
+          "EFT",
+          5000
+        ]
+      ]
+    },
+    "result": {
+      "status": "unavailable",
+      "trace_id": "9b95bdffad594e9cb259272d7f8009ec",
+      "reason": "NO_CERTIFIED_METRIC"
+    },
+    "grade": {
+      "matched": false,
+      "evidence": false
+    },
+    "trace": {
+      "trace_id": "9b95bdffad594e9cb259272d7f8009ec",
+      "mode": "scripted-baseline",
+      "status": "unavailable",
+      "reason": "NO_CERTIFIED_METRIC",
+      "actions": [
+        "authorize_scope",
+        "propose_plan"
+      ],
+      "usage": null,
+      "duration_ms": 0
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  },
+  {
+    "case": "H03",
+    "split": "held-out",
+    "mode": "scripted-baseline",
+    "expected": {
+      "status": "ok",
+      "metric_id": "refunded_amount",
+      "currency": "USD",
+      "merchant": "a",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "total",
+      "provider": null,
+      "rows": [
+        [
+          null,
+          0
+        ]
+      ]
+    },
+    "result": {
+      "status": "unavailable",
+      "trace_id": "1cfea9fd57f341c4b4aca212694a40d4",
+      "reason": "NO_CERTIFIED_METRIC"
+    },
+    "grade": {
+      "matched": false,
+      "evidence": false
+    },
+    "trace": {
+      "trace_id": "1cfea9fd57f341c4b4aca212694a40d4",
+      "mode": "scripted-baseline",
+      "status": "unavailable",
+      "reason": "NO_CERTIFIED_METRIC",
+      "actions": [
+        "authorize_scope",
+        "propose_plan"
+      ],
+      "usage": null,
+      "duration_ms": 0
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  },
+  {
+    "case": "H04",
+    "split": "held-out",
+    "mode": "scripted-baseline",
+    "expected": {
+      "status": "ok",
+      "metric_id": "paying_orders",
+      "currency": "USD",
+      "merchant": "a",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "total",
+      "provider": null,
+      "rows": [
+        [
+          null,
+          1
+        ]
+      ]
+    },
+    "result": {
+      "status": "unavailable",
+      "trace_id": "4fa2c1c30edb4c12bab40cf00440baf1",
+      "reason": "NO_CERTIFIED_METRIC"
+    },
+    "grade": {
+      "matched": false,
+      "evidence": false
+    },
+    "trace": {
+      "trace_id": "4fa2c1c30edb4c12bab40cf00440baf1",
+      "mode": "scripted-baseline",
+      "status": "unavailable",
+      "reason": "NO_CERTIFIED_METRIC",
+      "actions": [
+        "authorize_scope",
+        "propose_plan"
+      ],
+      "usage": null,
+      "duration_ms": 0
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  },
+  {
+    "case": "H05",
+    "split": "held-out",
+    "mode": "scripted-baseline",
+    "expected": {
+      "status": "ok",
+      "metric_id": "payment_success_rate",
+      "currency": "ZAR",
+      "merchant": "a",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "total",
+      "provider": "CARD",
+      "rows": [
+        [
+          null,
+          [
+            "0.666667",
+            2,
+            3
+          ]
+        ]
+      ]
+    },
+    "result": {
+      "status": "unavailable",
+      "trace_id": "1075f20ad51548a8b05060531d55c788",
+      "reason": "NO_CERTIFIED_METRIC"
+    },
+    "grade": {
+      "matched": false,
+      "evidence": false
+    },
+    "trace": {
+      "trace_id": "1075f20ad51548a8b05060531d55c788",
+      "mode": "scripted-baseline",
+      "status": "unavailable",
+      "reason": "NO_CERTIFIED_METRIC",
+      "actions": [
+        "authorize_scope",
+        "propose_plan"
+      ],
+      "usage": null,
+      "duration_ms": 0
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  },
+  {
+    "case": "H06",
+    "split": "held-out",
+    "mode": "scripted-baseline",
+    "expected": {
+      "status": "clarify",
+      "reason": "CONFIRM_PROVIDER"
+    },
+    "result": {
+      "status": "clarify",
+      "trace_id": "931999f133224661aebb70213752a60a",
+      "reason": "CONFIRM_PROVIDER",
+      "question": "Please confirm you want the CARD provider only."
+    },
+    "grade": {
+      "matched": true,
+      "evidence": true
+    },
+    "trace": {
+      "trace_id": "931999f133224661aebb70213752a60a",
+      "mode": "scripted-baseline",
+      "status": "clarify",
+      "reason": "CONFIRM_PROVIDER",
+      "actions": [
+        "authorize_scope",
+        "propose_plan",
+        "authorize_plan"
+      ],
+      "usage": null,
+      "duration_ms": 0
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  },
+  {
+    "case": "H07",
+    "split": "held-out",
+    "mode": "scripted-baseline",
+    "expected": {
+      "status": "clarify",
+      "reason": "AMBIGUOUS_PAYMENTS"
+    },
+    "result": {
+      "status": "clarify",
+      "trace_id": "613e0c1d15d14a2498c01c121515d573",
+      "reason": "AMBIGUOUS_PAYMENTS",
+      "question": "Do you mean captured amount, paying orders, or payment success rate?"
+    },
+    "grade": {
+      "matched": true,
+      "evidence": true
+    },
+    "trace": {
+      "trace_id": "613e0c1d15d14a2498c01c121515d573",
+      "mode": "scripted-baseline",
+      "status": "clarify",
+      "reason": "AMBIGUOUS_PAYMENTS",
+      "actions": [
+        "authorize_scope",
+        "propose_plan"
+      ],
+      "usage": null,
+      "duration_ms": 0
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  },
+  {
+    "case": "H08",
+    "split": "held-out",
+    "mode": "scripted-baseline",
+    "expected": {
+      "status": "denied",
+      "reason": "SCOPE_DENIED"
+    },
+    "result": {
+      "status": "denied",
+      "trace_id": "59cd441f236942c7ba254de033d8b690",
+      "reason": "SCOPE_DENIED"
+    },
+    "grade": {
+      "matched": true,
+      "evidence": true
+    },
+    "trace": {
+      "trace_id": "59cd441f236942c7ba254de033d8b690",
+      "mode": "scripted-baseline",
+      "status": "denied",
+      "reason": "SCOPE_DENIED",
+      "actions": [
+        "authorize_scope"
+      ],
+      "usage": null,
+      "duration_ms": 0
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  },
+  {
+    "case": "H09",
+    "split": "held-out",
+    "mode": "scripted-baseline",
+    "expected": {
+      "status": "ok",
+      "metric_id": "captured_amount",
+      "currency": "ZAR",
+      "merchant": "a",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "total",
+      "provider": null,
+      "rows": [
+        [
+          null,
+          17000
+        ]
+      ]
+    },
+    "result": {
+      "status": "unavailable",
+      "trace_id": "a456a60d64034ca482530959246eb8eb",
+      "reason": "NO_CERTIFIED_METRIC"
+    },
+    "grade": {
+      "matched": false,
+      "evidence": false
+    },
+    "trace": {
+      "trace_id": "a456a60d64034ca482530959246eb8eb",
+      "mode": "scripted-baseline",
+      "status": "unavailable",
+      "reason": "NO_CERTIFIED_METRIC",
+      "actions": [
+        "authorize_scope",
+        "propose_plan"
+      ],
+      "usage": null,
+      "duration_ms": 0
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  },
+  {
+    "case": "H10",
+    "split": "held-out",
+    "mode": "scripted-baseline",
+    "expected": {
+      "status": "clarify",
+      "reason": "WINDOW_TOO_LONG"
+    },
+    "result": {
+      "status": "clarify",
+      "trace_id": "17c7d957efef4c3d9520409213f2d9f6",
+      "reason": "WINDOW_TOO_LONG",
+      "question": "Choose a window of up to 60 business dates."
+    },
+    "grade": {
+      "matched": true,
+      "evidence": true
+    },
+    "trace": {
+      "trace_id": "17c7d957efef4c3d9520409213f2d9f6",
+      "mode": "scripted-baseline",
+      "status": "clarify",
+      "reason": "WINDOW_TOO_LONG",
+      "actions": [
+        "authorize_scope",
+        "propose_plan"
+      ],
+      "usage": null,
+      "duration_ms": 0
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  },
+  {
+    "case": "H11",
+    "split": "held-out",
+    "mode": "scripted-baseline",
+    "expected": {
+      "status": "unavailable",
+      "reason": "NO_CERTIFIED_METRIC"
+    },
+    "result": {
+      "status": "unavailable",
+      "trace_id": "1364bd95a8a5497f813f256e5721ca45",
+      "reason": "NO_CERTIFIED_METRIC"
+    },
+    "grade": {
+      "matched": true,
+      "evidence": true
+    },
+    "trace": {
+      "trace_id": "1364bd95a8a5497f813f256e5721ca45",
+      "mode": "scripted-baseline",
+      "status": "unavailable",
+      "reason": "NO_CERTIFIED_METRIC",
+      "actions": [
+        "authorize_scope",
+        "propose_plan"
+      ],
+      "usage": null,
+      "duration_ms": 0
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  },
+  {
+    "case": "H12",
+    "split": "held-out",
+    "mode": "scripted-baseline",
+    "expected": {
+      "status": "ok",
+      "metric_id": "net_collected",
+      "currency": "ZAR",
+      "merchant": "a",
+      "start": "2026-11-04",
+      "end": "2026-11-05",
+      "grouping": "total",
+      "provider": null,
+      "rows": [
+        [
+          null,
+          0
+        ]
+      ]
+    },
+    "result": {
+      "status": "unavailable",
+      "trace_id": "fe6acdb7f8fe4bb9ac1e6e170c2e9680",
+      "reason": "NO_CERTIFIED_METRIC"
+    },
+    "grade": {
+      "matched": false,
+      "evidence": false
+    },
+    "trace": {
+      "trace_id": "fe6acdb7f8fe4bb9ac1e6e170c2e9680",
+      "mode": "scripted-baseline",
+      "status": "unavailable",
+      "reason": "NO_CERTIFIED_METRIC",
+      "actions": [
+        "authorize_scope",
+        "propose_plan"
+      ],
+      "usage": null,
+      "duration_ms": 0
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  },
+  {
+    "case": "D01",
+    "split": "development",
+    "mode": "scripted-catalog",
+    "expected": {
+      "status": "ok",
+      "metric_id": "net_collected",
+      "currency": "ZAR",
+      "merchant": "a",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "total",
+      "provider": null,
+      "rows": [
+        [
+          null,
+          13000
+        ]
+      ]
+    },
+    "result": {
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "trace_id": "48485cab3fec42ba949ba852ad1c8065",
+      "metric_id": "net_collected",
+      "label": "Net collected",
+      "definition": "Settled captures less settled refunds, each counted on its own settlement date.",
+      "catalog_version": "payments/1.0",
+      "unit": "minor_units",
+      "currency": "ZAR",
+      "currency_default_used": false,
+      "merchant": "a",
+      "provider": null,
+      "grouping": "total",
+      "timezone": "Africa/Johannesburg",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "rows": [
+        {
+          "group": null,
+          "value": 13000,
+          "numerator": null,
+          "denominator": null
+        }
+      ],
+      "template_id": "net_collected.total",
+      "query_hash": "c5d55028ca1859b02e8b31c39859dfcb0e761e77a22a9ac467bb0c9ec631f5b7",
+      "snapshot_id": "33f443ac5ff60ab4e248158ca35c3e9f",
+      "required_inputs": [
+        "captures",
+        "refunds"
+      ],
+      "watermarks": {
+        "captures": {
+          "loaded_at": "2026-11-05T07:50:00Z",
+          "complete_through": "2026-11-05"
+        },
+        "refunds": {
+          "loaded_at": "2026-11-05T07:50:00Z",
+          "complete_through": "2026-11-05"
+        }
+      }
+    },
+    "grade": {
+      "matched": true,
+      "evidence": true
+    },
+    "trace": {
+      "trace_id": "48485cab3fec42ba949ba852ad1c8065",
+      "mode": "scripted-catalog",
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "actions": [
+        "authorize_scope",
+        "propose_plan",
+        "authorize_plan",
+        "check_freshness",
+        "execute_approved_metric"
+      ],
+      "usage": null,
+      "duration_ms": 110
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  },
+  {
+    "case": "D02",
+    "split": "development",
+    "mode": "scripted-catalog",
+    "expected": {
+      "status": "ok",
+      "metric_id": "captured_amount",
+      "currency": "ZAR",
+      "merchant": "a",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "total",
+      "provider": null,
+      "rows": [
+        [
+          null,
+          17000
+        ]
+      ]
+    },
+    "result": {
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "trace_id": "2f6732d260ee444690440986160f9776",
+      "metric_id": "captured_amount",
+      "label": "Captured amount",
+      "definition": "Total settled captures on their capture settlement date.",
+      "catalog_version": "payments/1.0",
+      "unit": "minor_units",
+      "currency": "ZAR",
+      "currency_default_used": false,
+      "merchant": "a",
+      "provider": null,
+      "grouping": "total",
+      "timezone": "Africa/Johannesburg",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "rows": [
+        {
+          "group": null,
+          "value": 17000,
+          "numerator": null,
+          "denominator": null
+        }
+      ],
+      "template_id": "captured_amount.total",
+      "query_hash": "3e19295ad78940464ae7553fefada36112a9290b5c47ed45da09c56632398676",
+      "snapshot_id": "33f443ac5ff60ab4e248158ca35c3e9f",
+      "required_inputs": [
+        "captures"
+      ],
+      "watermarks": {
+        "captures": {
+          "loaded_at": "2026-11-05T07:50:00Z",
+          "complete_through": "2026-11-05"
+        }
+      }
+    },
+    "grade": {
+      "matched": true,
+      "evidence": true
+    },
+    "trace": {
+      "trace_id": "2f6732d260ee444690440986160f9776",
+      "mode": "scripted-catalog",
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "actions": [
+        "authorize_scope",
+        "propose_plan",
+        "authorize_plan",
+        "check_freshness",
+        "execute_approved_metric"
+      ],
+      "usage": null,
+      "duration_ms": 106
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  },
+  {
+    "case": "D03",
+    "split": "development",
+    "mode": "scripted-catalog",
+    "expected": {
+      "status": "ok",
+      "metric_id": "refunded_amount",
+      "currency": "ZAR",
+      "merchant": "a",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "total",
+      "provider": null,
+      "rows": [
+        [
+          null,
+          4000
+        ]
+      ]
+    },
+    "result": {
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "trace_id": "6c4296b849584ea6ab933a6c2581f232",
+      "metric_id": "refunded_amount",
+      "label": "Refunded amount",
+      "definition": "Total settled refunds on their refund settlement date, including refunds for captures before the window.",
+      "catalog_version": "payments/1.0",
+      "unit": "minor_units",
+      "currency": "ZAR",
+      "currency_default_used": false,
+      "merchant": "a",
+      "provider": null,
+      "grouping": "total",
+      "timezone": "Africa/Johannesburg",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "rows": [
+        {
+          "group": null,
+          "value": 4000,
+          "numerator": null,
+          "denominator": null
+        }
+      ],
+      "template_id": "refunded_amount.total",
+      "query_hash": "43bf75446abe851d92daf1b2e80eba3cdfd3bbe48432351cbd68f8b516a5822f",
+      "snapshot_id": "33f443ac5ff60ab4e248158ca35c3e9f",
+      "required_inputs": [
+        "captures",
+        "refunds"
+      ],
+      "watermarks": {
+        "captures": {
+          "loaded_at": "2026-11-05T07:50:00Z",
+          "complete_through": "2026-11-05"
+        },
+        "refunds": {
+          "loaded_at": "2026-11-05T07:50:00Z",
+          "complete_through": "2026-11-05"
+        }
+      }
+    },
+    "grade": {
+      "matched": true,
+      "evidence": true
+    },
+    "trace": {
+      "trace_id": "6c4296b849584ea6ab933a6c2581f232",
+      "mode": "scripted-catalog",
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "actions": [
+        "authorize_scope",
+        "propose_plan",
+        "authorize_plan",
+        "check_freshness",
+        "execute_approved_metric"
+      ],
+      "usage": null,
+      "duration_ms": 105
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  },
+  {
+    "case": "D04",
+    "split": "development",
+    "mode": "scripted-catalog",
+    "expected": {
+      "status": "ok",
+      "metric_id": "payment_success_rate",
+      "currency": "ZAR",
+      "merchant": "a",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "total",
+      "provider": null,
+      "rows": [
+        [
+          null,
+          [
+            "0.750000",
+            3,
+            4
+          ]
+        ]
+      ]
+    },
+    "result": {
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "trace_id": "9c19f226a825499e950aa0ec2d0e09d8",
+      "metric_id": "payment_success_rate",
+      "label": "Payment success rate",
+      "definition": "Successful terminal attempts divided by all terminal attempts on their completion date.",
+      "catalog_version": "payments/1.0",
+      "unit": "ratio",
+      "currency": "ZAR",
+      "currency_default_used": false,
+      "merchant": "a",
+      "provider": null,
+      "grouping": "total",
+      "timezone": "Africa/Johannesburg",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "rows": [
+        {
+          "group": null,
+          "value": "0.750000",
+          "numerator": 3,
+          "denominator": 4
+        }
+      ],
+      "template_id": "payment_success_rate.total",
+      "query_hash": "a1d8d9f2a27018f96ab02f179039a5f0dbb74dc03bb1ca869909ffc0bb4f2d5d",
+      "snapshot_id": "33f443ac5ff60ab4e248158ca35c3e9f",
+      "required_inputs": [
+        "attempts"
+      ],
+      "watermarks": {
+        "attempts": {
+          "loaded_at": "2026-11-05T07:50:00Z",
+          "complete_through": "2026-11-05"
+        }
+      }
+    },
+    "grade": {
+      "matched": true,
+      "evidence": true
+    },
+    "trace": {
+      "trace_id": "9c19f226a825499e950aa0ec2d0e09d8",
+      "mode": "scripted-catalog",
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "actions": [
+        "authorize_scope",
+        "propose_plan",
+        "authorize_plan",
+        "check_freshness",
+        "execute_approved_metric"
+      ],
+      "usage": null,
+      "duration_ms": 108
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  },
+  {
+    "case": "D05",
+    "split": "development",
+    "mode": "scripted-catalog",
+    "expected": {
+      "status": "ok",
+      "metric_id": "paying_orders",
+      "currency": "ZAR",
+      "merchant": "a",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "total",
+      "provider": null,
+      "rows": [
+        [
+          null,
+          2
+        ]
+      ]
+    },
+    "result": {
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "trace_id": "b270e6425c95416d96647d00e787fe2b",
+      "metric_id": "paying_orders",
+      "label": "Paying orders",
+      "definition": "Distinct orders with at least one settled capture in the requested scope.",
+      "catalog_version": "payments/1.0",
+      "unit": "count",
+      "currency": "ZAR",
+      "currency_default_used": false,
+      "merchant": "a",
+      "provider": null,
+      "grouping": "total",
+      "timezone": "Africa/Johannesburg",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "rows": [
+        {
+          "group": null,
+          "value": 2,
+          "numerator": null,
+          "denominator": null
+        }
+      ],
+      "template_id": "paying_orders.total",
+      "query_hash": "1c6a8cae5629657bb6c2e0e3761d2b0ef5391525148abae79e1b7d807f234e76",
+      "snapshot_id": "33f443ac5ff60ab4e248158ca35c3e9f",
+      "required_inputs": [
+        "captures"
+      ],
+      "watermarks": {
+        "captures": {
+          "loaded_at": "2026-11-05T07:50:00Z",
+          "complete_through": "2026-11-05"
+        }
+      }
+    },
+    "grade": {
+      "matched": true,
+      "evidence": true
+    },
+    "trace": {
+      "trace_id": "b270e6425c95416d96647d00e787fe2b",
+      "mode": "scripted-catalog",
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "actions": [
+        "authorize_scope",
+        "propose_plan",
+        "authorize_plan",
+        "check_freshness",
+        "execute_approved_metric"
+      ],
+      "usage": null,
+      "duration_ms": 110
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  },
+  {
+    "case": "D06",
+    "split": "development",
+    "mode": "scripted-catalog",
+    "expected": {
+      "status": "ok",
+      "metric_id": "captured_amount",
+      "currency": "ZAR",
+      "merchant": "a",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "day",
+      "provider": null,
+      "rows": [
+        [
+          "2026-11-01",
+          10000
+        ],
+        [
+          "2026-11-02",
+          7000
+        ]
+      ]
+    },
+    "result": {
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "trace_id": "bc27c86ff5a44dbdae23842f7642616f",
+      "metric_id": "captured_amount",
+      "label": "Captured amount",
+      "definition": "Total settled captures on their capture settlement date.",
+      "catalog_version": "payments/1.0",
+      "unit": "minor_units",
+      "currency": "ZAR",
+      "currency_default_used": false,
+      "merchant": "a",
+      "provider": null,
+      "grouping": "day",
+      "timezone": "Africa/Johannesburg",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "rows": [
+        {
+          "group": "2026-11-01",
+          "value": 10000,
+          "numerator": null,
+          "denominator": null
+        },
+        {
+          "group": "2026-11-02",
+          "value": 7000,
+          "numerator": null,
+          "denominator": null
+        }
+      ],
+      "template_id": "captured_amount.day",
+      "query_hash": "0f448c8dab3ecdf2600715ec2e811e026b51c34e055d0d81acff30eda4f020c2",
+      "snapshot_id": "33f443ac5ff60ab4e248158ca35c3e9f",
+      "required_inputs": [
+        "captures"
+      ],
+      "watermarks": {
+        "captures": {
+          "loaded_at": "2026-11-05T07:50:00Z",
+          "complete_through": "2026-11-05"
+        }
+      }
+    },
+    "grade": {
+      "matched": true,
+      "evidence": true
+    },
+    "trace": {
+      "trace_id": "bc27c86ff5a44dbdae23842f7642616f",
+      "mode": "scripted-catalog",
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "actions": [
+        "authorize_scope",
+        "propose_plan",
+        "authorize_plan",
+        "check_freshness",
+        "execute_approved_metric"
+      ],
+      "usage": null,
+      "duration_ms": 108
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  },
+  {
+    "case": "D07",
+    "split": "development",
+    "mode": "scripted-catalog",
+    "expected": {
+      "status": "ok",
+      "metric_id": "refunded_amount",
+      "currency": "ZAR",
+      "merchant": "a",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "day",
+      "provider": null,
+      "rows": [
+        [
+          "2026-11-01",
+          0
+        ],
+        [
+          "2026-11-02",
+          4000
+        ]
+      ]
+    },
+    "result": {
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "trace_id": "bf630acb01da4e98a653a82ebc5305e0",
+      "metric_id": "refunded_amount",
+      "label": "Refunded amount",
+      "definition": "Total settled refunds on their refund settlement date, including refunds for captures before the window.",
+      "catalog_version": "payments/1.0",
+      "unit": "minor_units",
+      "currency": "ZAR",
+      "currency_default_used": false,
+      "merchant": "a",
+      "provider": null,
+      "grouping": "day",
+      "timezone": "Africa/Johannesburg",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "rows": [
+        {
+          "group": "2026-11-01",
+          "value": 0,
+          "numerator": null,
+          "denominator": null
+        },
+        {
+          "group": "2026-11-02",
+          "value": 4000,
+          "numerator": null,
+          "denominator": null
+        }
+      ],
+      "template_id": "refunded_amount.day",
+      "query_hash": "4af53e6761fa9cf619ca4db336806b56bd2eb6ecea7059dae0e584e45159847d",
+      "snapshot_id": "33f443ac5ff60ab4e248158ca35c3e9f",
+      "required_inputs": [
+        "captures",
+        "refunds"
+      ],
+      "watermarks": {
+        "captures": {
+          "loaded_at": "2026-11-05T07:50:00Z",
+          "complete_through": "2026-11-05"
+        },
+        "refunds": {
+          "loaded_at": "2026-11-05T07:50:00Z",
+          "complete_through": "2026-11-05"
+        }
+      }
+    },
+    "grade": {
+      "matched": true,
+      "evidence": true
+    },
+    "trace": {
+      "trace_id": "bf630acb01da4e98a653a82ebc5305e0",
+      "mode": "scripted-catalog",
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "actions": [
+        "authorize_scope",
+        "propose_plan",
+        "authorize_plan",
+        "check_freshness",
+        "execute_approved_metric"
+      ],
+      "usage": null,
+      "duration_ms": 110
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  },
+  {
+    "case": "D08",
+    "split": "development",
+    "mode": "scripted-catalog",
+    "expected": {
+      "status": "ok",
+      "metric_id": "net_collected",
+      "currency": "ZAR",
+      "merchant": "a",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "day",
+      "provider": null,
+      "rows": [
+        [
+          "2026-11-01",
+          10000
+        ],
+        [
+          "2026-11-02",
+          3000
+        ]
+      ]
+    },
+    "result": {
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "trace_id": "cb71e768a324417fbbaaf7efb69ef400",
+      "metric_id": "net_collected",
+      "label": "Net collected",
+      "definition": "Settled captures less settled refunds, each counted on its own settlement date.",
+      "catalog_version": "payments/1.0",
+      "unit": "minor_units",
+      "currency": "ZAR",
+      "currency_default_used": false,
+      "merchant": "a",
+      "provider": null,
+      "grouping": "day",
+      "timezone": "Africa/Johannesburg",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "rows": [
+        {
+          "group": "2026-11-01",
+          "value": 10000,
+          "numerator": null,
+          "denominator": null
+        },
+        {
+          "group": "2026-11-02",
+          "value": 3000,
+          "numerator": null,
+          "denominator": null
+        }
+      ],
+      "template_id": "net_collected.day",
+      "query_hash": "70294e4f4ebbcbe7008ec969759bb40778c8dcc55ee41a2935d426aa91024bad",
+      "snapshot_id": "33f443ac5ff60ab4e248158ca35c3e9f",
+      "required_inputs": [
+        "captures",
+        "refunds"
+      ],
+      "watermarks": {
+        "captures": {
+          "loaded_at": "2026-11-05T07:50:00Z",
+          "complete_through": "2026-11-05"
+        },
+        "refunds": {
+          "loaded_at": "2026-11-05T07:50:00Z",
+          "complete_through": "2026-11-05"
+        }
+      }
+    },
+    "grade": {
+      "matched": true,
+      "evidence": true
+    },
+    "trace": {
+      "trace_id": "cb71e768a324417fbbaaf7efb69ef400",
+      "mode": "scripted-catalog",
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "actions": [
+        "authorize_scope",
+        "propose_plan",
+        "authorize_plan",
+        "check_freshness",
+        "execute_approved_metric"
+      ],
+      "usage": null,
+      "duration_ms": 111
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  },
+  {
+    "case": "D09",
+    "split": "development",
+    "mode": "scripted-catalog",
+    "expected": {
+      "status": "ok",
+      "metric_id": "payment_success_rate",
+      "currency": "ZAR",
+      "merchant": "a",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "day",
+      "provider": null,
+      "rows": [
+        [
+          "2026-11-01",
+          [
+            "1.000000",
+            1,
+            1
+          ]
+        ],
+        [
+          "2026-11-02",
+          [
+            "0.666667",
+            2,
+            3
+          ]
+        ]
+      ]
+    },
+    "result": {
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "trace_id": "2980a9636a6f40d1bb4d44e7c979bc59",
+      "metric_id": "payment_success_rate",
+      "label": "Payment success rate",
+      "definition": "Successful terminal attempts divided by all terminal attempts on their completion date.",
+      "catalog_version": "payments/1.0",
+      "unit": "ratio",
+      "currency": "ZAR",
+      "currency_default_used": false,
+      "merchant": "a",
+      "provider": null,
+      "grouping": "day",
+      "timezone": "Africa/Johannesburg",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "rows": [
+        {
+          "group": "2026-11-01",
+          "value": "1.000000",
+          "numerator": 1,
+          "denominator": 1
+        },
+        {
+          "group": "2026-11-02",
+          "value": "0.666667",
+          "numerator": 2,
+          "denominator": 3
+        }
+      ],
+      "template_id": "payment_success_rate.day",
+      "query_hash": "5b1face0e83ddbc08f16ffece1f0a9375b6be5801d43644d04d907313deda0f4",
+      "snapshot_id": "33f443ac5ff60ab4e248158ca35c3e9f",
+      "required_inputs": [
+        "attempts"
+      ],
+      "watermarks": {
+        "attempts": {
+          "loaded_at": "2026-11-05T07:50:00Z",
+          "complete_through": "2026-11-05"
+        }
+      }
+    },
+    "grade": {
+      "matched": true,
+      "evidence": true
+    },
+    "trace": {
+      "trace_id": "2980a9636a6f40d1bb4d44e7c979bc59",
+      "mode": "scripted-catalog",
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "actions": [
+        "authorize_scope",
+        "propose_plan",
+        "authorize_plan",
+        "check_freshness",
+        "execute_approved_metric"
+      ],
+      "usage": null,
+      "duration_ms": 108
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  },
+  {
+    "case": "D10",
+    "split": "development",
+    "mode": "scripted-catalog",
+    "expected": {
+      "status": "ok",
+      "metric_id": "paying_orders",
+      "currency": "ZAR",
+      "merchant": "a",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "day",
+      "provider": null,
+      "rows": [
+        [
+          "2026-11-01",
+          1
+        ],
+        [
+          "2026-11-02",
+          2
+        ]
+      ]
+    },
+    "result": {
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "trace_id": "1b1fbb3bacb64fb8968c22b6de4d36bc",
+      "metric_id": "paying_orders",
+      "label": "Paying orders",
+      "definition": "Distinct orders with at least one settled capture in the requested scope.",
+      "catalog_version": "payments/1.0",
+      "unit": "count",
+      "currency": "ZAR",
+      "currency_default_used": false,
+      "merchant": "a",
+      "provider": null,
+      "grouping": "day",
+      "timezone": "Africa/Johannesburg",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "rows": [
+        {
+          "group": "2026-11-01",
+          "value": 1,
+          "numerator": null,
+          "denominator": null
+        },
+        {
+          "group": "2026-11-02",
+          "value": 2,
+          "numerator": null,
+          "denominator": null
+        }
+      ],
+      "template_id": "paying_orders.day",
+      "query_hash": "535bac3baf02995404bee4e5ee26a1adfccad0aa6a1ad0d165a7b7dc4890a82b",
+      "snapshot_id": "33f443ac5ff60ab4e248158ca35c3e9f",
+      "required_inputs": [
+        "captures"
+      ],
+      "watermarks": {
+        "captures": {
+          "loaded_at": "2026-11-05T07:50:00Z",
+          "complete_through": "2026-11-05"
+        }
+      }
+    },
+    "grade": {
+      "matched": true,
+      "evidence": true
+    },
+    "trace": {
+      "trace_id": "1b1fbb3bacb64fb8968c22b6de4d36bc",
+      "mode": "scripted-catalog",
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "actions": [
+        "authorize_scope",
+        "propose_plan",
+        "authorize_plan",
+        "check_freshness",
+        "execute_approved_metric"
+      ],
+      "usage": null,
+      "duration_ms": 111
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  },
+  {
+    "case": "D11",
+    "split": "development",
+    "mode": "scripted-catalog",
+    "expected": {
+      "status": "ok",
+      "metric_id": "net_collected",
+      "currency": "ZAR",
+      "merchant": "a",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "provider",
+      "provider": null,
+      "rows": [
+        [
+          "CARD",
+          8000
+        ],
+        [
+          "EFT",
+          5000
+        ]
+      ]
+    },
+    "result": {
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "trace_id": "a21a5525f86e45fdad3a418a31460c4f",
+      "metric_id": "net_collected",
+      "label": "Net collected",
+      "definition": "Settled captures less settled refunds, each counted on its own settlement date.",
+      "catalog_version": "payments/1.0",
+      "unit": "minor_units",
+      "currency": "ZAR",
+      "currency_default_used": false,
+      "merchant": "a",
+      "provider": null,
+      "grouping": "provider",
+      "timezone": "Africa/Johannesburg",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "rows": [
+        {
+          "group": "CARD",
+          "value": 8000,
+          "numerator": null,
+          "denominator": null
+        },
+        {
+          "group": "EFT",
+          "value": 5000,
+          "numerator": null,
+          "denominator": null
+        }
+      ],
+      "template_id": "net_collected.provider",
+      "query_hash": "330be055e20e70d2886c48a06aa7d47edff5d3bbdcf802b2898d3a9051a66a83",
+      "snapshot_id": "33f443ac5ff60ab4e248158ca35c3e9f",
+      "required_inputs": [
+        "captures",
+        "refunds"
+      ],
+      "watermarks": {
+        "captures": {
+          "loaded_at": "2026-11-05T07:50:00Z",
+          "complete_through": "2026-11-05"
+        },
+        "refunds": {
+          "loaded_at": "2026-11-05T07:50:00Z",
+          "complete_through": "2026-11-05"
+        }
+      }
+    },
+    "grade": {
+      "matched": true,
+      "evidence": true
+    },
+    "trace": {
+      "trace_id": "a21a5525f86e45fdad3a418a31460c4f",
+      "mode": "scripted-catalog",
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "actions": [
+        "authorize_scope",
+        "propose_plan",
+        "authorize_plan",
+        "check_freshness",
+        "execute_approved_metric"
+      ],
+      "usage": null,
+      "duration_ms": 111
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  },
+  {
+    "case": "D12",
+    "split": "development",
+    "mode": "scripted-catalog",
+    "expected": {
+      "status": "ok",
+      "metric_id": "captured_amount",
+      "currency": "ZAR",
+      "merchant": "a",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "total",
+      "provider": "CARD",
+      "rows": [
+        [
+          null,
+          12000
+        ]
+      ]
+    },
+    "result": {
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "trace_id": "c6552428ebb44f37a6818d6cc1ff746b",
+      "metric_id": "captured_amount",
+      "label": "Captured amount",
+      "definition": "Total settled captures on their capture settlement date.",
+      "catalog_version": "payments/1.0",
+      "unit": "minor_units",
+      "currency": "ZAR",
+      "currency_default_used": false,
+      "merchant": "a",
+      "provider": "CARD",
+      "grouping": "total",
+      "timezone": "Africa/Johannesburg",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "rows": [
+        {
+          "group": null,
+          "value": 12000,
+          "numerator": null,
+          "denominator": null
+        }
+      ],
+      "template_id": "captured_amount.total.filtered",
+      "query_hash": "304cd97308ab5664b3d5ca996580441d20c490991dec1ce22e15c10c37b8a408",
+      "snapshot_id": "33f443ac5ff60ab4e248158ca35c3e9f",
+      "required_inputs": [
+        "captures"
+      ],
+      "watermarks": {
+        "captures": {
+          "loaded_at": "2026-11-05T07:50:00Z",
+          "complete_through": "2026-11-05"
+        }
+      }
+    },
+    "grade": {
+      "matched": true,
+      "evidence": true
+    },
+    "trace": {
+      "trace_id": "c6552428ebb44f37a6818d6cc1ff746b",
+      "mode": "scripted-catalog",
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "actions": [
+        "authorize_scope",
+        "propose_plan",
+        "authorize_plan",
+        "check_freshness",
+        "execute_approved_metric"
+      ],
+      "usage": null,
+      "duration_ms": 107
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  },
+  {
+    "case": "D13",
+    "split": "development",
+    "mode": "scripted-catalog",
+    "expected": {
+      "status": "ok",
+      "metric_id": "refunded_amount",
+      "currency": "ZAR",
+      "merchant": "a",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "total",
+      "provider": "CARD",
+      "rows": [
+        [
+          null,
+          4000
+        ]
+      ]
+    },
+    "result": {
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "trace_id": "a0e897225f5d478084e2c2b8fe6f2da9",
+      "metric_id": "refunded_amount",
+      "label": "Refunded amount",
+      "definition": "Total settled refunds on their refund settlement date, including refunds for captures before the window.",
+      "catalog_version": "payments/1.0",
+      "unit": "minor_units",
+      "currency": "ZAR",
+      "currency_default_used": false,
+      "merchant": "a",
+      "provider": "CARD",
+      "grouping": "total",
+      "timezone": "Africa/Johannesburg",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "rows": [
+        {
+          "group": null,
+          "value": 4000,
+          "numerator": null,
+          "denominator": null
+        }
+      ],
+      "template_id": "refunded_amount.total.filtered",
+      "query_hash": "b18b95fd30262e9d18bdeba1c75899cc422dfe007f29392781d3467333306e33",
+      "snapshot_id": "33f443ac5ff60ab4e248158ca35c3e9f",
+      "required_inputs": [
+        "captures",
+        "refunds"
+      ],
+      "watermarks": {
+        "captures": {
+          "loaded_at": "2026-11-05T07:50:00Z",
+          "complete_through": "2026-11-05"
+        },
+        "refunds": {
+          "loaded_at": "2026-11-05T07:50:00Z",
+          "complete_through": "2026-11-05"
+        }
+      }
+    },
+    "grade": {
+      "matched": true,
+      "evidence": true
+    },
+    "trace": {
+      "trace_id": "a0e897225f5d478084e2c2b8fe6f2da9",
+      "mode": "scripted-catalog",
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "actions": [
+        "authorize_scope",
+        "propose_plan",
+        "authorize_plan",
+        "check_freshness",
+        "execute_approved_metric"
+      ],
+      "usage": null,
+      "duration_ms": 106
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  },
+  {
+    "case": "D14",
+    "split": "development",
+    "mode": "scripted-catalog",
+    "expected": {
+      "status": "ok",
+      "metric_id": "net_collected",
+      "currency": "ZAR",
+      "merchant": "a",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "total",
+      "provider": "CARD",
+      "rows": [
+        [
+          null,
+          8000
+        ]
+      ]
+    },
+    "result": {
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "trace_id": "1a58b96bf0e94e93bf9669734f22c1ba",
+      "metric_id": "net_collected",
+      "label": "Net collected",
+      "definition": "Settled captures less settled refunds, each counted on its own settlement date.",
+      "catalog_version": "payments/1.0",
+      "unit": "minor_units",
+      "currency": "ZAR",
+      "currency_default_used": false,
+      "merchant": "a",
+      "provider": "CARD",
+      "grouping": "total",
+      "timezone": "Africa/Johannesburg",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "rows": [
+        {
+          "group": null,
+          "value": 8000,
+          "numerator": null,
+          "denominator": null
+        }
+      ],
+      "template_id": "net_collected.total.filtered",
+      "query_hash": "e6e5209aca3fa58b4b2d625821f07530669c804e92df05290dd7995e898d8334",
+      "snapshot_id": "33f443ac5ff60ab4e248158ca35c3e9f",
+      "required_inputs": [
+        "captures",
+        "refunds"
+      ],
+      "watermarks": {
+        "captures": {
+          "loaded_at": "2026-11-05T07:50:00Z",
+          "complete_through": "2026-11-05"
+        },
+        "refunds": {
+          "loaded_at": "2026-11-05T07:50:00Z",
+          "complete_through": "2026-11-05"
+        }
+      }
+    },
+    "grade": {
+      "matched": true,
+      "evidence": true
+    },
+    "trace": {
+      "trace_id": "1a58b96bf0e94e93bf9669734f22c1ba",
+      "mode": "scripted-catalog",
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "actions": [
+        "authorize_scope",
+        "propose_plan",
+        "authorize_plan",
+        "check_freshness",
+        "execute_approved_metric"
+      ],
+      "usage": null,
+      "duration_ms": 109
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  },
+  {
+    "case": "D15",
+    "split": "development",
+    "mode": "scripted-catalog",
+    "expected": {
+      "status": "ok",
+      "metric_id": "payment_success_rate",
+      "currency": "ZAR",
+      "merchant": "a",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "total",
+      "provider": "CARD",
+      "rows": [
+        [
+          null,
+          [
+            "0.666667",
+            2,
+            3
+          ]
+        ]
+      ]
+    },
+    "result": {
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "trace_id": "b7a9086164e04692bb276a81419bd9bf",
+      "metric_id": "payment_success_rate",
+      "label": "Payment success rate",
+      "definition": "Successful terminal attempts divided by all terminal attempts on their completion date.",
+      "catalog_version": "payments/1.0",
+      "unit": "ratio",
+      "currency": "ZAR",
+      "currency_default_used": false,
+      "merchant": "a",
+      "provider": "CARD",
+      "grouping": "total",
+      "timezone": "Africa/Johannesburg",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "rows": [
+        {
+          "group": null,
+          "value": "0.666667",
+          "numerator": 2,
+          "denominator": 3
+        }
+      ],
+      "template_id": "payment_success_rate.total.filtered",
+      "query_hash": "f1bada80684388f783e82d96b9f58f51470609d3fddbb9847e6b882ed6835713",
+      "snapshot_id": "33f443ac5ff60ab4e248158ca35c3e9f",
+      "required_inputs": [
+        "attempts"
+      ],
+      "watermarks": {
+        "attempts": {
+          "loaded_at": "2026-11-05T07:50:00Z",
+          "complete_through": "2026-11-05"
+        }
+      }
+    },
+    "grade": {
+      "matched": true,
+      "evidence": true
+    },
+    "trace": {
+      "trace_id": "b7a9086164e04692bb276a81419bd9bf",
+      "mode": "scripted-catalog",
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "actions": [
+        "authorize_scope",
+        "propose_plan",
+        "authorize_plan",
+        "check_freshness",
+        "execute_approved_metric"
+      ],
+      "usage": null,
+      "duration_ms": 108
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  },
+  {
+    "case": "D16",
+    "split": "development",
+    "mode": "scripted-catalog",
+    "expected": {
+      "status": "ok",
+      "metric_id": "paying_orders",
+      "currency": "ZAR",
+      "merchant": "a",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "total",
+      "provider": "CARD",
+      "rows": [
+        [
+          null,
+          1
+        ]
+      ]
+    },
+    "result": {
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "trace_id": "5d4e8a8c70974553a357aaf5a95bc7b8",
+      "metric_id": "paying_orders",
+      "label": "Paying orders",
+      "definition": "Distinct orders with at least one settled capture in the requested scope.",
+      "catalog_version": "payments/1.0",
+      "unit": "count",
+      "currency": "ZAR",
+      "currency_default_used": false,
+      "merchant": "a",
+      "provider": "CARD",
+      "grouping": "total",
+      "timezone": "Africa/Johannesburg",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "rows": [
+        {
+          "group": null,
+          "value": 1,
+          "numerator": null,
+          "denominator": null
+        }
+      ],
+      "template_id": "paying_orders.total.filtered",
+      "query_hash": "5b204ec715bd383bd9a9e5678ff8bb507ff45120178d2493e0f787c3b225f04d",
+      "snapshot_id": "33f443ac5ff60ab4e248158ca35c3e9f",
+      "required_inputs": [
+        "captures"
+      ],
+      "watermarks": {
+        "captures": {
+          "loaded_at": "2026-11-05T07:50:00Z",
+          "complete_through": "2026-11-05"
+        }
+      }
+    },
+    "grade": {
+      "matched": true,
+      "evidence": true
+    },
+    "trace": {
+      "trace_id": "5d4e8a8c70974553a357aaf5a95bc7b8",
+      "mode": "scripted-catalog",
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "actions": [
+        "authorize_scope",
+        "propose_plan",
+        "authorize_plan",
+        "check_freshness",
+        "execute_approved_metric"
+      ],
+      "usage": null,
+      "duration_ms": 108
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  },
+  {
+    "case": "D17",
+    "split": "development",
+    "mode": "scripted-catalog",
+    "expected": {
+      "status": "ok",
+      "metric_id": "net_collected",
+      "currency": "USD",
+      "merchant": "a",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "total",
+      "provider": null,
+      "rows": [
+        [
+          null,
+          700
+        ]
+      ]
+    },
+    "result": {
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "trace_id": "dceafcd9af834743a807442aad7eb79b",
+      "metric_id": "net_collected",
+      "label": "Net collected",
+      "definition": "Settled captures less settled refunds, each counted on its own settlement date.",
+      "catalog_version": "payments/1.0",
+      "unit": "minor_units",
+      "currency": "USD",
+      "currency_default_used": false,
+      "merchant": "a",
+      "provider": null,
+      "grouping": "total",
+      "timezone": "Africa/Johannesburg",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "rows": [
+        {
+          "group": null,
+          "value": 700,
+          "numerator": null,
+          "denominator": null
+        }
+      ],
+      "template_id": "net_collected.total",
+      "query_hash": "c5d55028ca1859b02e8b31c39859dfcb0e761e77a22a9ac467bb0c9ec631f5b7",
+      "snapshot_id": "33f443ac5ff60ab4e248158ca35c3e9f",
+      "required_inputs": [
+        "captures",
+        "refunds"
+      ],
+      "watermarks": {
+        "captures": {
+          "loaded_at": "2026-11-05T07:50:00Z",
+          "complete_through": "2026-11-05"
+        },
+        "refunds": {
+          "loaded_at": "2026-11-05T07:50:00Z",
+          "complete_through": "2026-11-05"
+        }
+      }
+    },
+    "grade": {
+      "matched": true,
+      "evidence": true
+    },
+    "trace": {
+      "trace_id": "dceafcd9af834743a807442aad7eb79b",
+      "mode": "scripted-catalog",
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "actions": [
+        "authorize_scope",
+        "propose_plan",
+        "authorize_plan",
+        "check_freshness",
+        "execute_approved_metric"
+      ],
+      "usage": null,
+      "duration_ms": 109
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  },
+  {
+    "case": "D18",
+    "split": "development",
+    "mode": "scripted-catalog",
+    "expected": {
+      "status": "ok",
+      "metric_id": "net_collected",
+      "currency": "ZAR",
+      "merchant": "b",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "total",
+      "provider": null,
+      "rows": [
+        [
+          null,
+          90000
+        ]
+      ]
+    },
+    "result": {
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "trace_id": "ded55e4ab9274ccca29f99d5e06a172e",
+      "metric_id": "net_collected",
+      "label": "Net collected",
+      "definition": "Settled captures less settled refunds, each counted on its own settlement date.",
+      "catalog_version": "payments/1.0",
+      "unit": "minor_units",
+      "currency": "ZAR",
+      "currency_default_used": false,
+      "merchant": "b",
+      "provider": null,
+      "grouping": "total",
+      "timezone": "Africa/Johannesburg",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "rows": [
+        {
+          "group": null,
+          "value": 90000,
+          "numerator": null,
+          "denominator": null
+        }
+      ],
+      "template_id": "net_collected.total",
+      "query_hash": "c5d55028ca1859b02e8b31c39859dfcb0e761e77a22a9ac467bb0c9ec631f5b7",
+      "snapshot_id": "33f443ac5ff60ab4e248158ca35c3e9f",
+      "required_inputs": [
+        "captures",
+        "refunds"
+      ],
+      "watermarks": {
+        "captures": {
+          "loaded_at": "2026-11-05T07:50:00Z",
+          "complete_through": "2026-11-05"
+        },
+        "refunds": {
+          "loaded_at": "2026-11-05T07:50:00Z",
+          "complete_through": "2026-11-05"
+        }
+      }
+    },
+    "grade": {
+      "matched": true,
+      "evidence": true
+    },
+    "trace": {
+      "trace_id": "ded55e4ab9274ccca29f99d5e06a172e",
+      "mode": "scripted-catalog",
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "actions": [
+        "authorize_scope",
+        "propose_plan",
+        "authorize_plan",
+        "check_freshness",
+        "execute_approved_metric"
+      ],
+      "usage": null,
+      "duration_ms": 109
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  },
+  {
+    "case": "D19",
+    "split": "development",
+    "mode": "scripted-catalog",
+    "expected": {
+      "status": "clarify",
+      "reason": "AMBIGUOUS_METRIC"
+    },
+    "result": {
+      "status": "clarify",
+      "trace_id": "5f88b5daebba4a9f9f3e08ccce121afb",
+      "reason": "AMBIGUOUS_METRIC",
+      "question": "Do you mean gross captured amount or net collected after settled refunds?"
+    },
+    "grade": {
+      "matched": true,
+      "evidence": true
+    },
+    "trace": {
+      "trace_id": "5f88b5daebba4a9f9f3e08ccce121afb",
+      "mode": "scripted-catalog",
+      "status": "clarify",
+      "reason": "AMBIGUOUS_METRIC",
+      "actions": [
+        "authorize_scope",
+        "propose_plan"
+      ],
+      "usage": null,
+      "duration_ms": 0
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  },
+  {
+    "case": "D20",
+    "split": "development",
+    "mode": "scripted-catalog",
+    "expected": {
+      "status": "clarify",
+      "reason": "CURRENCY_REQUIRED"
+    },
+    "result": {
+      "status": "clarify",
+      "trace_id": "21657772633c47e3a18f86a1efca8d55",
+      "reason": "CURRENCY_REQUIRED",
+      "question": "Which currency should I use, ZAR or USD?"
+    },
+    "grade": {
+      "matched": true,
+      "evidence": true
+    },
+    "trace": {
+      "trace_id": "21657772633c47e3a18f86a1efca8d55",
+      "mode": "scripted-catalog",
+      "status": "clarify",
+      "reason": "CURRENCY_REQUIRED",
+      "actions": [
+        "authorize_scope",
+        "propose_plan"
+      ],
+      "usage": null,
+      "duration_ms": 0
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  },
+  {
+    "case": "D21",
+    "split": "development",
+    "mode": "scripted-catalog",
+    "expected": {
+      "status": "clarify",
+      "reason": "DATE_REQUIRED"
+    },
+    "result": {
+      "status": "clarify",
+      "trace_id": "6c332eff394945e2b54462ce83456158",
+      "reason": "DATE_REQUIRED",
+      "question": "What business date or date range should I use? Include the year if it is unclear."
+    },
+    "grade": {
+      "matched": true,
+      "evidence": true
+    },
+    "trace": {
+      "trace_id": "6c332eff394945e2b54462ce83456158",
+      "mode": "scripted-catalog",
+      "status": "clarify",
+      "reason": "DATE_REQUIRED",
+      "actions": [
+        "authorize_scope",
+        "propose_plan"
+      ],
+      "usage": null,
+      "duration_ms": 0
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  },
+  {
+    "case": "D22",
+    "split": "development",
+    "mode": "scripted-catalog",
+    "expected": {
+      "status": "denied",
+      "reason": "SCOPE_DENIED"
+    },
+    "result": {
+      "status": "denied",
+      "trace_id": "4c784af4c7834d28af619488f8bc101d",
+      "reason": "SCOPE_DENIED"
+    },
+    "grade": {
+      "matched": true,
+      "evidence": true
+    },
+    "trace": {
+      "trace_id": "4c784af4c7834d28af619488f8bc101d",
+      "mode": "scripted-catalog",
+      "status": "denied",
+      "reason": "SCOPE_DENIED",
+      "actions": [
+        "authorize_scope"
+      ],
+      "usage": null,
+      "duration_ms": 0
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  },
+  {
+    "case": "D23",
+    "split": "development",
+    "mode": "scripted-catalog",
+    "expected": {
+      "status": "stale",
+      "reason": "STALE_INPUT"
+    },
+    "result": {
+      "status": "stale",
+      "trace_id": "14caaa5130204db896716d4327dd83e4",
+      "reason": "STALE_INPUT"
+    },
+    "grade": {
+      "matched": true,
+      "evidence": true
+    },
+    "trace": {
+      "trace_id": "14caaa5130204db896716d4327dd83e4",
+      "mode": "scripted-catalog",
+      "status": "stale",
+      "reason": "STALE_INPUT",
+      "actions": [
+        "authorize_scope",
+        "propose_plan",
+        "authorize_plan",
+        "check_freshness"
+      ],
+      "usage": null,
+      "duration_ms": 13
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  },
+  {
+    "case": "D24",
+    "split": "development",
+    "mode": "scripted-catalog",
+    "expected": {
+      "status": "ok",
+      "metric_id": "payment_success_rate",
+      "currency": "ZAR",
+      "merchant": "a",
+      "start": "2026-11-04",
+      "end": "2026-11-05",
+      "grouping": "total",
+      "provider": null,
+      "rows": [
+        [
+          null,
+          [
+            null,
+            0,
+            0
+          ]
+        ]
+      ]
+    },
+    "result": {
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "trace_id": "5d71e546de3a49e79de088dfc2fdf048",
+      "metric_id": "payment_success_rate",
+      "label": "Payment success rate",
+      "definition": "Successful terminal attempts divided by all terminal attempts on their completion date.",
+      "catalog_version": "payments/1.0",
+      "unit": "ratio",
+      "currency": "ZAR",
+      "currency_default_used": false,
+      "merchant": "a",
+      "provider": null,
+      "grouping": "total",
+      "timezone": "Africa/Johannesburg",
+      "start": "2026-11-04",
+      "end": "2026-11-05",
+      "rows": [
+        {
+          "group": null,
+          "value": null,
+          "numerator": 0,
+          "denominator": 0
+        }
+      ],
+      "template_id": "payment_success_rate.total",
+      "query_hash": "a1d8d9f2a27018f96ab02f179039a5f0dbb74dc03bb1ca869909ffc0bb4f2d5d",
+      "snapshot_id": "33f443ac5ff60ab4e248158ca35c3e9f",
+      "required_inputs": [
+        "attempts"
+      ],
+      "watermarks": {
+        "attempts": {
+          "loaded_at": "2026-11-05T07:50:00Z",
+          "complete_through": "2026-11-05"
+        }
+      }
+    },
+    "grade": {
+      "matched": true,
+      "evidence": true
+    },
+    "trace": {
+      "trace_id": "5d71e546de3a49e79de088dfc2fdf048",
+      "mode": "scripted-catalog",
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "actions": [
+        "authorize_scope",
+        "propose_plan",
+        "authorize_plan",
+        "check_freshness",
+        "execute_approved_metric"
+      ],
+      "usage": null,
+      "duration_ms": 106
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  },
+  {
+    "case": "H01",
+    "split": "held-out",
+    "mode": "scripted-catalog",
+    "expected": {
+      "status": "ok",
+      "metric_id": "net_collected",
+      "currency": "ZAR",
+      "merchant": "a",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "total",
+      "provider": null,
+      "rows": [
+        [
+          null,
+          13000
+        ]
+      ]
+    },
+    "result": {
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "trace_id": "dca1814a3d12420885b2a0888d9f6200",
+      "metric_id": "net_collected",
+      "label": "Net collected",
+      "definition": "Settled captures less settled refunds, each counted on its own settlement date.",
+      "catalog_version": "payments/1.0",
+      "unit": "minor_units",
+      "currency": "ZAR",
+      "currency_default_used": false,
+      "merchant": "a",
+      "provider": null,
+      "grouping": "total",
+      "timezone": "Africa/Johannesburg",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "rows": [
+        {
+          "group": null,
+          "value": 13000,
+          "numerator": null,
+          "denominator": null
+        }
+      ],
+      "template_id": "net_collected.total",
+      "query_hash": "c5d55028ca1859b02e8b31c39859dfcb0e761e77a22a9ac467bb0c9ec631f5b7",
+      "snapshot_id": "33f443ac5ff60ab4e248158ca35c3e9f",
+      "required_inputs": [
+        "captures",
+        "refunds"
+      ],
+      "watermarks": {
+        "captures": {
+          "loaded_at": "2026-11-05T07:50:00Z",
+          "complete_through": "2026-11-05"
+        },
+        "refunds": {
+          "loaded_at": "2026-11-05T07:50:00Z",
+          "complete_through": "2026-11-05"
+        }
+      }
+    },
+    "grade": {
+      "matched": true,
+      "evidence": true
+    },
+    "trace": {
+      "trace_id": "dca1814a3d12420885b2a0888d9f6200",
+      "mode": "scripted-catalog",
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "actions": [
+        "authorize_scope",
+        "propose_plan",
+        "authorize_plan",
+        "check_freshness",
+        "execute_approved_metric"
+      ],
+      "usage": null,
+      "duration_ms": 109
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  },
+  {
+    "case": "H02",
+    "split": "held-out",
+    "mode": "scripted-catalog",
+    "expected": {
+      "status": "ok",
+      "metric_id": "captured_amount",
+      "currency": "ZAR",
+      "merchant": "a",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "provider",
+      "provider": null,
+      "rows": [
+        [
+          "CARD",
+          12000
+        ],
+        [
+          "EFT",
+          5000
+        ]
+      ]
+    },
+    "result": {
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "trace_id": "8cac2a09a6f54b0c8fe161e7e7899cca",
+      "metric_id": "captured_amount",
+      "label": "Captured amount",
+      "definition": "Total settled captures on their capture settlement date.",
+      "catalog_version": "payments/1.0",
+      "unit": "minor_units",
+      "currency": "ZAR",
+      "currency_default_used": false,
+      "merchant": "a",
+      "provider": null,
+      "grouping": "provider",
+      "timezone": "Africa/Johannesburg",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "rows": [
+        {
+          "group": "CARD",
+          "value": 12000,
+          "numerator": null,
+          "denominator": null
+        },
+        {
+          "group": "EFT",
+          "value": 5000,
+          "numerator": null,
+          "denominator": null
+        }
+      ],
+      "template_id": "captured_amount.provider",
+      "query_hash": "ee3804e8833014f4a226d029624d49509203dcb69a1f0ead7512f40e79d45865",
+      "snapshot_id": "33f443ac5ff60ab4e248158ca35c3e9f",
+      "required_inputs": [
+        "captures"
+      ],
+      "watermarks": {
+        "captures": {
+          "loaded_at": "2026-11-05T07:50:00Z",
+          "complete_through": "2026-11-05"
+        }
+      }
+    },
+    "grade": {
+      "matched": true,
+      "evidence": true
+    },
+    "trace": {
+      "trace_id": "8cac2a09a6f54b0c8fe161e7e7899cca",
+      "mode": "scripted-catalog",
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "actions": [
+        "authorize_scope",
+        "propose_plan",
+        "authorize_plan",
+        "check_freshness",
+        "execute_approved_metric"
+      ],
+      "usage": null,
+      "duration_ms": 108
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  },
+  {
+    "case": "H03",
+    "split": "held-out",
+    "mode": "scripted-catalog",
+    "expected": {
+      "status": "ok",
+      "metric_id": "refunded_amount",
+      "currency": "USD",
+      "merchant": "a",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "total",
+      "provider": null,
+      "rows": [
+        [
+          null,
+          0
+        ]
+      ]
+    },
+    "result": {
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "trace_id": "a4bb8c1eb5d14435b03a2d31325f7a26",
+      "metric_id": "refunded_amount",
+      "label": "Refunded amount",
+      "definition": "Total settled refunds on their refund settlement date, including refunds for captures before the window.",
+      "catalog_version": "payments/1.0",
+      "unit": "minor_units",
+      "currency": "USD",
+      "currency_default_used": false,
+      "merchant": "a",
+      "provider": null,
+      "grouping": "total",
+      "timezone": "Africa/Johannesburg",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "rows": [
+        {
+          "group": null,
+          "value": 0,
+          "numerator": null,
+          "denominator": null
+        }
+      ],
+      "template_id": "refunded_amount.total",
+      "query_hash": "43bf75446abe851d92daf1b2e80eba3cdfd3bbe48432351cbd68f8b516a5822f",
+      "snapshot_id": "33f443ac5ff60ab4e248158ca35c3e9f",
+      "required_inputs": [
+        "captures",
+        "refunds"
+      ],
+      "watermarks": {
+        "captures": {
+          "loaded_at": "2026-11-05T07:50:00Z",
+          "complete_through": "2026-11-05"
+        },
+        "refunds": {
+          "loaded_at": "2026-11-05T07:50:00Z",
+          "complete_through": "2026-11-05"
+        }
+      }
+    },
+    "grade": {
+      "matched": true,
+      "evidence": true
+    },
+    "trace": {
+      "trace_id": "a4bb8c1eb5d14435b03a2d31325f7a26",
+      "mode": "scripted-catalog",
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "actions": [
+        "authorize_scope",
+        "propose_plan",
+        "authorize_plan",
+        "check_freshness",
+        "execute_approved_metric"
+      ],
+      "usage": null,
+      "duration_ms": 105
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  },
+  {
+    "case": "H04",
+    "split": "held-out",
+    "mode": "scripted-catalog",
+    "expected": {
+      "status": "ok",
+      "metric_id": "paying_orders",
+      "currency": "USD",
+      "merchant": "a",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "total",
+      "provider": null,
+      "rows": [
+        [
+          null,
+          1
+        ]
+      ]
+    },
+    "result": {
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "trace_id": "181c2256d9e143a1ba2291ef8f8c83ac",
+      "metric_id": "paying_orders",
+      "label": "Paying orders",
+      "definition": "Distinct orders with at least one settled capture in the requested scope.",
+      "catalog_version": "payments/1.0",
+      "unit": "count",
+      "currency": "USD",
+      "currency_default_used": false,
+      "merchant": "a",
+      "provider": null,
+      "grouping": "total",
+      "timezone": "Africa/Johannesburg",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "rows": [
+        {
+          "group": null,
+          "value": 1,
+          "numerator": null,
+          "denominator": null
+        }
+      ],
+      "template_id": "paying_orders.total",
+      "query_hash": "1c6a8cae5629657bb6c2e0e3761d2b0ef5391525148abae79e1b7d807f234e76",
+      "snapshot_id": "33f443ac5ff60ab4e248158ca35c3e9f",
+      "required_inputs": [
+        "captures"
+      ],
+      "watermarks": {
+        "captures": {
+          "loaded_at": "2026-11-05T07:50:00Z",
+          "complete_through": "2026-11-05"
+        }
+      }
+    },
+    "grade": {
+      "matched": true,
+      "evidence": true
+    },
+    "trace": {
+      "trace_id": "181c2256d9e143a1ba2291ef8f8c83ac",
+      "mode": "scripted-catalog",
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "actions": [
+        "authorize_scope",
+        "propose_plan",
+        "authorize_plan",
+        "check_freshness",
+        "execute_approved_metric"
+      ],
+      "usage": null,
+      "duration_ms": 106
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  },
+  {
+    "case": "H05",
+    "split": "held-out",
+    "mode": "scripted-catalog",
+    "expected": {
+      "status": "ok",
+      "metric_id": "payment_success_rate",
+      "currency": "ZAR",
+      "merchant": "a",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "total",
+      "provider": "CARD",
+      "rows": [
+        [
+          null,
+          [
+            "0.666667",
+            2,
+            3
+          ]
+        ]
+      ]
+    },
+    "result": {
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "trace_id": "8461ca8dc85a4146bf62b0ed34ae8c38",
+      "metric_id": "payment_success_rate",
+      "label": "Payment success rate",
+      "definition": "Successful terminal attempts divided by all terminal attempts on their completion date.",
+      "catalog_version": "payments/1.0",
+      "unit": "ratio",
+      "currency": "ZAR",
+      "currency_default_used": false,
+      "merchant": "a",
+      "provider": "CARD",
+      "grouping": "total",
+      "timezone": "Africa/Johannesburg",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "rows": [
+        {
+          "group": null,
+          "value": "0.666667",
+          "numerator": 2,
+          "denominator": 3
+        }
+      ],
+      "template_id": "payment_success_rate.total.filtered",
+      "query_hash": "f1bada80684388f783e82d96b9f58f51470609d3fddbb9847e6b882ed6835713",
+      "snapshot_id": "33f443ac5ff60ab4e248158ca35c3e9f",
+      "required_inputs": [
+        "attempts"
+      ],
+      "watermarks": {
+        "attempts": {
+          "loaded_at": "2026-11-05T07:50:00Z",
+          "complete_through": "2026-11-05"
+        }
+      }
+    },
+    "grade": {
+      "matched": true,
+      "evidence": true
+    },
+    "trace": {
+      "trace_id": "8461ca8dc85a4146bf62b0ed34ae8c38",
+      "mode": "scripted-catalog",
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "actions": [
+        "authorize_scope",
+        "propose_plan",
+        "authorize_plan",
+        "check_freshness",
+        "execute_approved_metric"
+      ],
+      "usage": null,
+      "duration_ms": 108
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  },
+  {
+    "case": "H06",
+    "split": "held-out",
+    "mode": "scripted-catalog",
+    "expected": {
+      "status": "clarify",
+      "reason": "CONFIRM_PROVIDER"
+    },
+    "result": {
+      "status": "clarify",
+      "trace_id": "55623b9451544194aed8f21ccf2b0998",
+      "reason": "CONFIRM_PROVIDER",
+      "question": "Please confirm you want the CARD provider only."
+    },
+    "grade": {
+      "matched": true,
+      "evidence": true
+    },
+    "trace": {
+      "trace_id": "55623b9451544194aed8f21ccf2b0998",
+      "mode": "scripted-catalog",
+      "status": "clarify",
+      "reason": "CONFIRM_PROVIDER",
+      "actions": [
+        "authorize_scope",
+        "propose_plan",
+        "authorize_plan"
+      ],
+      "usage": null,
+      "duration_ms": 0
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  },
+  {
+    "case": "H07",
+    "split": "held-out",
+    "mode": "scripted-catalog",
+    "expected": {
+      "status": "clarify",
+      "reason": "AMBIGUOUS_PAYMENTS"
+    },
+    "result": {
+      "status": "clarify",
+      "trace_id": "10c270895b2148e69b89867aa0f02b5a",
+      "reason": "AMBIGUOUS_PAYMENTS",
+      "question": "Do you mean captured amount, paying orders, or payment success rate?"
+    },
+    "grade": {
+      "matched": true,
+      "evidence": true
+    },
+    "trace": {
+      "trace_id": "10c270895b2148e69b89867aa0f02b5a",
+      "mode": "scripted-catalog",
+      "status": "clarify",
+      "reason": "AMBIGUOUS_PAYMENTS",
+      "actions": [
+        "authorize_scope",
+        "propose_plan"
+      ],
+      "usage": null,
+      "duration_ms": 0
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  },
+  {
+    "case": "H08",
+    "split": "held-out",
+    "mode": "scripted-catalog",
+    "expected": {
+      "status": "denied",
+      "reason": "SCOPE_DENIED"
+    },
+    "result": {
+      "status": "denied",
+      "trace_id": "d9709309e50a4e5fb28efd4224fb52c5",
+      "reason": "SCOPE_DENIED"
+    },
+    "grade": {
+      "matched": true,
+      "evidence": true
+    },
+    "trace": {
+      "trace_id": "d9709309e50a4e5fb28efd4224fb52c5",
+      "mode": "scripted-catalog",
+      "status": "denied",
+      "reason": "SCOPE_DENIED",
+      "actions": [
+        "authorize_scope"
+      ],
+      "usage": null,
+      "duration_ms": 0
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  },
+  {
+    "case": "H09",
+    "split": "held-out",
+    "mode": "scripted-catalog",
+    "expected": {
+      "status": "ok",
+      "metric_id": "captured_amount",
+      "currency": "ZAR",
+      "merchant": "a",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "grouping": "total",
+      "provider": null,
+      "rows": [
+        [
+          null,
+          17000
+        ]
+      ]
+    },
+    "result": {
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "trace_id": "9e23bc211c9046d8a8db1876bcb2501a",
+      "metric_id": "captured_amount",
+      "label": "Captured amount",
+      "definition": "Total settled captures on their capture settlement date.",
+      "catalog_version": "payments/1.0",
+      "unit": "minor_units",
+      "currency": "ZAR",
+      "currency_default_used": false,
+      "merchant": "a",
+      "provider": null,
+      "grouping": "total",
+      "timezone": "Africa/Johannesburg",
+      "start": "2026-11-01",
+      "end": "2026-11-03",
+      "rows": [
+        {
+          "group": null,
+          "value": 17000,
+          "numerator": null,
+          "denominator": null
+        }
+      ],
+      "template_id": "captured_amount.total",
+      "query_hash": "3e19295ad78940464ae7553fefada36112a9290b5c47ed45da09c56632398676",
+      "snapshot_id": "7f8c864eff9daaae5eb200a8e4f16d6a",
+      "required_inputs": [
+        "captures"
+      ],
+      "watermarks": {
+        "captures": {
+          "loaded_at": "2026-11-05T07:50:00Z",
+          "complete_through": "2026-11-05"
+        }
+      }
+    },
+    "grade": {
+      "matched": true,
+      "evidence": true
+    },
+    "trace": {
+      "trace_id": "9e23bc211c9046d8a8db1876bcb2501a",
+      "mode": "scripted-catalog",
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "actions": [
+        "authorize_scope",
+        "propose_plan",
+        "authorize_plan",
+        "check_freshness",
+        "execute_approved_metric"
+      ],
+      "usage": null,
+      "duration_ms": 108
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  },
+  {
+    "case": "H10",
+    "split": "held-out",
+    "mode": "scripted-catalog",
+    "expected": {
+      "status": "clarify",
+      "reason": "WINDOW_TOO_LONG"
+    },
+    "result": {
+      "status": "clarify",
+      "trace_id": "e47aaf04cfa04d9b8d652030e1fe0962",
+      "reason": "WINDOW_TOO_LONG",
+      "question": "Choose a window of up to 60 business dates."
+    },
+    "grade": {
+      "matched": true,
+      "evidence": true
+    },
+    "trace": {
+      "trace_id": "e47aaf04cfa04d9b8d652030e1fe0962",
+      "mode": "scripted-catalog",
+      "status": "clarify",
+      "reason": "WINDOW_TOO_LONG",
+      "actions": [
+        "authorize_scope",
+        "propose_plan"
+      ],
+      "usage": null,
+      "duration_ms": 0
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  },
+  {
+    "case": "H11",
+    "split": "held-out",
+    "mode": "scripted-catalog",
+    "expected": {
+      "status": "unavailable",
+      "reason": "NO_CERTIFIED_METRIC"
+    },
+    "result": {
+      "status": "unavailable",
+      "trace_id": "b803f670b6c445c7897de563bf127e0f",
+      "reason": "NO_CERTIFIED_METRIC"
+    },
+    "grade": {
+      "matched": true,
+      "evidence": true
+    },
+    "trace": {
+      "trace_id": "b803f670b6c445c7897de563bf127e0f",
+      "mode": "scripted-catalog",
+      "status": "unavailable",
+      "reason": "NO_CERTIFIED_METRIC",
+      "actions": [
+        "authorize_scope",
+        "propose_plan"
+      ],
+      "usage": null,
+      "duration_ms": 0
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  },
+  {
+    "case": "H12",
+    "split": "held-out",
+    "mode": "scripted-catalog",
+    "expected": {
+      "status": "ok",
+      "metric_id": "net_collected",
+      "currency": "ZAR",
+      "merchant": "a",
+      "start": "2026-11-04",
+      "end": "2026-11-05",
+      "grouping": "total",
+      "provider": null,
+      "rows": [
+        [
+          null,
+          0
+        ]
+      ]
+    },
+    "result": {
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "trace_id": "03d9b0ed25b940019bdea9a7688c6893",
+      "metric_id": "net_collected",
+      "label": "Net collected",
+      "definition": "Settled captures less settled refunds, each counted on its own settlement date.",
+      "catalog_version": "payments/1.0",
+      "unit": "minor_units",
+      "currency": "ZAR",
+      "currency_default_used": false,
+      "merchant": "a",
+      "provider": null,
+      "grouping": "total",
+      "timezone": "Africa/Johannesburg",
+      "start": "2026-11-04",
+      "end": "2026-11-05",
+      "rows": [
+        {
+          "group": null,
+          "value": 0,
+          "numerator": null,
+          "denominator": null
+        }
+      ],
+      "template_id": "net_collected.total",
+      "query_hash": "c5d55028ca1859b02e8b31c39859dfcb0e761e77a22a9ac467bb0c9ec631f5b7",
+      "snapshot_id": "33f443ac5ff60ab4e248158ca35c3e9f",
+      "required_inputs": [
+        "captures",
+        "refunds"
+      ],
+      "watermarks": {
+        "captures": {
+          "loaded_at": "2026-11-05T07:50:00Z",
+          "complete_through": "2026-11-05"
+        },
+        "refunds": {
+          "loaded_at": "2026-11-05T07:50:00Z",
+          "complete_through": "2026-11-05"
+        }
+      }
+    },
+    "grade": {
+      "matched": true,
+      "evidence": true
+    },
+    "trace": {
+      "trace_id": "03d9b0ed25b940019bdea9a7688c6893",
+      "mode": "scripted-catalog",
+      "status": "ok",
+      "reason": "VERIFIED_METRIC",
+      "actions": [
+        "authorize_scope",
+        "propose_plan",
+        "authorize_plan",
+        "check_freshness",
+        "execute_approved_metric"
+      ],
+      "usage": null,
+      "duration_ms": 110
+    },
+    "scope_violation": false,
+    "cap_violation": false
+  }
+]

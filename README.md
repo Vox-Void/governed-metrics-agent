@@ -2,6 +2,8 @@
 
 Ask for a certified payments metric and see the value, definition, scope and freshness used to answer it. The fixture uses synthetic capture, refund and attempt deliveries.
 
+Watch the [2:18 captioned demo](docs/demo.mp4) for the net collection answer, revenue clarification, access denial and stale-refund case.
+
 ## Run it
 
 Use Bash on Linux or WSL2 with `uv` 0.13.9. Run these commands from the repository root.
@@ -33,4 +35,4 @@ The report is saved to `artifacts/demo.json`. The evaluation saves its aggregate
 3. The service rechecks the proposed scope and freshness, pins a tested snapshot, and executes one approved query with bound parameters. Net collected uses separate capture and refund aggregates.
 4. The response contains the calculation and its provenance. The same rules apply to the terminal and MCP tools.
 
-See the [operator guide](docs/runbook.md) for profile examples, live mode and the isolated reader. The [architecture](docs/architecture.md) explains the facts, snapshot publication and authority boundary. The [review pull request](https://github.com/Vox-Void/governed-metrics-agent/pull/1) contains the service and its regression tests.
+See the [operator guide](docs/runbook.md) for profile examples, live mode and the isolated reader. The [architecture](docs/architecture.md) explains the facts, snapshot publication and authority boundary. The [example results](docs/example-results/README.md) cover the benchmark and problems found during testing. The [review pull request](https://github.com/Vox-Void/governed-metrics-agent/pull/1) contains the service and its regression tests.

@@ -1,0 +1,132 @@
+{
+  "mode": "scripted-catalog",
+  "cases": [
+    {
+      "question": "How much did we collect after refunds in ZAR on 1-2 November 2026?",
+      "merchant": "a",
+      "snapshot_variant": "fresh",
+      "formatted": "Net collected  ZAR 130.00\nSettled captures less settled refunds, each counted on its own settlement date.\nMerchant A | ZAR | all providers\nWindow [2026-11-01, 2026-11-03)  Africa/Johannesburg\nCatalog payments/1.0 | Snapshot 33f443ac5ff60ab4e248158ca35c3e9f\ncaptures loaded 2026-11-05T07:50:00+00:00 | complete through 2026-11-05 (exclusive)\nrefunds loaded 2026-11-05T07:50:00+00:00 | complete through 2026-11-05 (exclusive)",
+      "answer": {
+        "status": "ok",
+        "reason": "VERIFIED_METRIC",
+        "trace_id": "fa7e842eb42641a98a585508a6102347",
+        "metric_id": "net_collected",
+        "label": "Net collected",
+        "definition": "Settled captures less settled refunds, each counted on its own settlement date.",
+        "catalog_version": "payments/1.0",
+        "unit": "minor_units",
+        "currency": "ZAR",
+        "currency_default_used": false,
+        "merchant": "a",
+        "provider": null,
+        "grouping": "total",
+        "timezone": "Africa/Johannesburg",
+        "start": "2026-11-01",
+        "end": "2026-11-03",
+        "rows": [
+          {
+            "group": null,
+            "value": 13000,
+            "numerator": null,
+            "denominator": null
+          }
+        ],
+        "template_id": "net_collected.total",
+        "query_hash": "c5d55028ca1859b02e8b31c39859dfcb0e761e77a22a9ac467bb0c9ec631f5b7",
+        "snapshot_id": "33f443ac5ff60ab4e248158ca35c3e9f",
+        "required_inputs": [
+          "captures",
+          "refunds"
+        ],
+        "watermarks": {
+          "captures": {
+            "loaded_at": "2026-11-05T07:50:00Z",
+            "complete_through": "2026-11-05"
+          },
+          "refunds": {
+            "loaded_at": "2026-11-05T07:50:00Z",
+            "complete_through": "2026-11-05"
+          }
+        }
+      }
+    },
+    {
+      "question": "How much revenue in ZAR on 1-2 November 2026?",
+      "merchant": "a",
+      "snapshot_variant": "fresh",
+      "formatted": "Do you mean gross captured amount or net collected after settled refunds?",
+      "answer": {
+        "status": "clarify",
+        "trace_id": "e3360feb93dc450389105b99d2ecfec7",
+        "reason": "AMBIGUOUS_METRIC",
+        "question": "Do you mean gross captured amount or net collected after settled refunds?"
+      }
+    },
+    {
+      "question": "Net collected in ZAR on 1-2 November 2026",
+      "merchant": "b",
+      "snapshot_variant": "fresh",
+      "formatted": "That scope is unavailable for this profile.",
+      "answer": {
+        "status": "denied",
+        "trace_id": "467fc9af763d4fbabfdb85cdff0b2c88",
+        "reason": "SCOPE_DENIED"
+      }
+    },
+    {
+      "question": "Net collected in ZAR on 1-2 November 2026",
+      "merchant": "a",
+      "snapshot_variant": "stale-refunds",
+      "formatted": "A required input is stale or incomplete for the requested dates.",
+      "answer": {
+        "status": "stale",
+        "trace_id": "6ee9bf2548544b50875ce0fc782b82b0",
+        "reason": "STALE_INPUT"
+      }
+    },
+    {
+      "question": "Captured amount in ZAR on 1-2 November 2026",
+      "merchant": "a",
+      "snapshot_variant": "stale-refunds",
+      "formatted": "Captured amount  ZAR 170.00\nTotal settled captures on their capture settlement date.\nMerchant A | ZAR | all providers\nWindow [2026-11-01, 2026-11-03)  Africa/Johannesburg\nCatalog payments/1.0 | Snapshot 7f8c864eff9daaae5eb200a8e4f16d6a\ncaptures loaded 2026-11-05T07:50:00+00:00 | complete through 2026-11-05 (exclusive)",
+      "answer": {
+        "status": "ok",
+        "reason": "VERIFIED_METRIC",
+        "trace_id": "c3a2a76d7ab74a9e91656990a98f5390",
+        "metric_id": "captured_amount",
+        "label": "Captured amount",
+        "definition": "Total settled captures on their capture settlement date.",
+        "catalog_version": "payments/1.0",
+        "unit": "minor_units",
+        "currency": "ZAR",
+        "currency_default_used": false,
+        "merchant": "a",
+        "provider": null,
+        "grouping": "total",
+        "timezone": "Africa/Johannesburg",
+        "start": "2026-11-01",
+        "end": "2026-11-03",
+        "rows": [
+          {
+            "group": null,
+            "value": 17000,
+            "numerator": null,
+            "denominator": null
+          }
+        ],
+        "template_id": "captured_amount.total",
+        "query_hash": "3e19295ad78940464ae7553fefada36112a9290b5c47ed45da09c56632398676",
+        "snapshot_id": "7f8c864eff9daaae5eb200a8e4f16d6a",
+        "required_inputs": [
+          "captures"
+        ],
+        "watermarks": {
+          "captures": {
+            "loaded_at": "2026-11-05T07:50:00Z",
+            "complete_through": "2026-11-05"
+          }
+        }
+      }
+    }
+  ]
+}
