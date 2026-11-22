@@ -15,8 +15,8 @@ seeds:
   governed_payments:
     +quote_columns: false
     capture_deliveries:
-      +column_types: {settled_at: varchar, ingested_at: varchar}
+      +column_types: {settled_at: varchar, ingested_at: varchar, amount_minor: varchar, version: varchar}
     refund_deliveries:
-      +column_types: {settled_at: varchar, ingested_at: varchar}
+      +column_types: {settled_at: varchar, ingested_at: varchar, amount_minor: varchar, version: varchar}
     attempt_deliveries:
-      +column_types: {initiated_at: varchar, completed_at: varchar, ingested_at: varchar}
+      +column_types: {initiated_at: varchar, completed_at: varchar, ingested_at: varchar, version: varchar}

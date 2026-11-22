@@ -11,7 +11,7 @@
 
 Add `--json` to inspect the typed answer. The template command returns SQL with placeholders. The simulated operations profile can ask for CARD payment success rate by day or total. It will be asked to confirm CARD if it is absent from the request.
 
-The demo clock is 5 November 2026 at 08:00 UTC. Use ISO dates, a month-day phrase or yesterday. A date phrase without a year uses the current Johannesburg year if the resulting date is today or earlier. A later day without a reliable year requires clarification. A date window can contain up to 60 business dates.
+The demo clock is 5 November 2026 at 08:00 UTC. Use ISO dates, a month-day phrase or yesterday. For a range, join the dates with "to" or use a short form like "1-2 November". Separate, nonconsecutive days require separate questions. A date phrase without a year uses the current Johannesburg year if the resulting date is today or earlier. A later day without a reliable year requires clarification. A date window can contain up to 60 business dates.
 
 ## Review a freshness decision
 
@@ -36,7 +36,7 @@ docker compose run --rm -T metrics-reader ask --root /snapshots --merchant a \
 
 ## MCP stdio tools
 
-Use `./scripts/dev mcp --profile analyst-a` as the local MCP client's command and arguments. The server offers `list_metrics` for scoped discovery and `run_metric` for one structured metric request. Supply `merchant`, `metric_id`, `currency`, `grouping`, `provider` and ISO `start`/`end` dates. Use `null` as the provider when there is no filter. The launcher sets the profile. Stdio tests cover the 2025-11-25 handshake and 2026-07-28 request metadata. [MCP stdio specification](https://modelcontextprotocol.io/specification/2026-07-28/basic/transports/stdio)
+Use `./scripts/dev mcp --profile analyst-a` as the local MCP client's command and arguments. The server offers `list_metrics` for scoped discovery and `run_metric` for one structured metric request. Supply `merchant`, `metric_id`, `currency`, `grouping`, `provider` and ISO `start`/`end` dates. Use `null` as the provider when there is no filter. The launcher sets the profile. Stdio tests cover the 2025-11-25 handshake and 2026-07-28 requests with a protocol version and client capabilities in `_meta`. [MCP stdio specification](https://modelcontextprotocol.io/specification/2026-07-28/basic/transports/stdio)
 
 ## Benchmark and optional live mode
 

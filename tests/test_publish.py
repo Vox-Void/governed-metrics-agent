@@ -41,6 +41,20 @@ def test_conflicting_same_version_fails_dbt_and_keeps_last_good_snapshot(snapsho
     assert answer(local).rows[0].value == 15000
 
 
+@pytest.mark.parametrize("replacement", [b",-0.1,1,", b",15000,1.1,"])
+def test_fractional_amount_or_version_cannot_be_certified(snapshot_root, tmp_path, replacement):
+    local = shutil.copytree(snapshot_root, tmp_path / "publish")
+    before = snapshots.pin_snapshot(local, "fresh")[0]
+    project = isolated_project(tmp_path)
+    seed = project / "data/seeds/capture_deliveries.csv"
+    seed.write_bytes(seed.read_bytes().replace(b",15000,1,", replacement))
+
+    with pytest.raises(snapshots.SnapshotError, match="valid_delivery_values"):
+        snapshots.publish_snapshots(local, project)
+    assert snapshots.pin_snapshot(local, "fresh")[0] == before
+    assert answer(local).rows[0].value == 15000
+
+
 def test_concurrent_read_sees_one_complete_revision(snapshot_root, tmp_path, monkeypatch):
     local = shutil.copytree(snapshot_root, tmp_path / "publish")
     before = snapshots.pin_snapshot(local, "fresh")[0]

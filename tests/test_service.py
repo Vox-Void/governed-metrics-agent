@@ -188,6 +188,51 @@ def test_trusted_profile_currency_default_is_visible(snapshot_root):
 
 
 @pytest.mark.parametrize(
+    "question,override,reason",
+    [
+        ("Net collected", {"metric_id": "captured_amount"}, "METRIC_MISMATCH"),
+        ("Net collected by day", {}, "GROUP_REQUIRED"),
+        ("Net collected by provider", {"grouping": "day"}, "GROUP_REQUIRED"),
+        ("Net collected by day and by provider", {}, "GROUP_REQUIRED"),
+    ],
+)
+def test_planner_cannot_change_the_named_metric_or_grouping(
+    snapshot_root, question, override, reason
+):
+    service = Service(snapshot_root, executor=NoQuery())
+    answer = service.ask(
+        f"{question} {SCOPE}", "a", PROFILES["analyst-a"], RoguePlanner(plan(**override))
+    )
+    assert (answer.status, answer.reason) == ("clarify", reason)
+
+
+def test_spelled_date_range_includes_the_last_requested_day(snapshot_root):
+    service = Service(snapshot_root)
+    answer = ask(service, "net collected", "in ZAR from 1 November to 3 November 2026")
+    assert isinstance(answer, Answer)
+    assert (answer.start, answer.end, answer.rows[0].value) == (
+        date(2026, 11, 1),
+        date(2026, 11, 4),
+        28000,
+    )
+
+
+@pytest.mark.parametrize(
+    "dates",
+    ["on 1 November and 3 November", "on 1 and 3 November", "today on 2026-11-01"],
+)
+def test_ambiguous_date_mentions_do_not_run_a_partial_window(snapshot_root, dates):
+    answer = ask(Service(snapshot_root, executor=NoQuery()), "net collected", f"in ZAR {dates}")
+    assert (answer.status, answer.reason) == ("clarify", "DATE_REQUIRED")
+
+
+def test_reader_uses_snapshot_root_relative_to_caller(snapshot_root, monkeypatch):
+    monkeypatch.chdir(snapshot_root)
+    answer = ask(Service(Path(".")), "net collected")
+    assert isinstance(answer, Answer) and answer.rows[0].value == 13000
+
+
+@pytest.mark.parametrize(
     "mark,reason",
     [
         (None, "MISSING_WATERMARK"),

@@ -133,14 +133,14 @@ def publish_snapshots(output: Path, project_root: Path = ROOT) -> dict[str, Any]
 
 
 def pin_snapshot(output: Path, variant: str) -> tuple[str, Path]:
-    """Read the current map and resolve one revision to its DuckDB file."""
+    """Read the current map and resolve one revision to an absolute DuckDB path."""
     if variant not in VARIANTS:
         raise SnapshotError("Unknown snapshot variant.")
     try:
         revision = json.loads((output / "current.json").read_bytes())[variant]
         if not re.fullmatch(r"[0-9a-f]{32}", revision):
             raise ValueError("Invalid revision.")
-        file = output / "snapshots" / f"{revision}.duckdb"
+        file = (output / "snapshots" / f"{revision}.duckdb").resolve()
         if not file.is_file():
             raise FileNotFoundError(file)
     except (OSError, ValueError, TypeError, KeyError) as error:

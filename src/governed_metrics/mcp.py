@@ -13,6 +13,7 @@ LEGACY = "2025-11-25"
 SERVER = {"name": "governed-metrics-agent", "version": "0.1.0"}
 CAPABILITIES = {"tools": {"listChanged": False}}
 VERSION_KEY = "io.modelcontextprotocol/protocolVersion"
+CLIENT_CAPABILITIES_KEY = "io.modelcontextprotocol/clientCapabilities"
 
 
 def tool_definitions() -> list[dict[str, Any]]:
@@ -64,21 +65,32 @@ def serve(service: Service, principal: Principal, variant: str) -> None:
             if not isinstance(params, dict):
                 raise TypeError("Invalid params")
             meta = params.get("_meta", {})
-            modern = isinstance(meta, dict) and meta.get(VERSION_KEY) == MODERN
+            if not isinstance(meta, dict):
+                raise TypeError("Invalid request metadata")
+            # Read the protocol version from this request before dispatching it.
+            requested = meta.get(VERSION_KEY)
+            if VERSION_KEY in meta and not isinstance(requested, str):
+                raise TypeError("Protocol version must be a string")
+            if requested is not None and requested != MODERN:
+                error = rpc_error(request_id, -32022, "Unsupported protocol version")
+                error["error"]["data"] = {"supported": [MODERN, LEGACY], "requested": requested}
+                print(json.dumps(error), flush=True)
+                continue
+            modern = requested == MODERN
+            if modern and not isinstance(meta.get(CLIENT_CAPABILITIES_KEY), dict):
+                raise TypeError("Client capabilities are required")
             result: dict[str, Any]
-            if method == "initialize":
+            if method == "initialize" and not modern:
                 legacy_session = True
                 result = {
                     "protocolVersion": LEGACY,
                     "serverInfo": SERVER,
                     "capabilities": CAPABILITIES,
                 }
-                modern = False
-            elif method == "server/discover":
-                modern = True
-                result = {"supportedVersions": [MODERN], "capabilities": CAPABILITIES}
+            elif method == "server/discover" and modern:
+                result = {"supportedVersions": [MODERN, LEGACY], "capabilities": CAPABILITIES}
             elif not (modern or legacy_session):
-                raise TypeError("Protocol version missing or unsupported")
+                raise TypeError("Protocol version is required")
             elif method == "ping":
                 result = {}
             elif method == "tools/list":
@@ -117,6 +129,7 @@ def serve(service: Service, principal: Principal, variant: str) -> None:
             continue
         if modern:
             result["_meta"] = {"io.modelcontextprotocol/serverInfo": SERVER}
-            if method in {"tools/list", "tools/call"}:
-                result["resultType"] = "complete"
+            result["resultType"] = "complete"
+            if method in {"server/discover", "tools/list"}:
+                result.update(ttlMs=0, cacheScope="private")
         print(json.dumps({"jsonrpc": "2.0", "id": request_id, "result": result}), flush=True)

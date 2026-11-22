@@ -27,9 +27,14 @@ MONTHS = {
     for label in (calendar.month_name[index], calendar.month_abbr[index])
 }
 MONTH = "|".join(sorted(MONTHS, key=len, reverse=True))
-DAYS = r"(?P<first>\d{1,2})(?:(?:\s*[-\u2013]\s*|\s+(?:to|through|and)\s+)(?P<last>\d{1,2}))?"
+DAYS = r"(?P<first>\d{1,2})(?:(?P<separator>\s*[-\u2013]\s*|\s+(?:to|through|and)\s+)(?P<last>\d{1,2}))?"
+ISO_DATE = re.compile(r"\b\d{4}-\d{2}-\d{2}\b")
 MONTH_FIRST = re.compile(rf"\b(?P<month>{MONTH})\s+{DAYS}(?:,?\s+(?P<year>\d{{4}}))?\b")
 DAY_FIRST = re.compile(rf"\b{DAYS}\s+(?P<month>{MONTH})(?:,?\s+(?P<year>\d{{4}}))?\b")
+GROUP_PHRASES: dict[Grouping, tuple[str, ...]] = {
+    "day": ("daily", "by day", "per day", "each day", "day by day"),
+    "provider": ("by provider", "per provider", "provider breakdown"),
+}
 
 
 @dataclass(frozen=True)
@@ -79,6 +84,14 @@ def requested_providers(text: str) -> list[Provider]:
     return [provider for provider in PROVIDERS if phrase(text, provider.lower())]
 
 
+def requested_groups(text: str) -> set[Grouping]:
+    return {
+        grouping
+        for grouping, labels in GROUP_PHRASES.items()
+        if any(phrase(text, label) for label in labels)
+    }
+
+
 def ambiguous_reason(text: str, labels: tuple[str, ...]) -> ClarificationCode | None:
     match = next((label for label in labels if phrase(text, label)), None)
     if match is None:
@@ -88,27 +101,50 @@ def ambiguous_reason(text: str, labels: tuple[str, ...]) -> ClarificationCode | 
 
 def date_window(text: str, today: date) -> tuple[date, date] | None:
     """Parse a day or date range and return the first day and exclusive end day."""
+    candidates = sorted(
+        (
+            match
+            for pattern in (ISO_DATE, DAY_FIRST, MONTH_FIRST)
+            for match in pattern.finditer(text)
+        ),
+        key=lambda match: (match.start(), -match.end()),
+    )
+    matches: list[re.Match[str]] = []
+    for match in candidates:
+        if not matches or match.start() >= matches[-1].end():
+            matches.append(match)
+    yesterday = phrase(text, "yesterday")
+    current_day = phrase(text, "today")
     try:
-        iso = re.findall(r"\b\d{4}-\d{2}-\d{2}\b", text)
-        if iso:
-            if len(iso) > 2:
+        if yesterday or current_day:
+            if matches or (yesterday and current_day):
                 return None
-            first, last = date.fromisoformat(iso[0]), date.fromisoformat(iso[-1])
-        elif phrase(text, "yesterday") or phrase(text, "today"):
-            if phrase(text, "yesterday") and phrase(text, "today"):
-                return None
-            first = last = today - timedelta(days=int(phrase(text, "yesterday")))
-        elif match := DAY_FIRST.search(text) or MONTH_FIRST.search(text):
-            year = int(match["year"] or today.year)
-            month = MONTHS[match["month"]]
-            first, last = (
-                date(year, month, int(match["first"])),
-                date(year, month, int(match["last"] or match["first"])),
-            )
-            if match["year"] is None and last > today:
-                return None
-        else:
+            first = today - timedelta(days=int(yesterday))
+            return first, first + timedelta(days=1)
+        if not 1 <= len(matches) <= 2:
             return None
+        dates: list[tuple[date, date]] = []
+        for match in matches:
+            if match.re is ISO_DATE:
+                first = last = date.fromisoformat(match[0])
+            else:
+                year = int(match["year"] or today.year)
+                month = MONTHS[match["month"]]
+                first = date(year, month, int(match["first"]))
+                last = date(year, month, int(match["last"] or match["first"]))
+                if first > last or (match["year"] is None and last > today):
+                    return None
+                if (match["separator"] or "").strip() == "and" and (last - first).days > 1:
+                    return None
+            dates.append((first, last))
+        first, last = dates[0][0], dates[-1][1]
+        if len(matches) == 2:
+            separator = text[matches[0].end() : matches[1].start()].strip()
+            if any(start != end for start, end in dates) or (
+                separator not in {"to", "through", "-", "\u2013"}
+                and not (separator == "and" and (last - first).days <= 1)
+            ):
+                return None
         if last >= first:
             return first, last + timedelta(days=1)
     except (ValueError, OverflowError):
@@ -166,16 +202,10 @@ class ScriptedPlanner:
         start, end = window
         if (end - start).days > 60:
             return clarify("WINDOW_TOO_LONG")
-        by_day = any(
-            phrase(text, sample)
-            for sample in ("daily", "by day", "per day", "each day", "day by day")
-        )
-        by_provider = any(
-            phrase(text, sample) for sample in ("by provider", "per provider", "provider breakdown")
-        )
-        if by_day and by_provider:
+        groups = requested_groups(text)
+        if len(groups) > 1:
             return clarify("GROUP_REQUIRED")
-        grouping = "day" if by_day else "provider" if by_provider else "total"
+        grouping = next(iter(groups), "total")
         if grouping not in context.metrics[metric].groups:
             return clarify("UNSUPPORTED_GROUP")
         providers = requested_providers(text)

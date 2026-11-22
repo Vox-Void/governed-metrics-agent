@@ -24,6 +24,7 @@ from governed_metrics.planner import (
     date_window,
     recognised_metrics,
     requested_currencies,
+    requested_groups,
     requested_providers,
 )
 from governed_metrics.schemas import (
@@ -55,12 +56,17 @@ def denial(trace: str) -> Failure:
 
 
 def check_question(text: str, context: Context, plan: MetricPlan) -> ClarificationCode | None:
-    """Check metric ambiguity and compare the question's currency, dates, and providers with the plan."""
+    """Compare the question's metric, currency, dates, grouping, and providers with the plan."""
     choices = recognised_metrics(text, context, baseline=False)
     if len(choices) > 1:
         return "MULTIPLE_METRICS"
     if not choices and (reason := ambiguous_reason(text, context.ambiguous)):
         return reason
+    if choices and plan.metric_id not in choices:
+        return "METRIC_MISMATCH"
+    groups = requested_groups(text)
+    if groups and groups != {plan.grouping}:
+        return "GROUP_REQUIRED"
     currencies = requested_currencies(text)
     if (currencies and currencies != {plan.currency}) or (
         not currencies and context.currency_default != plan.currency
