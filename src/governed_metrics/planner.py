@@ -35,6 +35,18 @@ GROUP_PHRASES: dict[Grouping, tuple[str, ...]] = {
     "day": ("daily", "by day", "per day", "each day", "day by day"),
     "provider": ("by provider", "per provider", "provider breakdown"),
 }
+EXCLUSION = (
+    r"(?:\b(?:excludes?|excluding|except(?:\s+for)?|without|other\s+than|all\s+but|"
+    r"no|not(?!\s+only\b))\s+(?:(?:all|any|the|in)\s+)?|\bnon[-\s])"
+)
+PROVIDER_EXCLUSION = re.compile(
+    rf"{EXCLUSION}(?:card|eft)\b|\b(?:card|eft)(?:\s+(?:payments|transactions))?\s+excluded\b"
+)
+CURRENCY_EXCLUSION = re.compile(rf"{EXCLUSION}(?:zar|usd|rand|us dollars)\b")
+UNSUPPORTED_CURRENCY = re.compile(
+    r"\b(?:eur|euros?|gbp|pounds? sterling|jpy|yen|aud|australian dollars|cad|"
+    r"canadian dollars|chf|swiss francs?|cny|yuan|inr|rupees?|nzd|new zealand dollars)\b"
+)
 
 
 @dataclass(frozen=True)
@@ -82,6 +94,15 @@ def requested_currencies(text: str, *, aliases: bool = True) -> set[Currency]:
 
 def requested_providers(text: str) -> list[Provider]:
     return [provider for provider in PROVIDERS if phrase(text, provider.lower())]
+
+
+def unsupported_scope(text: str) -> ClarificationCode | None:
+    """Identify explicit scope restrictions the positive-only plans cannot represent."""
+    if CURRENCY_EXCLUSION.search(text) or UNSUPPORTED_CURRENCY.search(text):
+        return "CURRENCY_REQUIRED"
+    if PROVIDER_EXCLUSION.search(text):
+        return "PROVIDER_REQUIRED"
+    return None
 
 
 def requested_groups(text: str) -> set[Grouping]:

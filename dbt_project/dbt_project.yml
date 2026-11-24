@@ -14,9 +14,32 @@ models:
 seeds:
   governed_payments:
     +quote_columns: false
+    # Keep raw identifiers and numeric fields as text until the staging models validate them.
     capture_deliveries:
-      +column_types: {settled_at: varchar, ingested_at: varchar, amount_minor: varchar, version: varchar}
+      +column_types:
+        merchant_id: varchar
+        capture_id: varchar
+        order_id: varchar
+        attempt_id: varchar
+        settled_at: varchar
+        ingested_at: varchar
+        amount_minor: varchar
+        version: varchar
     refund_deliveries:
-      +column_types: {settled_at: varchar, ingested_at: varchar, amount_minor: varchar, version: varchar}
+      +column_types:
+        merchant_id: varchar
+        refund_id: varchar
+        capture_id: varchar
+        settled_at: varchar
+        ingested_at: varchar
+        amount_minor: varchar
+        version: varchar
     attempt_deliveries:
-      +column_types: {initiated_at: varchar, completed_at: varchar, ingested_at: varchar, version: varchar}
+      +column_types:
+        merchant_id: varchar
+        attempt_id: varchar
+        order_id: varchar
+        initiated_at: varchar
+        completed_at: varchar
+        ingested_at: varchar
+        version: varchar

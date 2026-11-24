@@ -1,3 +1,4 @@
+import json
 import shutil
 from concurrent.futures import ThreadPoolExecutor
 from threading import Event
@@ -85,3 +86,59 @@ def test_concurrent_read_sees_one_complete_revision(snapshot_root, tmp_path, mon
     new = answer(local)
     assert new.snapshot_id == complete != before
     assert new.rows[0].value == 15200
+
+
+def test_revision_and_dbt_build_use_the_same_copied_inputs(tmp_path, monkeypatch):
+    project = isolated_project(tmp_path)
+    output = tmp_path / "published"
+    marks = json.loads((project / "data/freshness.json").read_bytes())["fresh"]
+    expected_revision = snapshots.revision_digest(project, "fresh", marks)
+    seed = project / "data/seeds/capture_deliveries.csv"
+    real_dbt = snapshots.run_dbt
+
+    def build_after_source_edit(build_root, candidate, scratch):
+        seed.write_bytes(seed.read_bytes().replace(b",15000,1,", b",15200,1,"))
+        return real_dbt(build_root, candidate, scratch)
+
+    monkeypatch.setattr(snapshots, "run_dbt", build_after_source_edit)
+    snapshots.publish_snapshots(output, project)
+    response = answer(output)
+
+    assert response.snapshot_id == expected_revision
+    assert snapshots.revision_digest(project, "fresh", marks) != expected_revision
+    assert response.rows[0].value == 15000
+
+
+def test_numeric_looking_order_ids_are_distinct(tmp_path):
+    project = isolated_project(tmp_path)
+    output = tmp_path / "published"
+    # Make all order IDs look numeric, including two distinct IDs with the same numeric value.
+    for source in ("capture_deliveries", "attempt_deliveries"):
+        seed = project / f"data/seeds/{source}.csv"
+        numbered = seed.read_bytes()
+        order_ids = (b"20", b"01", b"1", b"23", b"24", b"25", b"26")
+        for ordinal, order_id in enumerate(order_ids):
+            numbered = numbered.replace(f",o{ordinal},".encode(), b"," + order_id + b",")
+        seed.write_bytes(numbered)
+    snapshots.publish_snapshots(output, project)
+    response = Service(output).ask(
+        "Paying orders in ZAR on 1-2 November 2026", "a", PROFILES["analyst-a"], ScriptedPlanner()
+    )
+
+    assert response.status == "ok"
+    assert response.rows[0].value == 2
+
+
+def test_publish_refuses_a_damaged_existing_revision(snapshot_root, tmp_path):
+    output = shutil.copytree(snapshot_root, tmp_path / "published")
+    revision, database = snapshots.pin_snapshot(output, "fresh")
+    pointer = output / "current.json"
+    before = pointer.read_bytes()
+    database.write_bytes(b"not a DuckDB file")
+
+    with pytest.raises(
+        snapshots.SnapshotError, match=f"Existing snapshot {revision} could not be read"
+    ):
+        snapshots.publish_snapshots(output)
+
+    assert pointer.read_bytes() == before

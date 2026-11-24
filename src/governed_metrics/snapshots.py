@@ -7,13 +7,14 @@ import re
 import shutil
 import subprocess
 import sys
-from contextlib import suppress
 from datetime import date, datetime
 from pathlib import Path
 from tempfile import NamedTemporaryFile, TemporaryDirectory
 from typing import Any
 
 import duckdb
+
+from governed_metrics.worker import connect_read_only
 
 ROOT = Path(__file__).resolve().parents[2]
 DEMO_CLOCK = datetime.fromisoformat("2026-11-05T08:00:00+00:00")
@@ -25,18 +26,28 @@ class SnapshotError(RuntimeError):
     pass
 
 
-def revision_digest(project_root: Path, variant: str, marks: object) -> str:
-    """Hash the build inputs and the watermark values for one snapshot variant."""
-    paths = sorted(
+def build_sources(project_root: Path) -> list[Path]:
+    return sorted(
         [
-            *project_root.glob("data/seeds/*.csv"),
-            *project_root.glob("dbt_project/**/*.sql"),
-            *project_root.glob("dbt_project/**/*.yml"),
+            *project_root.glob("data/seeds/**/*.csv"),
+            *(
+                path
+                for path in (project_root / "dbt_project").rglob("*")
+                if path.is_file()
+                and path.suffix in {".sql", ".yml", ".yaml"}
+                and not {"target", "logs", "dbt_packages"}.intersection(
+                    path.relative_to(project_root).parts
+                )
+            ),
             project_root / "uv.lock",
         ]
     )
+
+
+def revision_digest(project_root: Path, variant: str, marks: object) -> str:
+    """Hash the build inputs and the watermark values for one snapshot variant."""
     digest = hashlib.sha256()
-    for path in paths:
+    for path in build_sources(project_root):
         digest.update(path.relative_to(project_root).as_posix().encode() + b"\0")
         digest.update(hashlib.sha256(path.read_bytes()).digest())
     digest.update(json.dumps([variant, marks], sort_keys=True).encode())
@@ -87,19 +98,46 @@ def run_dbt(project_root: Path, candidate: Path, scratch: Path) -> dict[str, int
     }
 
 
+def publish_revision(staged: Path, published: Path, revision: str) -> None:
+    # Link the completed file once. A retry checks the existing copy before reusing it.
+    try:
+        os.link(staged, published)
+    except FileExistsError:
+        try:
+            with connect_read_only(published) as connection:
+                metadata = connection.execute(
+                    "select revision, tested from snapshot_meta"
+                ).fetchall()
+        except duckdb.Error as error:
+            raise SnapshotError(f"Existing snapshot {revision} could not be read.") from error
+        if metadata != [(revision, True)]:
+            raise SnapshotError(
+                f"Existing snapshot {revision} failed its metadata check."
+            ) from None
+
+
 def publish_snapshots(output: Path, project_root: Path = ROOT) -> dict[str, Any]:
     output = output.resolve()
     versions = output / "snapshots"
     versions.mkdir(parents=True, exist_ok=True)
-    watermarks = json.loads((project_root / "data/freshness.json").read_bytes())
-    revisions = {
-        variant: revision_digest(project_root, variant, watermarks[variant]) for variant in VARIANTS
-    }
-    with TemporaryDirectory(prefix="building-", dir=output) as temp:
+    with (
+        TemporaryDirectory(prefix="metric-inputs-") as source_dir,
+        TemporaryDirectory(prefix="building-", dir=output) as temp,
+    ):
         scratch = Path(temp)
+        # Hash the same copies dbt reads, even if the source checkout changes during a build.
+        inputs = Path(source_dir)
+        for source in [*build_sources(project_root), project_root / "data/freshness.json"]:
+            copied = inputs / source.relative_to(project_root)
+            copied.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(source, copied)
+        watermarks = json.loads((inputs / "data/freshness.json").read_bytes())
+        revisions = {
+            variant: revision_digest(inputs, variant, watermarks[variant]) for variant in VARIANTS
+        }
         candidate = scratch / "tested.duckdb"
         # Build the facts once and check the counts reported by dbt.
-        checks = run_dbt(project_root, candidate, scratch)
+        checks = run_dbt(inputs, candidate, scratch)
         if checks["models"] != 6 or checks["tests"] != 7:
             raise SnapshotError("The dbt candidate did not run all six models and seven tests.")
         for variant, revision in revisions.items():
@@ -118,9 +156,7 @@ def publish_snapshots(output: Path, project_root: Path = ROOT) -> dict[str, Any]
                         [source, datetime.fromisoformat(loaded), date.fromisoformat(complete)],
                     )
                 database.execute("CHECKPOINT")
-            # Link the completed file under its revision name and keep any existing copy.
-            with suppress(FileExistsError):
-                os.link(staged, versions / staged.name)
+            publish_revision(staged, versions / staged.name, revision)
         # Publish the variant-to-revision map after both files are in place.
         with NamedTemporaryFile("w", encoding="utf-8", dir=scratch, delete=False) as pointer:
             json.dump(revisions, pointer, indent=2)

@@ -188,6 +188,32 @@ def test_trusted_profile_currency_default_is_visible(snapshot_root):
 
 
 @pytest.mark.parametrize(
+    "question,reason",
+    [
+        (f"Captured amount excluding CARD {SCOPE}", "PROVIDER_REQUIRED"),
+        (f"Captured amount with EFT payments excluded {SCOPE}", "PROVIDER_REQUIRED"),
+        (f"Captured amount for non-CARD payments {SCOPE}", "PROVIDER_REQUIRED"),
+        ("Captured amount in ZAR or EUR on 1-2 November 2026", "CURRENCY_REQUIRED"),
+        ("Captured amount in euros on 1-2 November 2026", "CURRENCY_REQUIRED"),
+        ("Captured amount not in ZAR on 1-2 November 2026", "CURRENCY_REQUIRED"),
+    ],
+)
+@pytest.mark.parametrize(
+    "planner",
+    [
+        ScriptedPlanner(),
+        RoguePlanner(plan(metric_id="captured_amount", provider="CARD")),
+    ],
+    ids=["scripted", "model-proposal"],
+)
+def test_unrepresentable_scope_requires_clarification(tmp_path, question, reason, planner):
+    service = Service(tmp_path, executor=NoQuery())
+    profile = replace(PROFILES["analyst-a"], default_currency="ZAR")
+    response = service.ask(question, "a", profile, planner)
+    assert (response.status, response.reason) == ("clarify", reason)
+
+
+@pytest.mark.parametrize(
     "question,override,reason",
     [
         ("Net collected", {"metric_id": "captured_amount"}, "METRIC_MISMATCH"),

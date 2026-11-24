@@ -27,7 +27,7 @@ The launcher supplies a simulated principal with server-owned entitlements. The 
 
 The compiler chooses SQL from fixed templates and binds the tenant, dates, currency and provider independently on each fact scan. The DuckDB subprocess opens only the pinned snapshot in read-only mode, disables external access and extension autoloading, uses two threads and caps memory at 256 MiB. The supervisor enforces a three-second deadline and withholds partial results. The isolated Compose reader runs under a separate OS identity with a read-only mount and no network.
 
-The builder runs dbt in a temporary candidate directory. It publishes immutable files by revision after seven checks pass. An atomic pointer update makes the complete set visible. Each request resolves the pointer once and uses that revision for metadata and facts. A failed build preserves the existing pointer.
+The builder copies the source files to a temporary directory. It hashes those copies and runs dbt against them. It publishes immutable files by revision after seven checks pass and checks the metadata before reusing an existing revision. An atomic pointer update makes the complete set visible. Each request resolves the pointer once and uses that revision for metadata and facts. A failed build preserves the existing pointer.
 
 ## Deployment mapping and next work
 

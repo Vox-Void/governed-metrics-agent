@@ -26,6 +26,7 @@ from governed_metrics.planner import (
     requested_currencies,
     requested_groups,
     requested_providers,
+    unsupported_scope,
 )
 from governed_metrics.schemas import (
     CLARIFICATIONS,
@@ -249,6 +250,9 @@ class Service:
                 Failure(status="unavailable", trace_id=trace.trace_id, reason="QUESTION_LIMIT"),
                 trace,
             )
+        text = question.lower()
+        if reason := unsupported_scope(text):
+            return self.close(clarification(trace.trace_id, reason), trace)
         catalog = load_catalog()
         order: tuple[Grouping, ...] = ("total", "day", "provider")
         # Pass only the profile's metric definitions and groupings to the planner.
@@ -287,7 +291,7 @@ class Service:
                 catalog,
                 variant,
                 trace,
-                natural_request=(question.lower(), context),
+                natural_request=(text, context),
             )
         return self.close(response, trace)
 
